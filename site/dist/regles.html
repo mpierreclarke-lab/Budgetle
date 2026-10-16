@@ -331,6 +331,26 @@ function inkFor(hex) {
   const L = .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
   return L > .23 ? "#111317" : "#ffffff";
 }
+// Ce que recouvre chaque catégorie (d'après les définitions de la classification COFOG des Nations unies)
+const DESCRIPTIONS = {
+  GF01: "Fonctionnement des institutions (gouvernement, parlement), administration fiscale, affaires étrangères, intérêts de la dette publique, aide au développement, recherche fondamentale.",
+  GF02: "Armées, défense civile, aide militaire à l'étranger.",
+  GF03: "Police, pompiers, tribunaux, prisons.",
+  GF04: "Transports (routes, rail), énergie, agriculture, aides aux entreprises, politiques de l'emploi, télécommunications.",
+  GF05: "Déchets, eaux usées, lutte contre la pollution, protection de la nature.",
+  GF06: "Construction de logements, aménagement urbain, distribution d'eau, éclairage public.",
+  GF07: "Hôpitaux, soins de ville, médicaments remboursés, prévention et santé publique.",
+  GF08: "Sport, culture (musées, bibliothèques), audiovisuel public, cultes.",
+  GF09: "Écoles, collèges, lycées, universités, services annexes (cantines, transports scolaires).",
+  GF10: "Retraites, famille, chômage, invalidité, aides au logement, minima sociaux.",
+  SP_OLD: "Pensions de retraite et services aux personnes âgées (maisons de retraite, aide à domicile).",
+  SP_SURV: "Pensions versées au conjoint ou aux enfants d'une personne décédée.",
+  SP_SICK: "Indemnités d'arrêt maladie et pensions d'invalidité ; les soins eux-mêmes sont en Santé.",
+  SP_FAM: "Allocations familiales, congés parentaux, crèches.",
+  SP_UNEMP: "Allocations chômage et aides au retour à l'emploi.",
+  SP_HOUS: "Aides au logement versées aux ménages.",
+  SP_OTHER: "Minima sociaux, aide aux personnes en situation d'exclusion, autres prestations.",
+};
 const share = (t) => `${fr1.format(100 * t.part_du_total)} %`;
 
 // Treemap : chaque rectangle affiche sa part dans la dépense totale ; % du PIB et montant au survol, au toucher ou au clavier.
@@ -358,10 +378,10 @@ function drawTreemap(box, p, detailEl) {
     const nodet = t.code === "GF10" && !sp.detail ? `<span class="small">Détail par risque non publié pour ce pays.</span>` : "";
     if (detailEl.classList.contains("compact")) {
       // Version courte, de hauteur fixe, pour ne pas déplacer le champ de saisie
-      detailEl.innerHTML = `<span><b>${t.sp ? "Protection sociale › " : ""}${t.label}</b> · ${share(t)} de la dépense · <span class="num">${pct(t.pc, t.approx)}</span> · <span class="num">${money(t.mio_eur)}</span>${t.code === "GF10" && !sp.detail ? " · détail non publié" : ""}</span>`;
+      detailEl.innerHTML = `<span><b>${t.sp ? "Protection sociale › " : ""}${t.label}</b> · ${share(t)} de la dépense · <span class="num">${pct(t.pc, t.approx)}</span> · <span class="num">${money(t.mio_eur)}</span>${t.code === "GF10" && !sp.detail ? " · détail non publié" : ""}</span><span class="desc">${DESCRIPTIONS[t.code] || ""}</span>`;
       return;
     }
-    detailEl.innerHTML = `${parent}<span class="k">${t.label}</span><div class="row"><span class="num">${share(t)} de la dépense totale</span><span class="num">${pct(t.pc, t.approx)}</span><span class="num">${money(t.mio_eur)}</span></div>${nodet}`;
+    detailEl.innerHTML = `${parent}<span class="k">${t.label}</span><div class="row"><span class="num">${share(t)} de la dépense totale</span><span class="num">${pct(t.pc, t.approx)}</span><span class="num">${money(t.mio_eur)}</span></div><span class="small">${DESCRIPTIONS[t.code] || ""}</span>${nodet}`;
   };
   detailEl.innerHTML = `<span class="small">Survolez ou touchez un rectangle pour voir son poids en % du PIB et son montant.</span>`;
   for (const t of tiles) {
@@ -370,7 +390,7 @@ function drawTreemap(box, p, detailEl) {
     el.className = "tile" + (t.sp ? " sp" : "");
     el.tabIndex = 0;
     el.setAttribute("role", "button");
-    el.setAttribute("aria-label", `${t.label} : ${share(t)} de la dépense totale`);
+    el.setAttribute("aria-label", `${t.label} : ${share(t)} de la dépense totale. ${DESCRIPTIONS[t.code] || ""}`);
     const bg = css(t.color || COLORS[t.code]);
     Object.assign(el.style, { left: t.x + GAP + "px", top: t.y + GAP + "px", width: Math.max(0, t.w - 2 * GAP) + "px", height: Math.max(0, t.h - 2 * GAP) + "px", background: bg, color: inkFor(bg) });
     const w = t.w, h = t.h;

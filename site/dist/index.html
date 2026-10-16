@@ -125,7 +125,7 @@ button.reveal { font: 700 .9rem/1 var(--f-body); padding: .6rem .9rem; border-ra
 .bar { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; padding-bottom: .5rem; border-bottom: 1px solid var(--rule); }
 .bar nav { white-space: nowrap; font-size: .9rem; min-width: 0; }
 .bar { flex-wrap: wrap; }
-.detail.compact { display: block; height: 3.4rem; overflow: hidden; padding-top: .4rem; font-size: .88rem; line-height: 1.45; }
+.detail.compact { display: block; min-height: 5.6rem; padding-top: .4rem; font-size: .88rem; line-height: 1.45; }
 @media (max-width: 560px) { .bar h1 { font-size: 1.6rem; } .game { gap: .7rem; padding-top: .6rem; } }
 .bar h1 { font-size: 2rem; }
 .bar nav { display: flex; gap: 1rem; font-size: .95rem; }
@@ -149,8 +149,13 @@ form.play button:disabled { opacity: .5; cursor: default; }
 /* Le treemap reste visible au-dessus de la saisie sur téléphone */
 @media (max-width: 560px) { .game .tm { aspect-ratio: 1 / .74; } .mode { padding: .45rem .4rem; font-size: .85rem; } .game .headline .big { font-size: 2.2rem; } .game .legend-note { font-size: .8rem; } }
 .msg:empty { display: none; }
-/* La saisie reste accessible : si elle sort de l'écran, elle se colle en bas de la fenêtre ; les suggestions s'ouvrent vers le haut */
-form.play { position: sticky; bottom: 0; z-index: 6; background: var(--bg); padding-block: .5rem calc(.5rem + env(safe-area-inset-bottom, 0px)); }
+/* Sous les essais : la ligne du prochain essai + la saisie. Si ce bloc sort de l'écran, il se colle en bas de la fenêtre,
+   pour que la saisie et la révélation des carrés restent visibles ; les suggestions s'ouvrent vers le haut. */
+.dock { position: sticky; bottom: 0; z-index: 6; background: var(--bg); display: grid; gap: .5rem;
+  padding-block: .5rem calc(.5rem + env(safe-area-inset-bottom, 0px)); }
+.dock .msg { margin: 0; }
+.g.pending { background: transparent; border-style: dashed; color: var(--ink-3); font-size: .9rem; min-height: 2.6rem; display: flex; align-items: center; justify-content: center; }
+.detail.compact .desc { display: block; font-size: .8rem; color: var(--ink-2); line-height: 1.35; margin-top: .15rem; }
 /* Révélation d'un essai, comme Tradle : carrés un par un (250 ms), pourcentage qui monte, puis la ligne détaillée */
 .g.reveal-row { grid-template-columns: minmax(0, 1fr) 4rem; }
 .sq { display: flex; justify-content: space-evenly; font-size: 1.35rem; line-height: 1; }
@@ -182,13 +187,16 @@ details.copy summary { font-weight: 400; font-size: .9rem; padding: .4rem .6rem;
   </div>
   <p class="banner" id="banner" hidden></p>
   <div class="card" id="mystery"></div>
-  <form class="play" id="form" autocomplete="off">
-    <input id="guess" type="text" placeholder="Nom d'un pays" aria-label="Votre proposition" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" enterkeyhint="go" autocapitalize="words" spellcheck="false">
-    <button type="submit" id="go">Valider</button>
-    <ul class="sugg" id="sugg" role="listbox" hidden></ul>
-  </form>
-  <p class="msg" id="msg" role="status"></p>
   <div class="slots" id="slots" aria-live="polite"></div>
+  <div class="dock" id="dock">
+    <div id="pending"></div>
+    <form class="play" id="form" autocomplete="off">
+      <input id="guess" type="text" placeholder="Nom d'un pays" aria-label="Votre proposition" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" enterkeyhint="go" autocapitalize="words" spellcheck="false">
+      <button type="submit" id="go">Valider</button>
+      <ul class="sugg" id="sugg" role="listbox" hidden></ul>
+    </form>
+    <p class="msg" id="msg" role="status"></p>
+  </div>
   <div class="card end" id="end" hidden></div>
   <p class="small">Données : dépenses des administrations publiques par fonction (classification COFOG), Eurostat (© Union européenne), OCDE et FMI (source : Fonds monétaire international). Distance et direction calculées comme dans Tradle.</p>
 </div>
@@ -436,6 +444,26 @@ function inkFor(hex) {
   const L = .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
   return L > .23 ? "#111317" : "#ffffff";
 }
+// Ce que recouvre chaque catégorie (d'après les définitions de la classification COFOG des Nations unies)
+const DESCRIPTIONS = {
+  GF01: "Fonctionnement des institutions (gouvernement, parlement), administration fiscale, affaires étrangères, intérêts de la dette publique, aide au développement, recherche fondamentale.",
+  GF02: "Armées, défense civile, aide militaire à l'étranger.",
+  GF03: "Police, pompiers, tribunaux, prisons.",
+  GF04: "Transports (routes, rail), énergie, agriculture, aides aux entreprises, politiques de l'emploi, télécommunications.",
+  GF05: "Déchets, eaux usées, lutte contre la pollution, protection de la nature.",
+  GF06: "Construction de logements, aménagement urbain, distribution d'eau, éclairage public.",
+  GF07: "Hôpitaux, soins de ville, médicaments remboursés, prévention et santé publique.",
+  GF08: "Sport, culture (musées, bibliothèques), audiovisuel public, cultes.",
+  GF09: "Écoles, collèges, lycées, universités, services annexes (cantines, transports scolaires).",
+  GF10: "Retraites, famille, chômage, invalidité, aides au logement, minima sociaux.",
+  SP_OLD: "Pensions de retraite et services aux personnes âgées (maisons de retraite, aide à domicile).",
+  SP_SURV: "Pensions versées au conjoint ou aux enfants d'une personne décédée.",
+  SP_SICK: "Indemnités d'arrêt maladie et pensions d'invalidité ; les soins eux-mêmes sont en Santé.",
+  SP_FAM: "Allocations familiales, congés parentaux, crèches.",
+  SP_UNEMP: "Allocations chômage et aides au retour à l'emploi.",
+  SP_HOUS: "Aides au logement versées aux ménages.",
+  SP_OTHER: "Minima sociaux, aide aux personnes en situation d'exclusion, autres prestations.",
+};
 const share = (t) => `${fr1.format(100 * t.part_du_total)} %`;
 
 // Treemap : chaque rectangle affiche sa part dans la dépense totale ; % du PIB et montant au survol, au toucher ou au clavier.
@@ -463,10 +491,10 @@ function drawTreemap(box, p, detailEl) {
     const nodet = t.code === "GF10" && !sp.detail ? `<span class="small">Détail par risque non publié pour ce pays.</span>` : "";
     if (detailEl.classList.contains("compact")) {
       // Version courte, de hauteur fixe, pour ne pas déplacer le champ de saisie
-      detailEl.innerHTML = `<span><b>${t.sp ? "Protection sociale › " : ""}${t.label}</b> · ${share(t)} de la dépense · <span class="num">${pct(t.pc, t.approx)}</span> · <span class="num">${money(t.mio_eur)}</span>${t.code === "GF10" && !sp.detail ? " · détail non publié" : ""}</span>`;
+      detailEl.innerHTML = `<span><b>${t.sp ? "Protection sociale › " : ""}${t.label}</b> · ${share(t)} de la dépense · <span class="num">${pct(t.pc, t.approx)}</span> · <span class="num">${money(t.mio_eur)}</span>${t.code === "GF10" && !sp.detail ? " · détail non publié" : ""}</span><span class="desc">${DESCRIPTIONS[t.code] || ""}</span>`;
       return;
     }
-    detailEl.innerHTML = `${parent}<span class="k">${t.label}</span><div class="row"><span class="num">${share(t)} de la dépense totale</span><span class="num">${pct(t.pc, t.approx)}</span><span class="num">${money(t.mio_eur)}</span></div>${nodet}`;
+    detailEl.innerHTML = `${parent}<span class="k">${t.label}</span><div class="row"><span class="num">${share(t)} de la dépense totale</span><span class="num">${pct(t.pc, t.approx)}</span><span class="num">${money(t.mio_eur)}</span></div><span class="small">${DESCRIPTIONS[t.code] || ""}</span>${nodet}`;
   };
   detailEl.innerHTML = `<span class="small">Survolez ou touchez un rectangle pour voir son poids en % du PIB et son montant.</span>`;
   for (const t of tiles) {
@@ -475,7 +503,7 @@ function drawTreemap(box, p, detailEl) {
     el.className = "tile" + (t.sp ? " sp" : "");
     el.tabIndex = 0;
     el.setAttribute("role", "button");
-    el.setAttribute("aria-label", `${t.label} : ${share(t)} de la dépense totale`);
+    el.setAttribute("aria-label", `${t.label} : ${share(t)} de la dépense totale. ${DESCRIPTIONS[t.code] || ""}`);
     const bg = css(t.color || COLORS[t.code]);
     Object.assign(el.style, { left: t.x + GAP + "px", top: t.y + GAP + "px", width: Math.max(0, t.w - 2 * GAP) + "px", height: Math.max(0, t.h - 2 * GAP) + "px", background: bg, color: inkFor(bg) });
     const w = t.w, h = t.h;
@@ -563,18 +591,20 @@ function rowHtml(g, i) {
 }
 
 function render() {
-  const slots = [];
-  for (let i = 0; i < MAX_TRIES; i++) slots.push(!guesses[i] ? `<div class="g empty" aria-hidden="true"></div>` : i === animating ? revealHtml(guesses[i], i) : rowHtml(guesses[i], i));
-  $("slots").innerHTML = slots.join("");
+  // Essais terminés dans la liste ; essai en cours de révélation (ou prochain essai, vide) dans le bloc de saisie
+  const shown = animating === null ? guesses.length : animating;
+  $("slots").innerHTML = guesses.slice(0, shown).map(rowHtml).join("");
   const st = status(guesses);
   const done = st !== "playing";
+  $("pending").innerHTML = animating !== null ? revealHtml(guesses[animating], animating)
+    : done ? "" : `<div class="g pending">Essai ${guesses.length + 1} sur ${MAX_TRIES}</div>`;
+  $("dock").hidden = done && animating === null;
   $("guess").disabled = $("go").disabled = done || animating !== null;
   if (animating !== null) {
     countUp($("count"), guesses[animating].proximity, STEP * 5);
     setTimeout(() => { animating = null; render(); if (status(guesses) === "playing") $("guess").focus({ preventScroll: true }); }, STEP * 6);
     return;
   }
-  $("form").hidden = done;
   if (!done) return;
   if (MODE === "infini" && !inf.counted) { inf.played++; if (st === "won") inf.won++; inf.counted = true; save(); }
   const text = shareText(MODE === "infini" ? "∞" : n, guesses, SITE_URL);
@@ -637,7 +667,7 @@ function setup(geo) {
   target = BY[geo];
   profileCard($("mystery"), target, { hideName: true, compact: true });
   guesses = load().filter(g => BY[g]).slice(0, MAX_TRIES).map(g => evaluate(BY[g], target, DMAX));
-  $("end").hidden = true; $("msg").textContent = ""; $("form").hidden = false;
+  $("end").hidden = true; $("msg").textContent = ""; $("dock").hidden = false;
   render();
 }
 
@@ -675,7 +705,7 @@ function start() {
   if (n == null) {
     const last = new Date(Date.UTC(...CAL.debut.split("-").map((x, i) => +x - (i === 1 ? 1 : 0))) + (CAL.pays.length - 1) * 864e5);
     $("mystery").innerHTML = `<p>Pas de partie du jour à cette date : le calendrier de la version bêta s'arrête le ${last.toLocaleDateString("fr-FR", { timeZone: "UTC" })}. Les parties infinies restent disponibles.</p>`;
-    $("form").hidden = true;
+    $("dock").hidden = true;
     return;
   }
   $("num").textContent = `Partie n° ${n}`;

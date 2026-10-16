@@ -49,8 +49,8 @@ with sync_playwright() as p:
         pg.wait_for_timeout(300)
         check(pg.locator(".reveal-row .sq span").count() == 5, f"[{width}px] révélation : 5 carrés affichés un par un")
         pg.wait_for_timeout(1500)
-        check(pg.locator(".reveal-row").count() == 0 and "km" in pg.locator(".g:not(.empty)").first.inner_text(), f"[{width}px] après la révélation : distance, direction, proximité")
-        check(pg.locator(".g:not(.empty):not(.head)").count() == 1, f"[{width}px] 1er essai enregistré par le clavier")
+        check(pg.locator(".reveal-row").count() == 0 and "km" in pg.locator("#slots .g").first.inner_text(), f"[{width}px] après la révélation : distance, direction, proximité")
+        check(pg.locator("#slots .g").count() == 1, f"[{width}px] 1er essai enregistré par le clavier")
         pg.fill("#guess", "Atlantide"); pg.keyboard.press("Enter")
         check("Pays inconnu" in pg.inner_text("#msg"), f"[{width}px] pays inconnu signalé")
         pg.fill("#guess", "france"); pg.click("#go")
@@ -67,7 +67,7 @@ with sync_playwright() as p:
         check(share.startswith("#Budgetle #1 2/6") and share.endswith("https://mpierreclarke-lab.github.io/Budgetle/"), f"[{width}px] texte de partage correct")
         check(pg.locator("#end li").count() >= 1, f"[{width}px] faits pédagogiques affichés")
         pg.reload()
-        check(pg.locator(".g:not(.empty):not(.head)").count() == 2 and pg.is_visible("#end"), f"[{width}px] partie restaurée après rechargement")
+        check(pg.locator("#slots .g").count() == 2 and pg.is_visible("#end"), f"[{width}px] partie restaurée après rechargement")
         check(pg.evaluate("document.documentElement.scrollWidth") <= width, f"[{width}px] pas de défilement horizontal (jeu)")
         if SHOTS and width == 390:
             pg.screenshot(path=str(SHOTS / "jeu_fin_mobile.png"), full_page=True)
@@ -93,10 +93,23 @@ with sync_playwright() as p:
             check(pg.inner_text("#end h2") == nom and pg.is_visible("#next"), f"[{width}px] infini : partie {k + 1} gagnée ({nom}), bouton « Pays suivant »")
             pg.click("#next"); pg.wait_for_timeout(200)
         check(len(seen) == 3 and pg.evaluate("target.geo") not in seen, f"[{width}px] infini : nouveaux pays à chaque partie ({', '.join(sorted(seen))})")
-        check(pg.locator(".g:not(.empty)").count() == 0 and pg.is_visible("#form"), f"[{width}px] infini : essais remis à zéro")
+        check(pg.locator("#slots .g").count() == 0 and pg.is_visible("#form"), f"[{width}px] infini : essais remis à zéro")
         cur = pg.evaluate("target.geo"); pg.reload(); pg.wait_for_timeout(300)
         check(pg.evaluate("target.geo") == cur and "Partie infinie n° 4" in pg.inner_text("#num"), f"[{width}px] infini : même pays et compteur après rechargement")
         check("3 pays trouvés sur 3" in (pg.evaluate("(()=>{const i=JSON.parse(localStorage.getItem('budgetle-v2-infini'));return i.won+' pays trouvés sur '+i.played})()")), f"[{width}px] infini : score cumulé")
+
+        # Petit écran : pendant la révélation, la ligne de l'essai reste visible juste au-dessus de la saisie
+        if width < 600:
+            pg.set_viewport_size({"width": 375, "height": 560})
+            pg.goto("about:blank"); pg.goto(BASE + "index.html#infini"); pg.wait_for_timeout(300)
+            pg.fill("#guess", "Islande" if pg.evaluate("target.geo") != "IS" else "Japon"); pg.keyboard.press("Enter"); pg.wait_for_timeout(400)
+            box = pg.evaluate("(()=>{const a=document.querySelector('.reveal-row').getBoundingClientRect(),b=document.getElementById('guess').getBoundingClientRect();return [a.top,a.bottom,b.top,b.bottom,innerHeight]})()")
+            check(0 <= box[0] and box[1] <= box[2] and box[3] <= box[4], f"[375×560] révélation visible au-dessus de la saisie collée en bas {[round(x) for x in box]}")
+            pg.wait_for_timeout(1500)
+            check(pg.inner_text(".g.pending").startswith("Essai 2 sur 6"), "[375×560] ligne du prochain essai affichée au-dessus de la saisie")
+            pg.locator(".tile").first.hover()
+            check(len(pg.inner_text("#mystery .detail .desc")) > 10, "[375×560] survol : courte explication de la catégorie")
+            pg.set_viewport_size({"width": width, "height": 844})
 
         # Partie du jour et page de règles
         pg.goto(BASE + "index.html")
