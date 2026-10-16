@@ -63,3 +63,17 @@ Statut de chaque affirmation :
 - Eurostat, métadonnées gov_10a_exp (section 19, notes pays) : https://ec.europa.eu/eurostat/cache/metadata/en/gov_10a_exp_esms.htm
 - Eurostat, avis sur l'enregistrement du Superbonus 2023 : https://ec.europa.eu/eurostat/documents/1015035/16177999/IT+Advice+on+recording+of+2023+Superbonus.pdf
 - Central Bank of Ireland, Economic Letter (janvier 2021) : https://www.centralbank.ie/news/article/press-release-economic-letter-is-ireland-really-the-most-prosperous-country-in-europe-04-january-2021
+
+## Élargissement mondial (70 pays)
+
+Règles de sélection et transformations : en-tête de `scripts/10_build_world.py` ; rapport chiffré : `data/derived/controles_monde.txt`.
+
+- **Sources.** [Données] FMI GFS_COFOG pour 36 pays, OCDE pour l'Australie, la Corée, le Chili et la Colombie. Pour les pays européens, Eurostat reste la source. Le FMI reprend les mêmes chiffres qu'Eurostat pour l'Allemagne ; pour la Suisse, la dépense totale du FMI est inférieure de 3,6 % à celle d'Eurostat (millésimes ou périmètres différents).
+- **Exclus.** Hong Kong et Macao (territoires) ; Somalie (pas de taux de change 2024) ; Ouzbékistan (les fonctions ne couvrent que 90 % du total publié). Pays publiés seulement pour l'État central (Argentine, Philippines, Éthiopie…) : non retenus.
+- **Comptes en caisse (14 pays).** Arménie, Azerbaïdjan, Biélorussie, Géorgie, Indonésie, Kazakhstan, Kirghizistan, Kiribati, Kosovo, Moldavie, Mongolie, Singapour, Tadjikistan, Ukraine. Signalé en fin de partie.
+- **Détail de la protection sociale non publié (8 pays).** Canada, Chili, Chine, Corée du Sud, Indonésie, Kiribati, Nouvelle-Zélande, États-Unis.
+- **Fonctions publiées à zéro.** États-Unis : environnement (fonction non isolée). Signalé en fin de partie ; aucun « fait marquant » n'est tiré d'une fonction nulle.
+- **Cas extrêmes, réels.** Kiribati : dépense publique de 96 % du PIB (petit État insulaire, recettes de licences de pêche et aides). Ukraine 2023 : défense 43 % de la dépense publique. [Hypothèse] pour l'explication de Kiribati.
+- **Années.** 2022 (Namibie), 2023 (Albanie, Indonésie, Kazakhstan, Kenya, Kiribati, Corée, Ukraine), 2025 (Maurice, Nouvelle-Zélande, Turquie) ; 2024 pour les autres. L'année n'est révélée qu'en fin de partie.
+- **Exercices budgétaires.** [À vérifier] Pour certains pays (Japon, Nouvelle-Zélande, Australie, Royaume-Uni…), les données annuelles du FMI peuvent correspondre à l'exercice budgétaire plutôt qu'à l'année civile ; le taux de change utilisé est la moyenne de l'année civile.
+- **Taux de change.** [Données] Taux FMI (monnaie nationale pour 1 €, moyenne annuelle) ; pour les 17 pays dont la BCE publie la devise, écart maximal 0,52 % (livre turque, 2025). La méthode reproduit les euros d'Eurostat à 0,13 % près pour les pays européens hors zone euro.

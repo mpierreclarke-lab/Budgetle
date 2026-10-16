@@ -11,8 +11,8 @@
   <header class="top">
     <span class="eyebrow">Version bêta · règles et données · <a href="index.html">Jouer la partie du jour</a></span>
     <h1>Budgetle</h1>
-    <p class="lede">Un pays européen se cache derrière un budget public. Vous voyez combien il dépense et à quoi. Vous avez six essais pour le trouver ; chaque erreur vous dit à quelle distance et dans quelle direction chercher.</p>
-    <div class="status"><span class="pill">30 pays · UE + Islande, Norvège, Suisse</span><span class="pill">Données 2024 · Eurostat</span><span class="pill warn">Règles provisoires</span></div>
+    <p class="lede">Un pays se cache derrière un budget public. Vous voyez combien il dépense et à quoi. Vous avez six essais pour le trouver ; chaque erreur vous dit à quelle distance et dans quelle direction chercher.</p>
+    <div class="status"><span class="pill" id="pill-n"></span><span class="pill">Données 2022 à 2025 · Eurostat, OCDE, FMI</span><span class="pill warn">Version bêta</span></div>
   </header>
 
   <section aria-labelledby="ex">
@@ -23,7 +23,7 @@
       <div style="display:grid; gap:.8rem; align-content:start; min-width:0">
         <h3>Les essais du joueur</h3>
         <div class="guesses" id="guesses"></div>
-        <p class="small">Distance entre les centres géographiques des deux pays. La flèche indique la direction du pays mystère depuis le pays proposé. Proximité : 100 % au point exact, 0 % à la plus grande distance du jeu (<span class="num" id="dmax"></span> km, Chypre–Islande).</p>
+        <p class="small">Distance entre les centres géographiques des deux pays. La flèche indique la direction du pays mystère depuis le pays proposé. Proximité : 100 % au point exact, 0 % à 20 000 km, la moitié du tour de la Terre, comme sur Tradle.</p>
         <button class="reveal" id="reveal" type="button">Révéler la réponse</button>
         <p id="answer" hidden></p>
       </div>
@@ -34,18 +34,18 @@
     <span class="eyebrow">Déroulement</span>
     <h2 id="regles">Règles du jeu</h2>
     <ol class="rules col">
-      <li><div><b>Un pays mystère par jour,</b> le même pour tous les joueurs, tiré d'une liste préparée à l'avance parmi les 30 pays.</div></li>
-      <li><div><b>Indice principal :</b> le montant total des dépenses publiques en euros, affiché en haut, avec entre parenthèses son poids en % du PIB. En dessous, un graphique en rectangles : chaque rectangle est une fonction de l'État au sens large (santé, enseignement, défense…), avec sa dépense en % du PIB et en euros. La surface de chaque rectangle est proportionnelle à sa part dans la dépense totale.</div></li>
-      <li><div><b>Protection sociale détaillée :</b> ses rectangles, dans des nuances de bleu, montrent la vieillesse (surtout les retraites), la maladie et l'invalidité, la famille, le chômage, etc. Touchez un rectangle pour voir le détail.</div></li>
+      <li><div><b>Un pays mystère par jour,</b> le même pour tous les joueurs, tiré d'une liste préparée à l'avance parmi les <span class="n-pays"></span> pays du jeu.</div></li>
+      <li><div><b>Indice principal :</b> le montant total des dépenses publiques en euros, affiché en haut, avec entre parenthèses son poids en % du PIB. En dessous, un graphique en rectangles : chaque rectangle est une fonction de l'État au sens large (santé, enseignement, défense…) et affiche sa part dans la dépense totale, proportionnelle à sa surface. Survolez ou touchez un rectangle pour voir sa dépense en % du PIB et en euros.</div></li>
+      <li><div><b>Protection sociale détaillée</b> quand le pays la publie : ses rectangles, dans des nuances de bleu, montrent la vieillesse (surtout les retraites), la maladie et l'invalidité, la famille, le chômage, etc.</div></li>
       <li><div><b>Six essais.</b> Après chaque mauvaise réponse, le jeu affiche la distance qui vous sépare du pays mystère, une flèche de direction et un pourcentage de proximité, comme sur Tradle.</div></li>
-      <li><div><b>Fin de partie</b> dès la bonne réponse ou après le sixième essai. Le résultat se partage sous forme de carrés colorés : un carré vert par tranche de 20 % de proximité, un carré jaune pour une demi-tranche.</div></li>
+      <li><div><b>Fin de partie</b> dès la bonne réponse ou après le sixième essai. L'écran de fin révèle l'année et la source des données, avec deux faits marquants. Le résultat se partage sous forme de carrés colorés : un carré vert par tranche de 20 % de proximité, un carré jaune pour une demi-tranche.</div></li>
     </ol>
   </section>
 
   <section aria-labelledby="profils">
     <span class="eyebrow">Échantillon vérifié</span>
     <h2 id="profils">Cinq profils budgétaires réels</h2>
-    <p class="col small">Choisis pour leur diversité. Chaque chiffre provient directement d'Eurostat ; la note sous le graphique signale ce qui pourrait surprendre ou fausser la comparaison.</p>
+    <p class="col small">Choisis pour leur diversité. Chaque chiffre provient directement de la source indiquée ; la note sous le graphique signale ce qui pourrait surprendre ou fausser la comparaison.</p>
     <div class="tabs" role="tablist" id="tabs"></div>
     <div class="card" id="example"></div>
   </section>
@@ -55,24 +55,27 @@
     <h2 id="donnees">D'où viennent les chiffres</h2>
     <div class="two">
       <dl class="facts">
-        <div><dt>Source</dt><dd>Eurostat, dépenses des administrations publiques par fonction (<span class="num">gov_10a_exp</span>, DOI 10.2908/GOV_10A_EXP)</dd></div>
-        <div><dt>Périmètre</dt><dd>Toutes les administrations publiques (État, collectivités locales, sécurité sociale), comptes consolidés : un versement de l'État à une commune n'est compté qu'une fois.</dd></div>
-        <div><dt>Classification</dt><dd>COFOG, 10 fonctions qui couvrent toute la dépense, sans recouvrement. La protection sociale est détaillée en 7 sous-catégories.</dd></div>
-        <div><dt>Année</dt><dd>2024, dernière année disponible pour les 30 pays.</dd></div>
+        <div><dt>Sources</dt><dd><span id="src-count"></span></dd></div>
+        <div><dt>Périmètre</dt><dd>Toutes les administrations publiques (État, collectivités locales, sécurité sociale). Les pays pour lesquels seul l'État central est publié sont exclus.</dd></div>
+        <div><dt>Classification</dt><dd>COFOG, 10 fonctions qui couvrent toute la dépense, sans recouvrement. La protection sociale est détaillée en 7 sous-catégories quand le pays la publie.</dd></div>
+        <div><dt>Année</dt><dd>La plus récente publiée pour chaque pays, de 2022 à 2025 ; 2024 pour les pays européens. Elle est révélée en fin de partie.</dd></div>
+        <div><dt>Euros</dt><dd>Monnaie nationale convertie au taux de change moyen de l'année des données (FMI), contrôlé avec la Banque centrale européenne quand elle publie la devise.</dd></div>
         <div><dt>Mise à jour</dt><dd><span class="num" id="upd"></span> (Eurostat) · extraction du <span class="num" id="extr"></span></dd></div>
       </dl>
       <div style="display:grid; gap:.8rem; align-content:start">
         <p class="note"><b>Santé et protection sociale sont deux fonctions distinctes</b> dans la classification COFOG. Les remboursements de soins sont en Santé. La sous-catégorie « Maladie et invalidité » de la protection sociale regroupe surtout des revenus de remplacement : indemnités journalières, pensions d'invalidité.</p>
-        <p class="note warn"><b>Chiffres provisoires</b> pour 2024 : <span id="prov"></span>. Ils peuvent être révisés lors des prochaines publications d'Eurostat.</p>
+        <p class="note warn"><b>Comptes en caisse</b> pour <span id="cash"></span> : une dépense y est enregistrée quand elle est payée, et non quand elle est engagée. L'écart est en général modéré.</p>
+        <p class="note warn"><b>Chiffres provisoires</b> pour 2024 : <span id="prov"></span> (Eurostat).</p>
       </div>
     </div>
     <details>
-      <summary>Vérifier un profil (les 30 pays)</summary>
+      <summary>Vérifier un profil (<span class="n-pays"></span> pays)</summary>
       <div class="tbl" style="display:grid; gap:.8rem; padding-top:.2rem">
         <label for="pick" class="small">Pays</label>
         <select id="pick"></select>
+        <p class="small" id="pickmeta"></p>
         <div style="overflow-x:auto"><table id="tbl"></table></div>
-        <p class="small">Le rang compare les 30 pays en % du PIB (1 = dépense la plus élevée). Les % du PIB des sous-catégories sont les valeurs publiées ; pour « Exclusion sociale et autres », c'est la somme des valeurs publiées de trois groupes (≈).</p>
+        <p class="small">Le rang compare tous les pays du jeu en % du PIB (1 = dépense la plus élevée). Les % du PIB des sous-catégories sont les valeurs publiées ; pour « Exclusion sociale et autres », c'est la somme des valeurs publiées de trois groupes (≈).</p>
       </div>
     </details>
   </section>
@@ -81,9 +84,9 @@
     <span class="eyebrow">Choix de conception</span>
     <h2 id="ouvert">Ce qu'il faut savoir</h2>
     <div class="open col">
-      <div><b>Échelle de proximité européenne.</b> Avec la formule de Tradle, rapportée à 20 000 km, deux pays européens seraient toujours entre 76 % et 99 % de proximité. Budgetle rapporte la distance à 4 778 km, la plus grande distance entre deux pays du jeu : la proximité va de 0 % à 98 %.</div>
-      <div><b>Difficulté.</b> Un joueur qui connaîtrait parfaitement la carte trouverait la réponse dès le deuxième essai, grâce à la distance en km et à la direction. C'est déjà le cas sur Tradle ; avec 30 pays, l'effet est plus fort. Le graphique budgétaire sert donc surtout au premier essai.</div>
-      <div><b>Montants en euros.</b> Les montants affichés par catégorie révèlent la taille de l'économie : les quatre plus grands pays (Allemagne, France, Italie, Espagne) sont reconnaissables à leurs seuls montants.</div>
+      <div><b>Comparabilité.</b> Les comptes suivent tous les standards internationaux (SEC 2010, SCN 2008 ou manuel du FMI), mais l'organisation des pays diffère : là où santé ou retraites passent par des assureurs privés obligatoires, la dépense publique paraît faible. Les notes de fin de partie signalent les cas connus.</div>
+      <div><b>Années différentes.</b> Les profils ne datent pas tous de la même année. L'année n'est pas affichée pendant la partie pour ne pas donner d'indice ; elle l'est à la fin et dans le tableau ci-dessus.</div>
+      <div><b>Montants en euros.</b> Les montants révèlent la taille de l'économie : les plus grands pays (États-Unis, Chine, Allemagne, Japon…) sont reconnaissables à leur seul total. C'est pourquoi les rectangles affichent des parts et non des montants.</div>
     </div>
   </section>
 
@@ -91,7 +94,9 @@
     <span class="eyebrow">Traçabilité</span>
     <h2 id="src">Sources et licence</h2>
     <div class="col small" style="display:grid; gap:.5rem">
-      <p>Données : © Union européenne, Eurostat. Réutilisation autorisée avec mention de la source (décision 2011/833/UE). Modifications : regroupement des groupes COFOG 10.7, 10.8 et 10.9 ; calcul des parts dans le total à partir des montants en euros. <a href="https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table" target="_blank" rel="noopener">Jeu de données</a> · <a href="https://ec.europa.eu/eurostat/cache/metadata/en/gov_10a_exp_esms.htm" target="_blank" rel="noopener">Métadonnées</a>.</p>
+      <p>Pays européens : © Union européenne, Eurostat, réutilisation autorisée avec mention de la source (décision 2011/833/UE). <a href="https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table" target="_blank" rel="noopener">Jeu de données</a> · <a href="https://ec.europa.eu/eurostat/cache/metadata/en/gov_10a_exp_esms.htm" target="_blank" rel="noopener">Métadonnées</a>.</p>
+      <p>Autres pays : Source : Fonds monétaire international, GFS Government Expenditures by Function et Exchange Rates (<a href="https://data.imf.org/en/datasets/IMF.STA:GFS_COFOG" target="_blank" rel="noopener">GFS_COFOG</a>) ; OCDE, Annual government expenditure by function (COFOG) et PIB, données ouvertes. Taux de contrôle : Banque centrale européenne.</p>
+      <p>Transformations : regroupement des groupes COFOG 10.7, 10.8 et 10.9 ; parts dans le total calculées à partir des montants ; conversion en euros ; % du PIB arrondis au dixième ; pour l'OCDE, % du PIB calculés avec le PIB publié par l'OCDE.</p>
       <p>Mécanique de distance et de direction reprise du code de Tradle (licence MIT), centres géographiques issus de la table « countries » de Google utilisée par Tradle.</p>
     </div>
   </section>
@@ -107,13 +112,15 @@ const META = /*__META__*/;
 const BY = Object.fromEntries(PROFILES.map(p => [p.geo, p]));
 /*__UI__*/
 function rank(code, geo) {
-  const val = (p) => code === "TOTAL" ? p.total.pc_gdp : (p.divisions.find(d => d.code === code) || p.divisions[9].detail.find(k => k.code === code))?.[code.startsWith("SP_") ? "pc_gdp_somme_publiee" : "pc_gdp"];
+  const val = (p) => code === "TOTAL" ? p.total.pc_gdp : (p.divisions.find(d => d.code === code) || (p.divisions[9].detail || []).find(k => k.code === code))?.[code.startsWith("SP_") ? "pc_gdp_somme_publiee" : "pc_gdp"];
   const me = val(BY[geo]);
-  return 1 + PROFILES.filter(p => val(p) > me).length;
+  // Sous-catégories : rang parmi les pays qui publient ce détail
+  const pool = PROFILES.filter(p => val(p) != null);
+  return `${1 + pool.filter(p => val(p) > me).length}${pool.length < PROFILES.length ? ` /${pool.length}` : ""}`;
 }
 
 // --- Exemple de partie
-const TARGET = "PT", TRIES = ["DE", "IT", "ES", "PT"];
+const TARGET = "JP", TRIES = ["FR", "CN", "KR", "JP"];
 profileCard(document.getElementById("mystery"), BY[TARGET], { hideName: true });
 const ARROW = { N: 0, NE: 45, E: 90, SE: 135, S: 180, SW: 225, W: 270, NW: 315 };
 const gEl = document.getElementById("guesses");
@@ -127,7 +134,6 @@ gEl.innerHTML = `<div class="g head small"><span class="c">Pays proposé</span><
       <span class="r num">${prox} %</span></div>`;
   }).join("") +
   `<p class="squares" aria-label="partage">${TRIES.map(g => g === TARGET ? "🎉" : squares(proximityScaled(distanceMeters(BY[g], BY[TARGET]), DMAX))).join("<br>")}</p>`;
-document.getElementById("dmax").textContent = fr0.format(DMAX / 1000);
 document.getElementById("reveal").addEventListener("click", (e) => {
   const a = document.getElementById("answer");
   a.hidden = !a.hidden;
@@ -137,11 +143,11 @@ document.getElementById("reveal").addEventListener("click", (e) => {
 
 // --- Cinq profils
 const EXAMPLES = [
-  ["FR", "La protection sociale représente 41 % de la dépense, dont 23 % pour la vieillesse. La France a le 2ᵉ ratio de dépense au PIB des 30 pays, derrière la Finlande.", false],
-  ["IE", "Le ratio au PIB le plus bas des 30 pays s'explique en partie par un PIB gonflé par les multinationales. La banque centrale irlandaise préfère le revenu national modifié (GNI*). Les parts dans le total restent comparables.", true],
+  ["FR", "La protection sociale représente 41,5 % de la dépense, dont 23,4 % pour la vieillesse. La France a le 4ᵉ ratio de dépense au PIB des pays du jeu, après Kiribati, l'Ukraine et la Finlande.", false],
+  ["US", "La santé pèse 26,0 % de la dépense publique, la part la plus forte de tous les pays du jeu. L'environnement apparaît à 0 : il n'est pas isolé dans les comptes publiés. Le détail de la protection sociale n'est pas publié.", true],
+  ["JP", "La protection sociale représente 40,7 % de la dépense, presque autant qu'en France (41,5 %). La défense ne pèse que 3,2 %.", false],
+  ["UA", "Données 2023, en pleine guerre : la défense absorbe 43,1 % de la dépense publique (31,6 % du PIB), la part la plus forte de tous les pays du jeu. Comptes tenus en caisse.", true],
   ["CH", "Santé à seulement 2,2 % du PIB : les médicaments et les soins ambulatoires sont presque absents. Explication probable, non confirmée à ce stade : l'assurance-maladie obligatoire est gérée par des caisses classées hors des administrations publiques.", true],
-  ["HU", "Les services généraux atteignent 10,0 % du PIB, le niveau le plus élevé des 30 pays. Les loisirs, la culture et le culte (2,5 %) sont aussi parmi les plus hauts.", false],
-  ["EE", "La défense atteint 3,7 % du PIB, le niveau le plus élevé des 30 pays, devant la Pologne (2,9 %) et la Lettonie (2,7 %).", false],
 ];
 const tabs = document.getElementById("tabs"), ex = document.getElementById("example");
 function pickExample(i) {
@@ -161,11 +167,18 @@ pickExample(0);
 document.getElementById("upd").textContent = META.update;
 document.getElementById("extr").textContent = META.extraction;
 document.getElementById("prov").textContent = PROFILES.filter(p => p.provisoire).map(p => p.nom).join(", ");
+const listNames = (f) => PROFILES.filter(f).map(p => p.nom).sort((a, b) => a.localeCompare(b, "fr")).join(", ");
+document.getElementById("cash").textContent = listNames(p => p.base_comptable === "caisse");
+document.querySelectorAll(".n-pays").forEach(e => e.textContent = PROFILES.length);
+document.getElementById("pill-n").textContent = `${PROFILES.length} pays · 5 continents`;
+const cnt = (s) => PROFILES.filter(p => p.source === s).length;
+document.getElementById("src-count").textContent = `Eurostat pour ${cnt("Eurostat")} pays européens (dépenses des administrations publiques par fonction, gov_10a_exp) ; OCDE pour ${cnt("OCDE")} pays (${listNames(p => p.source === "OCDE")}) ; FMI pour ${cnt("FMI")} pays (GFS_COFOG).`;
 const pick = document.getElementById("pick"), tbl = document.getElementById("tbl");
 [...PROFILES].sort((a, b) => a.nom.localeCompare(b.nom, "fr")).forEach(p => pick.add(new Option(p.nom, p.geo)));
 function table(geo) {
   const p = BY[geo];
-  let h = `<thead><tr><th>Fonction</th><th class="n">% du PIB</th><th class="n">Montant</th><th class="n">Part du total</th><th class="n">Rang /30</th></tr></thead><tbody>`;
+  document.getElementById("pickmeta").textContent = `${p.source}, ${p.annee}, comptes ${p.base_comptable === "caisse" ? "en caisse" : "en droits constatés"}${p.taux_eur && p.devise !== "EUR" ? `, 1 € = ${p.taux_eur.toLocaleString("fr-FR", { maximumSignificantDigits: 5 })} ${p.devise}` : ""}.`;
+  let h = `<thead><tr><th>Fonction</th><th class="n">% du PIB</th><th class="n">Montant</th><th class="n">Part du total</th><th class="n">Rang /${PROFILES.length}</th></tr></thead><tbody>`;
   for (const d of p.divisions) {
     h += `<tr><td>${d.label}</td><td class="n">${fr1.format(d.pc_gdp)}</td><td class="n">${money(d.mio_eur)}</td><td class="n">${fr1.format(100 * d.part_du_total)} %</td><td class="n">${rank(d.code, geo)}</td></tr>`;
     if (d.detail) for (const k of d.detail) h += `<tr class="sub"><td>${k.label}</td><td class="n">${k.pc_gdp_somme_publiee == null ? "n.d." : (k.cofog.length > 1 ? "≈ " : "") + fr1.format(k.pc_gdp_somme_publiee)}</td><td class="n">${money(k.mio_eur)}</td><td class="n">${k.part_du_total == null ? "n.d." : fr1.format(100 * k.part_du_total) + " %"}</td><td class="n">${rank(k.code, geo)}</td></tr>`;

@@ -2,8 +2,8 @@
 
 Pour chaque page de site/src/, remplace les marqueurs par :
   CSS      site/css/base.css               GEO / TREEMAP / GAME  site/js/*.js (import/export retirés)
-  UI       site/js/ui.js                   DATA  data/derived/profils_2024.json
-  DMAX     distance maximale (m)           CAL   data/derived/calendrier.json
+  UI       site/js/ui.js                   DATA  data/derived/profils_monde.json
+  DMAX     20 000 km (échelle de Tradle)           CAL   data/derived/calendrier.json
   META     dates de mise à jour Eurostat et d'extraction
 Sorties :
   site/dist/<page>.html          document HTML complet (doctype, langue, encodage) pour GitHub Pages
@@ -34,8 +34,8 @@ MARKERS = {
     "/*__TREEMAP__*/": js_module("site/js/treemap.js"),
     "/*__GAME__*/": js_module("site/js/game.js"),
     "/*__UI__*/": read("site/js/ui.js"),
-    "/*__DATA__*/": json.dumps(json.loads(read("data/derived/profils_2024.json")), ensure_ascii=False, separators=(",", ":")),
-    "/*__DMAX__*/": str(json.loads(read("data/derived/distance_max_m.json"))["distance_max_m"]),
+    "/*__DATA__*/": json.dumps(json.loads(read("data/derived/profils_monde.json")), ensure_ascii=False, separators=(",", ":")),
+    "/*__DMAX__*/": "20000000",  # échelle mondiale de Tradle : 20 000 km
     "/*__CAL__*/": json.dumps({"debut": cal["debut"], "pays": cal["pays"]}, separators=(",", ":")),
     "/*__META__*/": json.dumps({"update": f"{d}/{m}/20{y}", "extraction": "/".join(reversed(extr.split("-")))}),
 }

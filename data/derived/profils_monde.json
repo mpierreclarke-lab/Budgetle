@@ -179,7 +179,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "AUT",
+   "Austria",
+   "Republic of Austria"
+  ]
  },
  {
   "geo": "BE",
@@ -363,7 +368,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "BEL",
+   "Belgium",
+   "Kingdom of Belgium"
+  ]
  },
  {
   "geo": "BG",
@@ -549,7 +559,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "BGN",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "BGR",
+   "Bulgaria",
+   "Republic of Bulgaria"
+  ]
  },
  {
   "geo": "CH",
@@ -731,7 +746,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "CHF",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "CHE",
+   "Swiss Confederation",
+   "Switzerland"
+  ]
  },
  {
   "geo": "CY",
@@ -913,7 +933,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "CYP",
+   "Cyprus",
+   "Republic of Cyprus"
+  ]
  },
  {
   "geo": "CZ",
@@ -1095,7 +1120,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "CZK",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "CZE",
+   "Czech Republic",
+   "Czechia"
+  ]
  },
  {
   "geo": "DE",
@@ -1279,7 +1309,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "DEU",
+   "Federal Republic of Germany",
+   "Germany"
+  ]
  },
  {
   "geo": "DK",
@@ -1461,7 +1496,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "DKK",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "DNK",
+   "Denmark",
+   "Kingdom of Denmark"
+  ]
  },
  {
   "geo": "EE",
@@ -1643,7 +1683,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "EST",
+   "Estonia",
+   "Republic of Estonia"
+  ]
  },
  {
   "geo": "EL",
@@ -1825,7 +1870,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "GRC",
+   "Greece",
+   "Hellenic Republic"
+  ]
  },
  {
   "geo": "ES",
@@ -2009,7 +2059,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "ESP",
+   "Kingdom of Spain",
+   "Spain"
+  ]
  },
  {
   "geo": "FI",
@@ -2191,7 +2246,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "FIN",
+   "Finland",
+   "Republic of Finland"
+  ]
  },
  {
   "geo": "FR",
@@ -2375,7 +2435,11 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "FRA",
+   "French Republic"
+  ]
  },
  {
   "geo": "HR",
@@ -2557,7 +2621,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "Croatia",
+   "HRV",
+   "Republic of Croatia"
+  ]
  },
  {
   "geo": "HU",
@@ -2739,7 +2808,11 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "HUF",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "HUN",
+   "Hungary"
+  ]
  },
  {
   "geo": "IE",
@@ -2921,7 +2994,11 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "IRL",
+   "Ireland"
+  ]
  },
  {
   "geo": "IS",
@@ -3103,7 +3180,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "ISK",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "ISL",
+   "Iceland",
+   "Republic of Iceland"
+  ]
  },
  {
   "geo": "IT",
@@ -3285,7 +3367,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "ITA",
+   "Italian Republic",
+   "Italy"
+  ]
  },
  {
   "geo": "LT",
@@ -3467,7 +3554,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "LTU",
+   "Lithuania",
+   "Republic of Lithuania"
+  ]
  },
  {
   "geo": "LU",
@@ -3649,7 +3741,11 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "Grand Duchy of Luxembourg",
+   "LUX"
+  ]
  },
  {
   "geo": "LV",
@@ -3831,7 +3927,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "LVA",
+   "Latvia",
+   "Republic of Latvia"
+  ]
  },
  {
   "geo": "MT",
@@ -4013,7 +4114,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "MLT",
+   "Malta",
+   "Republic of Malta"
+  ]
  },
  {
   "geo": "NL",
@@ -4195,7 +4301,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "Kingdom of the Netherlands",
+   "NLD",
+   "Netherlands"
+  ]
  },
  {
   "geo": "NO",
@@ -4377,7 +4488,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "NOK",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "Kingdom of Norway",
+   "NOR",
+   "Norway"
+  ]
  },
  {
   "geo": "PL",
@@ -4559,7 +4675,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "PLN",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "POL",
+   "Poland",
+   "Republic of Poland"
+  ]
  },
  {
   "geo": "PT",
@@ -4743,7 +4864,11 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "PRT",
+   "Portuguese Republic"
+  ]
  },
  {
   "geo": "RO",
@@ -4925,7 +5050,11 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "RON",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "ROU",
+   "Romania"
+  ]
  },
  {
   "geo": "SE",
@@ -5107,7 +5236,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "SEK",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "Kingdom of Sweden",
+   "SWE",
+   "Sweden"
+  ]
  },
  {
   "geo": "SI",
@@ -5289,7 +5423,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "Republic of Slovenia",
+   "SVN",
+   "Slovenia"
+  ]
  },
  {
   "geo": "SK",
@@ -5473,7 +5612,12 @@
   "source": "Eurostat",
   "base_comptable": "droits constatés",
   "devise": "EUR",
-  "taux_eur": null
+  "taux_eur": null,
+  "alias": [
+   "SVK",
+   "Slovak Republic",
+   "Slovakia"
+  ]
  },
  {
   "geo": "AL",
@@ -5655,6 +5799,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "ALB",
+   "Albania",
+   "Republic of Albania"
   ]
  },
  {
@@ -5837,6 +5986,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "AND",
+   "Andorra",
+   "Principality of Andorra"
   ]
  },
  {
@@ -6019,6 +6173,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "ARE",
+   "United Arab Emirates"
   ]
  },
  {
@@ -6201,6 +6359,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "ARM",
+   "Armenia",
+   "Republic of Armenia"
   ]
  },
  {
@@ -6383,6 +6546,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "AUS",
+   "Australia"
   ]
  },
  {
@@ -6565,6 +6732,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "AZE",
+   "Azerbaijan",
+   "Republic of Azerbaijan"
   ]
  },
  {
@@ -6747,6 +6919,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "BLR",
+   "Belarus",
+   "Republic of Belarus"
   ]
  },
  {
@@ -6929,6 +7106,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "BRA",
+   "Brazil",
+   "Federative Republic of Brazil"
   ]
  },
  {
@@ -7031,6 +7213,9 @@
     "part_du_total": 0.3049568324754675,
     "detail": null
    }
+  ],
+  "alias": [
+   "CAN"
   ]
  },
  {
@@ -7133,6 +7318,11 @@
     "part_du_total": 0.2996385853645097,
     "detail": null
    }
+  ],
+  "alias": [
+   "CHL",
+   "Chile",
+   "Republic of Chile"
   ]
  },
  {
@@ -7235,6 +7425,11 @@
     "part_du_total": 0.26205518431724945,
     "detail": null
    }
+  ],
+  "alias": [
+   "CHN",
+   "China",
+   "People's Republic of China"
   ]
  },
  {
@@ -7417,6 +7612,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "COL",
+   "Colombia",
+   "Republic of Colombia"
   ]
  },
  {
@@ -7599,6 +7799,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "CRI",
+   "Republic of Costa Rica"
   ]
  },
  {
@@ -7781,6 +7985,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "DOM",
+   "Dominican Republic"
   ]
  },
  {
@@ -7963,6 +8171,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "GBR",
+   "United Kingdom",
+   "United Kingdom of Great Britain and Northern Ireland"
   ]
  },
  {
@@ -8145,6 +8358,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "GEO",
+   "Georgia"
   ]
  },
  {
@@ -8327,6 +8544,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "GTM",
+   "Republic of Guatemala"
   ]
  },
  {
@@ -8429,6 +8650,11 @@
     "part_du_total": 0.07511280306660853,
     "detail": null
    }
+  ],
+  "alias": [
+   "IDN",
+   "Indonesia",
+   "Republic of Indonesia"
   ]
  },
  {
@@ -8611,6 +8837,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "ISR",
+   "Israel",
+   "State of Israel"
   ]
  },
  {
@@ -8793,6 +9024,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "JPN",
+   "Japan"
   ]
  },
  {
@@ -8975,6 +9210,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "KAZ",
+   "Republic of Kazakhstan"
   ]
  },
  {
@@ -9157,6 +9396,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "KEN",
+   "Republic of Kenya"
   ]
  },
  {
@@ -9339,6 +9582,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "KGZ",
+   "Kyrgyz Republic",
+   "Kyrgyzstan"
   ]
  },
  {
@@ -9441,6 +9689,10 @@
     "part_du_total": 0.16789954545386768,
     "detail": null
    }
+  ],
+  "alias": [
+   "KIR",
+   "Republic of Kiribati"
   ]
  },
  {
@@ -9543,6 +9795,11 @@
     "part_du_total": 0.26159106986794145,
     "detail": null
    }
+  ],
+  "alias": [
+   "KOR",
+   "Korea, Republic of",
+   "South Korea"
   ]
  },
  {
@@ -9725,7 +9982,8 @@
      }
     ]
    }
-  ]
+  ],
+  "alias": []
  },
  {
   "geo": "MD",
@@ -9907,6 +10165,12 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "MDA",
+   "Moldova",
+   "Moldova, Republic of",
+   "Republic of Moldova"
   ]
  },
  {
@@ -10089,6 +10353,10 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "MNG",
+   "Mongolia"
   ]
  },
  {
@@ -10271,6 +10539,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "MUS",
+   "Mauritius",
+   "Republic of Mauritius"
   ]
  },
  {
@@ -10453,6 +10726,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "NAM",
+   "Namibia",
+   "Republic of Namibia"
   ]
  },
  {
@@ -10555,6 +10833,10 @@
     "part_du_total": 0.30846580880297264,
     "detail": null
    }
+  ],
+  "alias": [
+   "NZL",
+   "New Zealand"
   ]
  },
  {
@@ -10737,6 +11019,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "Republic of Singapore",
+   "SGP",
+   "Singapore"
   ]
  },
  {
@@ -10919,6 +11206,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "El Salvador",
+   "Republic of El Salvador",
+   "SLV"
   ]
  },
  {
@@ -11101,6 +11393,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "Republic of San Marino",
+   "SMR",
+   "San Marino"
   ]
  },
  {
@@ -11283,6 +11580,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "Kingdom of Thailand",
+   "THA",
+   "Thailand"
   ]
  },
  {
@@ -11465,6 +11767,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "Republic of Tajikistan",
+   "TJK",
+   "Tajikistan"
   ]
  },
  {
@@ -11647,6 +11954,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "Republic of Türkiye",
+   "TUR",
+   "Türkiye"
   ]
  },
  {
@@ -11829,6 +12141,9 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "UKR"
   ]
  },
  {
@@ -11931,6 +12246,11 @@
     "part_du_total": 0.1970723094907349,
     "detail": null
    }
+  ],
+  "alias": [
+   "USA",
+   "United States",
+   "United States of America"
   ]
  },
  {
@@ -12113,6 +12433,11 @@
      }
     ]
    }
+  ],
+  "alias": [
+   "Republic of South Africa",
+   "South Africa",
+   "ZAF"
   ]
  }
 ]

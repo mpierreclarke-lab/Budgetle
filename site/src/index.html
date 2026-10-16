@@ -1,6 +1,6 @@
 <title>Budgetle</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Devinez le pays européen derrière un budget public. Six essais, données Eurostat 2024.">
+<meta name="description" content="Devinez le pays derrière un budget public. Six essais, données Eurostat, OCDE et FMI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -40,13 +40,13 @@ form.play button:disabled { opacity: .5; cursor: default; }
   <div class="card" id="mystery"></div>
   <div class="slots" id="slots" aria-live="polite"></div>
   <form class="play" id="form" autocomplete="off">
-    <input id="guess" type="text" placeholder="Nom d'un pays européen" aria-label="Votre proposition" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" enterkeyhint="go" autocapitalize="words" spellcheck="false">
+    <input id="guess" type="text" placeholder="Nom d'un pays" aria-label="Votre proposition" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" enterkeyhint="go" autocapitalize="words" spellcheck="false">
     <button type="submit" id="go">Valider</button>
     <ul class="sugg" id="sugg" role="listbox" hidden></ul>
   </form>
   <p class="msg" id="msg" role="status"></p>
   <div class="card end" id="end" hidden></div>
-  <p class="small">Données : Eurostat, dépenses des administrations publiques par fonction, 2024 (© Union européenne). Distance et direction calculées comme dans Tradle.</p>
+  <p class="small">Données : dépenses des administrations publiques par fonction (classification COFOG), Eurostat (© Union européenne), OCDE et FMI (source : Fonds monétaire international). Distance et direction calculées comme dans Tradle.</p>
 </div>
 
 <script>
@@ -73,7 +73,7 @@ const forced = /^#partie(\d+)$/.exec(location.hash);
 const today = localDay();
 let n = forced ? +forced[1] : dayNumber(today, CAL);
 if (n != null && (n < 1 || n > CAL.pays.length)) n = null;
-const KEY = `budgetle-v1-${n}`;
+const KEY = `budgetle-v2-${n}`;
 const index = buildIndex(PROFILES);
 let guesses = [];
 
@@ -100,12 +100,12 @@ function render(target) {
   const text = shareText(n, guesses, SITE_URL);
   const lines = facts(target.geo, PROFILES).map(f => `<li>${f}</li>`).join("");
   const note = NOTES[target.geo] ? `<p class="note warn">${NOTES[target.geo]}</p>` : "";
-  const prov = target.provisoire ? `<p class="small">Les chiffres 2024 de ce pays sont provisoires (Eurostat).</p>` : "";
+  const prov = `<ul class="small">${dataNotes(target).map(n => `<li>${n}</li>`).join("")}</ul>`;
   $("end").hidden = false;
   $("end").innerHTML = `
     <span class="eyebrow">${st === "won" ? `Trouvé en ${guesses.length} essai${guesses.length > 1 ? "s" : ""}` : "Perdu"}</span>
     <h2>${target.nom}</h2>
-    <p>Dépenses publiques en 2024 : ${money(target.total.mio_eur)} (${fr1.format(target.total.pc_gdp)} % du PIB).</p>
+    <p>Dépenses publiques en ${target.annee} : ${money(target.total.mio_eur)} (${fr1.format(target.total.pc_gdp)} % du PIB).</p>
     <ul>${lines}</ul>${note}${prov}
     <div class="share"><label for="sharetxt" class="small">Votre résultat</label>
       <textarea id="sharetxt" rows="${guesses.length + 4}" readonly>${text}</textarea>
@@ -138,7 +138,7 @@ function setActive(i) {
 
 function submit(target, value) {
   const geo = findCountry(value, index);
-  if (!geo) { $("msg").textContent = "Pays inconnu : choisissez un des 30 pays proposés (UE, Islande, Norvège, Suisse)."; return; }
+  if (!geo) { $("msg").textContent = `Pays inconnu ou absent du jeu : choisissez un des ${PROFILES.length} pays proposés dans la liste.`; return; }
   if (guesses.some(g => g.geo === geo)) { $("msg").textContent = `${BY[geo].nom} a déjà été proposé.`; return; }
   $("msg").textContent = "";
   guesses.push(evaluate(BY[geo], target, DMAX));

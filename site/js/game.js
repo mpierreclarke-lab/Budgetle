@@ -11,6 +11,8 @@ export const ALIASES = {
   FR: [], HR: ["Croatia"], HU: ["Hungary"], IE: ["Ireland", "Eire"], IS: ["Iceland"], IT: ["Italy"],
   LT: ["Lithuania"], LU: [], LV: ["Latvia"], MT: ["Malta"], NL: ["Netherlands", "Hollande"],
   NO: ["Norway"], PL: ["Poland"], PT: [], RO: ["Romania"], SE: ["Sweden"], SI: ["Slovenia"], SK: ["Slovakia"],
+  US: ["USA", "Amérique"], GB: ["Angleterre", "Grande-Bretagne", "UK"], KR: ["Corée"], AE: ["Émirats"],
+  BY: ["Bélarus"], CN: ["République populaire de Chine"], DO: ["Dominicaine"], ZA: ["South Africa"],
 };
 
 export function normalize(s) {
@@ -19,7 +21,7 @@ export function normalize(s) {
 
 export function buildIndex(profiles) {
   const idx = new Map();
-  for (const p of profiles) for (const n of [p.nom, p.geo, ...(ALIASES[p.geo] || [])]) idx.set(normalize(n), p.geo);
+  for (const p of profiles) for (const n of [p.nom, p.geo, ...(ALIASES[p.geo] || []), ...(p.alias || [])]) idx.set(normalize(n), p.geo);
   return idx;
 }
 
@@ -32,7 +34,7 @@ export function suggest(input, profiles, exclude = []) {
   const q = normalize(input);
   if (!q) return [];
   const pool = profiles.filter((p) => !exclude.includes(p.geo));
-  const names = (p) => [p.nom, ...(ALIASES[p.geo] || [])].map(normalize);
+  const names = (p) => [p.nom, ...(ALIASES[p.geo] || []), ...(p.alias || [])].filter((n) => n.length > 3).map(normalize);
   const starts = pool.filter((p) => names(p).some((n) => n.startsWith(q)));
   const contains = pool.filter((p) => !starts.includes(p) && names(p).some((n) => n.includes(q)));
   return [...starts, ...contains].sort((a, b) => starts.includes(b) - starts.includes(a) || a.nom.localeCompare(b.nom, "fr")).slice(0, 6);
@@ -91,18 +93,39 @@ export function rankOf(code, geo, profiles) {
 const fmt1 = (v) => v.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const ord = (r) => (r === 1 ? "" : `${r}ᵉ `);
 const tie = (r) => (r.ties ? `, à égalité avec ${r.ties} autre${r.ties > 1 ? "s" : ""} pays` : "");
-const TOP = 5;
+const TOP = 10;
 
 /** Faits vérifiables pour l'écran de fin : la fonction où la part du pays est la plus forte
  *  (relativement aux autres pays) et celle où elle est la plus faible, si elles sont dans le top 5. */
 export function facts(geo, profiles) {
   const n = profiles.length;
   const p = profiles.find((x) => x.geo === geo);
-  const r = p.divisions.map((d) => ({ d, ...rankOf(d.code, geo, profiles) }));
+  // Les fonctions publiées à 0 (non isolées dans les comptes du pays) ne donnent pas lieu à un fait
+  const r = p.divisions.filter((d) => d.mio_eur > 0).map((d) => ({ d, ...rankOf(d.code, geo, profiles) }));
   const hi = [...r].sort((a, b) => a.high - b.high || b.value - a.value)[0];
   const lo = r.filter((x) => x !== hi).sort((a, b) => a.low - b.low || a.value - b.value)[0];
   const out = [];
   if (hi.high <= TOP) out.push(`${hi.d.label} : ${fmt1(hi.value)} % de la dépense publique, la ${ord(hi.high)}part la plus forte des ${n} pays${tie(hi)}.`);
   if (lo.low <= TOP) out.push(`${lo.d.label} : ${fmt1(lo.value)} % de la dépense publique, la ${ord(lo.low)}part la plus faible des ${n} pays${tie(lo)}.`);
+  if (!out.length) {
+    // Profil proche de la moyenne : on signale la fonction qui s'écarte le plus de la médiane des pays du jeu
+    const med = (code) => {
+      const v = profiles.map((q) => rankOf(code, q.geo, profiles).value).sort((a, b) => a - b);
+      return v[Math.floor(v.length / 2)];
+    };
+    const far = r.map((x) => ({ ...x, med: med(x.d.code) })).sort((a, b) => Math.abs(b.value / b.med - 1) - Math.abs(a.value / a.med - 1))[0];
+    out.push(`${far.d.label} : ${fmt1(far.value)} % de la dépense publique, contre une médiane de ${fmt1(far.med)} % pour les ${n} pays.`);
+  }
+  return out;
+}
+
+/** Notes de lecture automatiques pour l'écran de fin : source, année, base comptable, lacunes du détail. */
+export function dataNotes(p) {
+  const out = [`Source : ${p.source}, données ${p.annee}${p.provisoire ? " (provisoires)" : ""}.`];
+  if (p.base_comptable === "caisse") out.push("Comptes tenus en caisse : une dépense est enregistrée quand elle est payée, et non quand elle est engagée comme dans la plupart des autres pays du jeu.");
+  if (!p.divisions[9].detail) out.push("Le détail de la protection sociale (retraites, famille, chômage…) n'est pas publié pour ce pays.");
+  const zeros = p.divisions.filter((d) => d.mio_eur === 0).map((d) => d.label.toLowerCase());
+  if (zeros.length) out.push(`Dépense nulle dans les données publiées pour : ${zeros.join(", ")}. La fonction n'est pas isolée dans les comptes du pays : ces dépenses figurent dans d'autres rubriques.`);
+  if (p.devise && p.devise !== "EUR" && p.taux_eur) out.push(`Montants convertis en euros au taux moyen de ${p.annee} : 1 € = ${p.taux_eur.toLocaleString("fr-FR", { maximumSignificantDigits: 5 })} ${p.devise} (FMI).`);
   return out;
 }

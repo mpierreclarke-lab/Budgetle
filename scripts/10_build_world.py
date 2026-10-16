@@ -206,6 +206,11 @@ log("\nContrôle de la conversion (monnaie nationale Eurostat ÷ taux FMI, compa
 log("Information — dépense totale FMI vs Eurostat en monnaie nationale, 2024 : " + ", ".join(f"{k} {v:+.2f} %" for k, v in level))
 
 world = EU + profiles
+# Noms acceptés à la saisie en plus du nom français : noms anglais ISO (officiel et usuel) et code ISO à 3 lettres
+for w in world:
+    c = pycountry.countries.get(alpha_2=w["iso2"])
+    names = {w["nom"]} if not c else {c.name, getattr(c, "common_name", c.name), getattr(c, "official_name", c.name), c.alpha_3}
+    w["alias"] = sorted(n for n in names if n and n != w["nom"])
 OUT.joinpath("profils_monde.json").write_text(json.dumps(world, ensure_ascii=False, indent=1), encoding="utf-8")
 rows = []
 for p in world:

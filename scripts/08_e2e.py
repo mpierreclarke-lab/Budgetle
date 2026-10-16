@@ -37,8 +37,10 @@ with sync_playwright() as p:
         pg.on("pageerror", lambda e: errors.append(str(e)))
         pg.on("console", lambda m: errors.append(m.text) if m.type == "error" and "fonts" not in m.text else None)
 
-        # Partie n° 1 (Irlande) : erreurs de saisie, puis victoire au 2e essai
+        # Partie n° 1 : erreurs de saisie, puis victoire au 2e essai (réponse lue dans le calendrier de la page)
         pg.goto(BASE + "index.html#partie1")
+        answer = pg.evaluate("BY[CAL.pays[0]].nom")
+        assert answer != "France", "le test suppose que la partie n° 1 n'est pas la France"
         pg.fill("#guess", "Fra")
         check(pg.locator("#sugg li").first.inner_text() == "France", f"[{width}px] suggestion « Fra » → France")
         pg.keyboard.press("ArrowDown"); pg.keyboard.press("Enter")
@@ -47,9 +49,12 @@ with sync_playwright() as p:
         check("Pays inconnu" in pg.inner_text("#msg"), f"[{width}px] pays inconnu signalé")
         pg.fill("#guess", "france"); pg.click("#go")
         check("déjà été proposé" in pg.inner_text("#msg"), f"[{width}px] doublon signalé")
-        pg.fill("#guess", "Irl")
-        pg.locator("#sugg li", has_text="Irlande").dispatch_event("pointerdown")
-        check(pg.is_visible("#end") and pg.inner_text("#end h2") == "Irlande", f"[{width}px] victoire : écran de fin « Irlande »")
+        pg.fill("#guess", answer[:4])
+        pg.locator("#sugg li", has_text=answer).first.dispatch_event("pointerdown")
+        check(pg.is_visible("#end") and pg.inner_text("#end h2") == answer, f"[{width}px] victoire : écran de fin « {answer} »")
+        check(pg.locator(".tile").first.inner_text().strip().endswith("%"), f"[{width}px] les rectangles affichent une part en %")
+        pg.locator(".tile").first.hover()
+        check("% du PIB" in pg.inner_text("#mystery .detail") and "€" in pg.inner_text("#mystery .detail"), f"[{width}px] survol : % du PIB et montant affichés")
         share = pg.input_value("#sharetxt")
         check(share.startswith("#Budgetle #1 2/6") and share.endswith("https://mpierreclarke-lab.github.io/Budgetle/"), f"[{width}px] texte de partage correct")
         check(pg.locator("#end li").count() >= 1, f"[{width}px] faits pédagogiques affichés")
