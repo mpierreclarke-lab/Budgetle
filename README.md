@@ -32,6 +32,7 @@ python3 scripts/08_e2e.py             # partie complète jouée dans un navigate
 | Essais | 6 |
 | Pays du jour | liste fixée à l'avance (cycles de 70 jours, pas de retour avant 35 jours), date locale du joueur |
 | Revoir une partie | adresse `index.html#partie12` |
+| Parties infinies | `index.html#infini` : pays tiré au hasard (hors 15 derniers), bouton « Pays suivant », score cumulé dans le navigateur |
 
 ## Arborescence
 

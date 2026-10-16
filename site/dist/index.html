@@ -136,7 +136,7 @@ form.play input { font: inherit; font-size: 1.05rem; padding: .7rem .8rem; borde
 form.play input:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
 form.play button { font: 700 1rem/1 var(--f-body); padding: .7rem 1.1rem; border-radius: 8px; border: 0; background: var(--ink); color: var(--bg); cursor: pointer; }
 form.play button:disabled { opacity: .5; cursor: default; }
-.sugg { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 5; list-style: none; margin: 0; padding: .3rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; box-shadow: 0 8px 24px rgb(0 0 0 / .12); }
+.sugg { position: absolute; left: 0; right: 0; bottom: calc(100% + 4px); z-index: 5; list-style: none; margin: 0; padding: .3rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; box-shadow: 0 8px 24px rgb(0 0 0 / .12); }
 .sugg li { padding: .55rem .6rem; border-radius: 6px; cursor: pointer; }
 .sugg li[aria-selected="true"], .sugg li:hover { background: var(--accent-soft); }
 .msg { min-height: 1.4rem; font-size: .92rem; color: var(--warn); }
@@ -147,8 +147,10 @@ form.play button:disabled { opacity: .5; cursor: default; }
 .share textarea { font: .95rem/1.4 var(--f-data); padding: .6rem; border-radius: 8px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); resize: none; width: 100%; }
 .share button, .end a.btn { justify-self: start; font: 700 .95rem/1 var(--f-body); padding: .65rem 1rem; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); cursor: pointer; text-decoration: none; }
 /* Le treemap reste visible au-dessus de la saisie sur téléphone */
-@media (max-width: 560px) { .game .tm { aspect-ratio: 1 / .8; } .game .headline .big { font-size: 2.2rem; } .game .legend-note { font-size: .8rem; } }
+@media (max-width: 560px) { .game .tm { aspect-ratio: 1 / .74; } .mode { padding: .45rem .4rem; font-size: .85rem; } .game .headline .big { font-size: 2.2rem; } .game .legend-note { font-size: .8rem; } }
 .msg:empty { display: none; }
+/* La saisie reste accessible : si elle sort de l'écran, elle se colle en bas de la fenêtre ; les suggestions s'ouvrent vers le haut */
+form.play { position: sticky; bottom: 0; z-index: 6; background: var(--bg); padding-block: .5rem calc(.5rem + env(safe-area-inset-bottom, 0px)); }
 /* Révélation d'un essai, comme Tradle : carrés un par un (250 ms), pourcentage qui monte, puis la ligne détaillée */
 .g.reveal-row { grid-template-columns: minmax(0, 1fr) 4rem; }
 .sq { display: flex; justify-content: space-evenly; font-size: 1.35rem; line-height: 1; }
@@ -157,6 +159,12 @@ form.play button:disabled { opacity: .5; cursor: default; }
 .recap { display: grid; gap: .25rem; font-size: 1.6rem; line-height: 1.2; letter-spacing: .15rem; }
 @media (prefers-reduced-motion: reduce) { .sq span, .recap div { animation: none; opacity: 1; } }
 details.copy summary { font-weight: 400; font-size: .9rem; padding: .4rem .6rem; }
+.modes { display: flex; gap: .4rem; }
+.mode { flex: 1; text-align: center; font: 700 .9rem/1 var(--f-body); padding: .6rem .5rem; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); text-decoration: none; }
+.mode[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.mode:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.end .actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+.end button.next { font: 700 1rem/1 var(--f-body); padding: .75rem 1.2rem; border-radius: 8px; border: 0; background: var(--accent); color: var(--bg); cursor: pointer; }
 .banner { font-size: .88rem; background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: .5rem .8rem; }
 </style>
 </head>
@@ -167,6 +175,10 @@ details.copy summary { font-weight: 400; font-size: .9rem; padding: .4rem .6rem;
   <div class="bar">
     <h1>Budgetle</h1>
     <nav><span class="num small" id="num"></span><a href="regles.html">Règles</a></nav>
+  </div>
+  <div class="modes" role="group" aria-label="Mode de jeu">
+    <a href="#jour" id="mode-jour" class="mode">Partie du jour</a>
+    <a href="#infini" id="mode-infini" class="mode">Parties infinies</a>
   </div>
   <p class="banner" id="banner" hidden></p>
   <div class="card" id="mystery"></div>
@@ -501,17 +513,31 @@ const NOTES = {
 const ARROW = { N: 0, NE: 45, E: 90, SE: 135, S: 180, SW: 225, W: 270, NW: 315 };
 const $ = (id) => document.getElementById(id);
 
-// Partie du jour, ou partie choisie par l'adresse (#partie12) pour revoir une partie passée
+// Deux modes : partie du jour (calendrier fixe, #jour ou #partie12) et parties infinies (#infini, pays tiré au hasard)
 const forced = /^#partie(\d+)$/.exec(location.hash);
-const today = localDay();
-let n = forced ? +forced[1] : dayNumber(today, CAL);
+const MODE = location.hash === "#infini" ? "infini" : "jour";
+let n = forced ? +forced[1] : dayNumber(localDay(), CAL);
 if (n != null && (n < 1 || n > CAL.pays.length)) n = null;
-const KEY = `budgetle-v2-${n}`;
+const KEY = MODE === "infini" ? "budgetle-v2-infini" : `budgetle-v2-${n}`;
 const index = buildIndex(PROFILES);
-let guesses = [];
+let guesses = [], target = null;
+let inf = { geo: null, recent: [], played: 0, won: 0 }; // état des parties infinies
 
-function load() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch { return []; } }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(guesses.map(g => g.geo))); } catch {} }
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+function load() { return MODE === "infini" ? (inf.guesses || []) : store.get(KEY, []); }
+function save() {
+  if (MODE === "infini") { inf.guesses = guesses.map(g => g.geo); store.set(KEY, inf); }
+  else store.set(KEY, guesses.map(g => g.geo));
+}
+/** Tirage d'un pays au hasard, en évitant les 15 derniers tirés. */
+function drawCountry() {
+  const pool = PROFILES.filter(p => !inf.recent.includes(p.geo));
+  const r = new Uint32Array(1); crypto.getRandomValues(r);
+  return pool[r[0] % pool.length].geo;
+}
 
 const STEP = 250; // ms par carré, comme Tradle
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -536,7 +562,7 @@ function rowHtml(g, i) {
     <span class="r num">${g.proximity} %</span></div>`;
 }
 
-function render(target) {
+function render() {
   const slots = [];
   for (let i = 0; i < MAX_TRIES; i++) slots.push(!guesses[i] ? `<div class="g empty" aria-hidden="true"></div>` : i === animating ? revealHtml(guesses[i], i) : rowHtml(guesses[i], i));
   $("slots").innerHTML = slots.join("");
@@ -545,12 +571,13 @@ function render(target) {
   $("guess").disabled = $("go").disabled = done || animating !== null;
   if (animating !== null) {
     countUp($("count"), guesses[animating].proximity, STEP * 5);
-    setTimeout(() => { animating = null; render(target); if (status(guesses) === "playing") $("guess").focus({ preventScroll: true }); }, STEP * 6);
+    setTimeout(() => { animating = null; render(); if (status(guesses) === "playing") $("guess").focus({ preventScroll: true }); }, STEP * 6);
     return;
   }
   $("form").hidden = done;
   if (!done) return;
-  const text = shareText(n, guesses, SITE_URL);
+  if (MODE === "infini" && !inf.counted) { inf.played++; if (st === "won") inf.won++; inf.counted = true; save(); }
+  const text = shareText(MODE === "infini" ? "∞" : n, guesses, SITE_URL);
   const lines = facts(target.geo, PROFILES).map(f => `<li>${f}</li>`).join("");
   const note = NOTES[target.geo] ? `<p class="note warn">${NOTES[target.geo]}</p>` : "";
   const prov = `<ul class="small">${dataNotes(target).map(n => `<li>${n}</li>`).join("")}</ul>`;
@@ -564,7 +591,9 @@ function render(target) {
       <div class="recap" aria-label="Résumé des essais">${text.split("\n").slice(1, 1 + guesses.length).map((l, k) => `<div style="animation-delay:${k * STEP}ms">${l}</div>`).join("")}</div>
       <button type="button" id="copy">Copier le résultat</button>
       <details class="copy"><summary>Voir le texte à partager</summary><textarea id="sharetxt" rows="${guesses.length + 4}" readonly>${text}</textarea></details></div>
-    <a class="btn" href="regles.html">Comprendre les données</a>`;
+    <div class="actions">${MODE === "infini" ? `<button type="button" class="next" id="next">Pays suivant</button>` : `<a class="btn" href="#infini">Jouer en parties infinies</a>`}<a class="btn" href="regles.html">Comprendre les données</a></div>
+    ${MODE === "infini" ? `<p class="small">Parties infinies : ${inf.won} pays trouvé${inf.won > 1 ? "s" : ""} sur ${inf.played}.</p>` : ""}`;
+  if (MODE === "infini") $("next").addEventListener("click", nextCountry);
   $("copy").addEventListener("click", async () => {
     const ta = $("sharetxt");
     try { await navigator.clipboard.writeText(text); $("copy").textContent = "Copié"; }
@@ -590,7 +619,7 @@ function setActive(i) {
   $("guess").setAttribute("aria-activedescendant", "opt" + active);
 }
 
-function submit(target, value) {
+function submit(value) {
   const geo = findCountry(value, index);
   if (!geo) { $("msg").textContent = `Pays inconnu ou absent du jeu : choisissez un des ${PROFILES.length} pays proposés dans la liste.`; return; }
   if (guesses.some(g => g.geo === geo)) { $("msg").textContent = `${BY[geo].nom} a déjà été proposé.`; return; }
@@ -600,33 +629,58 @@ function submit(target, value) {
   $("guess").value = "";
   hideSugg();
   if (!REDUCED) animating = guesses.length - 1;
-  render(target);
+  render();
   if (status(guesses) !== "playing") setTimeout(() => $("end").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }), REDUCED ? 0 : STEP * 6 + 50);
 }
 
-function start() {
-  if (n == null) {
-    $("mystery").innerHTML = `<p>Pas de partie à cette date. Le calendrier de la version bêta couvre du 16/10/2026 au 10/10/2027.</p>`;
-    $("form").hidden = true;
-    return;
-  }
-  const target = BY[CAL.pays[n - 1]];
-  $("num").textContent = `Partie n° ${n}`;
-  if (forced) { $("banner").hidden = false; $("banner").textContent = `Partie n° ${n} ouverte directement depuis l'adresse de la page.`; }
+function setup(geo) {
+  target = BY[geo];
   profileCard($("mystery"), target, { hideName: true, compact: true });
   guesses = load().filter(g => BY[g]).slice(0, MAX_TRIES).map(g => evaluate(BY[g], target, DMAX));
-  render(target);
+  $("end").hidden = true; $("msg").textContent = ""; $("form").hidden = false;
+  render();
+}
+
+/** Parties infinies : nouveau pays tiré au hasard, essais remis à zéro. */
+function nextCountry() {
+  const geo = drawCountry();
+  inf = { ...inf, geo, guesses: [], counted: false, recent: [geo, ...inf.recent].slice(0, 15) };
+  store.set(KEY, inf);
+  $("num").textContent = `Partie infinie n° ${inf.played + 1}`;
+  setup(geo);
+  window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" });
+  $("guess").focus({ preventScroll: true });
+}
+
+function start() {
+  $("mode-" + MODE).setAttribute("aria-current", "page");
   $("guess").addEventListener("input", showSugg);
   $("guess").addEventListener("keydown", (e) => {
     if ($("sugg").hidden) return;
     if (e.key === "ArrowDown") { e.preventDefault(); setActive(active + 1); }
     else if (e.key === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
     else if (e.key === "Escape") hideSugg();
-    else if (e.key === "Enter" && active >= 0) { e.preventDefault(); submit(target, options[active].nom); }
+    else if (e.key === "Enter" && active >= 0) { e.preventDefault(); submit(options[active].nom); }
   });
   $("guess").addEventListener("blur", () => setTimeout(hideSugg, 150));
-  $("sugg").addEventListener("pointerdown", (e) => { const li = e.target.closest("li"); if (li) { e.preventDefault(); submit(target, BY[li.dataset.geo].nom); } });
-  $("form").addEventListener("submit", (e) => { e.preventDefault(); submit(target, $("guess").value); });
+  $("sugg").addEventListener("pointerdown", (e) => { const li = e.target.closest("li"); if (li) { e.preventDefault(); submit(BY[li.dataset.geo].nom); } });
+  $("form").addEventListener("submit", (e) => { e.preventDefault(); submit($("guess").value); });
+
+  if (MODE === "infini") {
+    inf = { ...inf, ...store.get(KEY, {}) };
+    if (!inf.geo || !BY[inf.geo]) return nextCountry();
+    $("num").textContent = `Partie infinie n° ${inf.counted ? inf.played : inf.played + 1}`;
+    return setup(inf.geo);
+  }
+  if (n == null) {
+    const last = new Date(Date.UTC(...CAL.debut.split("-").map((x, i) => +x - (i === 1 ? 1 : 0))) + (CAL.pays.length - 1) * 864e5);
+    $("mystery").innerHTML = `<p>Pas de partie du jour à cette date : le calendrier de la version bêta s'arrête le ${last.toLocaleDateString("fr-FR", { timeZone: "UTC" })}. Les parties infinies restent disponibles.</p>`;
+    $("form").hidden = true;
+    return;
+  }
+  $("num").textContent = `Partie n° ${n}`;
+  if (forced) { $("banner").hidden = false; $("banner").textContent = `Partie n° ${n} ouverte directement depuis l'adresse de la page.`; }
+  setup(CAL.pays[n - 1]);
 }
 start();
 window.addEventListener("hashchange", () => location.reload());

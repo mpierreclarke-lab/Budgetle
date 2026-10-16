@@ -82,6 +82,22 @@ with sync_playwright() as p:
         check(pg.input_value("#sharetxt").startswith("#Budgetle #2 X/6"), f"[{width}px] partage d'une défaite (X/6)")
         check(pg.is_hidden("#form"), f"[{width}px] saisie fermée en fin de partie")
 
+        # Parties infinies : tirage, victoire, pays suivant, reprise après rechargement
+        pg.goto("about:blank"); pg.goto(BASE + "index.html#infini")
+        check(pg.get_attribute("#mode-infini", "aria-current") == "page", f"[{width}px] infini : mode actif")
+        seen = set()
+        for k in range(3):
+            geo = pg.evaluate("target.geo"); seen.add(geo)
+            nom = pg.evaluate("target.nom")
+            pg.fill("#guess", nom); pg.keyboard.press("Enter"); pg.wait_for_timeout(1700)
+            check(pg.inner_text("#end h2") == nom and pg.is_visible("#next"), f"[{width}px] infini : partie {k + 1} gagnée ({nom}), bouton « Pays suivant »")
+            pg.click("#next"); pg.wait_for_timeout(200)
+        check(len(seen) == 3 and pg.evaluate("target.geo") not in seen, f"[{width}px] infini : nouveaux pays à chaque partie ({', '.join(sorted(seen))})")
+        check(pg.locator(".g:not(.empty)").count() == 0 and pg.is_visible("#form"), f"[{width}px] infini : essais remis à zéro")
+        cur = pg.evaluate("target.geo"); pg.reload(); pg.wait_for_timeout(300)
+        check(pg.evaluate("target.geo") == cur and "Partie infinie n° 4" in pg.inner_text("#num"), f"[{width}px] infini : même pays et compteur après rechargement")
+        check("3 pays trouvés sur 3" in (pg.evaluate("(()=>{const i=JSON.parse(localStorage.getItem('budgetle-v2-infini'));return i.won+' pays trouvés sur '+i.played})()")), f"[{width}px] infini : score cumulé")
+
         # Partie du jour et page de règles
         pg.goto(BASE + "index.html")
         n = pg.inner_text("#num")
