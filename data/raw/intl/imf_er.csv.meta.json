@@ -1,0 +1,10 @@
+{
+  "file": "imf_er.csv",
+  "url": "https://api.imf.org/external/sdmx/2.1/data/IMF.STA,ER,4.0.1/.XDC_EUR.PA_RT.A?startPeriod=2019&dimensionAtObservation=AllDimensions",
+  "headers": {
+    "Accept": "application/vnd.sdmx.data+csv;version=1.0.0"
+  },
+  "retrieved_utc": "2026-10-16T15:24:27+00:00",
+  "bytes": 546935,
+  "sha256": "93b022130a1e2f78d9aee8650872d5506b325f94d67ea376ad824f5d6e4a12c3"
+}

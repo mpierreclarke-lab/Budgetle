@@ -1,0 +1,49 @@
+AL Albanie                      FMI  2023  droits ALL     108.8243  total       6.2 Md€  29.0 % PIB  écart fonctions +0.000 %
+AD Andorre                      FMI  2024  droits EUR       1.0000  total       1.1 Md€  30.7 % PIB  écart fonctions -0.000 %
+AE Émirats arabes unis          FMI  2024  droits AED       3.9750  total     108.8 Md€  21.3 % PIB  écart fonctions +0.000 %
+AM Arménie                      FMI  2024  caisse AMD     425.0828  total       7.0 Md€  29.2 % PIB  écart fonctions -0.000 %
+AU Australie                    OCDE 2024  droits AUD       1.6402  total     697.5 Md€  41.2 % PIB  écart fonctions -0.000 %
+AZ Azerbaïdjan                  FMI  2024  caisse AZN       1.8400  total      24.2 Md€  35.3 % PIB  écart fonctions +0.000 %
+BY Biélorussie                  FMI  2024  caisse BYN       3.5136  total      30.2 Md€  43.0 % PIB  écart fonctions +0.000 %
+BR Brésil                       FMI  2024  droits BRL       5.8329  total     921.9 Md€  45.8 % PIB  écart fonctions -0.000 %
+CA Canada                       FMI  2024  droits CAD       1.4822  total     828.3 Md€  40.0 % PIB  écart fonctions +0.000 %  (sans détail social)
+CL Chili                        OCDE 2024  droits CLP    1021.3041  total      83.6 Md€  27.5 % PIB  écart fonctions +0.000 %  (sans détail social)
+CN Chine                        FMI  2024  droits CNY       7.7904  total    5360.3 Md€  31.0 % PIB  écart fonctions +0.000 %  (sans détail social)
+CO Colombie                     OCDE 2024  droits COP    4410.0880  total     149.8 Md€  38.6 % PIB  écart fonctions +0.000 %
+CR Costa Rica                   FMI  2024  droits CRC     557.5448  total      25.9 Md€  29.4 % PIB  écart fonctions +0.000 %
+DO République dominicaine       FMI  2024  droits DOP      64.4721  total      23.5 Md€  20.5 % PIB  écart fonctions +0.000 %
+GB Royaume-Uni                  FMI  2024  droits GBP       0.8469  total    1571.1 Md€  46.7 % PIB  écart fonctions +0.000 %
+GE Géorgie                      FMI  2024  caisse GEL       2.9447  total      10.4 Md€  33.2 % PIB  écart fonctions +0.000 %
+GT Guatemala                    FMI  2024  droits GTQ       8.3977  total      17.1 Md€  16.4 % PIB  écart fonctions +0.000 %
+ID Indonésie                    FMI  2023  caisse IDR   16475.1654  total     213.5 Md€  16.8 % PIB  écart fonctions +0.000 %  (sans détail social)
+IL Israël                       FMI  2024  droits ILS       4.0045  total     219.0 Md€  43.7 % PIB  écart fonctions +0.000 %
+JP Japon                        FMI  2024  droits JPY     163.8359  total    1493.2 Md€  40.2 % PIB  écart fonctions -0.000 %
+KZ Kazakhstan                   FMI  2023  caisse KZT     493.2369  total      56.6 Md€  23.4 % PIB  écart fonctions -0.000 %
+KE Kenya                        FMI  2023  droits KES     151.2115  total      20.8 Md€  20.8 % PIB  écart fonctions +0.000 %
+KG Kirghizistan                 FMI  2024  caisse KGS      94.3298  total       5.2 Md€  32.1 % PIB  écart fonctions +0.000 %
+KI Kiribati                     FMI  2023  caisse AUD       1.6275  total       0.2 Md€  96.1 % PIB  écart fonctions -0.000 %  (sans détail social)
+KR Corée du Sud                 OCDE 2023  droits KRW    1411.7719  total     607.4 Md€  35.6 % PIB  écart fonctions +0.000 %  (sans détail social)
+XK Kosovo                       FMI  2024  caisse EUR       1.0000  total       3.1 Md€  30.2 % PIB  écart fonctions +0.000 %
+MD Moldavie                     FMI  2024  caisse MDL      19.2576  total       6.4 Md€  38.0 % PIB  écart fonctions +0.000 %
+MN Mongolie                     FMI  2024  caisse MNT    3669.2498  total       8.4 Md€  38.1 % PIB  écart fonctions +0.000 %
+MU Maurice                      FMI  2025  droits MUR      51.9758  total       5.3 Md€  36.6 % PIB  écart fonctions +0.000 %
+NA Namibie                      FMI  2022  droits NAD      17.2235  total       4.5 Md€  38.0 % PIB  écart fonctions +0.000 %
+NZ Nouvelle-Zélande             FMI  2025  droits NZD       1.9437  total      93.3 Md€  40.7 % PIB  écart fonctions +0.000 %  (sans détail social)
+SG Singapour                    FMI  2024  caisse SGD       1.4463  total     127.2 Md€  25.2 % PIB  écart fonctions +0.000 %
+SV Salvador                     FMI  2024  droits USD       1.0824  total      10.4 Md€  31.7 % PIB  écart fonctions +0.000 %
+SM Saint-Marin                  FMI  2024  droits EUR       1.0000  total       0.8 Md€  40.8 % PIB  écart fonctions +0.000 %
+TH Thaïlande                    FMI  2024  droits THB      38.2010  total     109.4 Md€  22.5 % PIB  écart fonctions -0.000 %
+TJ Tadjikistan                  FMI  2024  caisse TJS      11.6892  total       4.0 Md€  30.6 % PIB  écart fonctions +0.000 %
+TR Turquie                      FMI  2025  droits TRY      44.5833  total     486.9 Md€  34.4 % PIB  écart fonctions +0.000 %
+UA Ukraine                      FMI  2023  caisse UAH      39.5461  total     123.2 Md€  73.5 % PIB  écart fonctions +0.000 %
+US États-Unis                   FMI  2024  droits USD       1.0824  total   10711.1 Md€  39.6 % PIB  écart fonctions +0.000 %  (sans détail social)
+ZA Afrique du Sud               FMI  2024  droits ZAR      19.8386  total     150.0 Md€  40.5 % PIB  écart fonctions +0.000 %
+
+Contrôle de la conversion (monnaie nationale Eurostat ÷ taux FMI, comparé aux euros Eurostat, 2024) : CH -0.04 %, CZ -0.04 %, DK -0.05 %, HU -0.13 %, IS -0.01 %, NO -0.02 %, PL -0.07 %, RO -0.05 %, SE -0.05 %
+Information — dépense totale FMI vs Eurostat en monnaie nationale, 2024 : CH -3.56 %, CZ -0.21 %, DK +0.00 %, NO -0.26 %, SE +0.23 %
+
+Pays retenus : 70 (30 Eurostat, 4 OCDE, 36 FMI) ; en caisse : 14 ; sans détail social : 8
+Exclus : HKG : territoire (Hong Kong); MAC : territoire (Macao); SOM : pas de taux de change 2024; UZB 2022 : somme des fonctions ≠ total (-9.56 %)
+Taux FMI comparés à la BCE : 17 pays, écart max 0.52 % (AU AUD +0.03 %, BR BRL +0.08 %, CA CAD +0.00 %, CN CNY +0.04 %, GB GBP +0.03 %, ID IDR -0.03 %, IL ILS -0.05 %, JP JPY -0.01 %, KI AUD -0.08 %, KR KRW -0.08 %, NZ NZD +0.08 %, SG SGD +0.04 %, SV USD +0.00 %, TH THB +0.05 %, TR TRY -0.52 %, US USD +0.00 %, ZA ZAR +0.04 %)
+
+Erreurs : 0

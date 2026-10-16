@@ -1,0 +1,8 @@
+{
+  "file": "ecb_exr.csv",
+  "url": "https://data-api.ecb.europa.eu/service/data/EXR/A..EUR.SP00.A?startPeriod=2019&format=csvdata",
+  "headers": {},
+  "retrieved_utc": "2026-10-16T15:24:28+00:00",
+  "bytes": 48028,
+  "sha256": "2c193ee893cde175c062745469f9d163ad051657d7a87d23695086f202640b46"
+}

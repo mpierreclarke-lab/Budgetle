@@ -1,0 +1,10 @@
+{
+  "file": "oecd_cofog.csv",
+  "url": "https://sdmx.oecd.org/public/rest/data/OECD.SDD.NAD,DSD_NASEC10@DF_TABLE11,1.1/A.AUS+KOR+CHL+COL.S13._Z.D.OTE._Z..XDC....?startPeriod=2019&dimensionAtObservation=AllDimensions",
+  "headers": {
+    "Accept": "application/vnd.sdmx.data+csv; charset=utf-8"
+  },
+  "retrieved_utc": "2026-10-16T15:24:29+00:00",
+  "bytes": 125888,
+  "sha256": "7500245c8cd765edd96509156e099632ebd99fd41367e45e2be053a29b804285"
+}

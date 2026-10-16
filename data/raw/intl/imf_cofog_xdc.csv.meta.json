@@ -1,0 +1,10 @@
+{
+  "file": "imf_cofog_xdc.csv",
+  "url": "https://api.imf.org/external/sdmx/2.1/data/IMF.STA,GFS_COFOG,11.0.0/.S13.G2MF.GF01_T+GF02_T+GF03_T+GF04_T+GF05_T+GF06_T+GF07_T+GF08_T+GF09_T+GF10_T+GF101_T+GF1020_T+GF1030_T+GF1040_T+GF1050_T+GF1060_T+GF1070_T+GF1080_T+GF1090_T+TOTOUT_T.XDC.A?startPeriod=2019&dimensionAtObservation=AllDimensions",
+  "headers": {
+    "Accept": "application/vnd.sdmx.data+csv;version=1.0.0"
+  },
+  "retrieved_utc": "2026-10-16T15:24:27+00:00",
+  "bytes": 14599079,
+  "sha256": "19c967d9dc91133cba68dd7f20c6c6a4aaa950c57dc15f02715af76298f2ab1c"
+}
