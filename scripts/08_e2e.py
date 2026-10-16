@@ -111,6 +111,19 @@ with sync_playwright() as p:
             check(len(pg.inner_text("#mystery .detail .desc")) > 10, "[375×560] survol : courte explication de la catégorie")
             pg.set_viewport_size({"width": width, "height": 844})
 
+        # Liste des pays en jeu
+        pg.goto("about:blank"); pg.goto(BASE + "index.html#infini"); pg.wait_for_timeout(300)
+        pg.fill("#guess", "Chili" if pg.evaluate("target.geo") != "CL" else "Japon"); pg.keyboard.press("Enter"); pg.wait_for_timeout(1700)
+        pg.click("#listbtn")
+        total = pg.evaluate("PROFILES.length")
+        check(pg.locator("#plist-ul button").count() == total and pg.locator("#plist-ul button.used").count() == pg.evaluate("guesses.length") >= 1, f"[{width}px] liste : {total} pays, essais déjà proposés barrés")
+        names = pg.evaluate("[...document.querySelectorAll('#plist-ul button')].map(b => b.textContent)")
+        check(names == sorted(names, key=lambda x: __import__('unicodedata').normalize('NFD', x).encode('ascii', 'ignore').decode().lower()), f"[{width}px] liste : ordre alphabétique")
+        pg.locator("#plist-ul button", has_text="Kenya").click()
+        check(pg.is_hidden("#plist") and pg.input_value("#guess") == "Kenya", f"[{width}px] liste : le pays choisi va dans le champ de saisie")
+        pg.click("#listbtn"); pg.keyboard.press("Escape")
+        check(pg.is_hidden("#plist"), f"[{width}px] liste : fermeture avec Échap")
+
         # Partie du jour et page de règles
         pg.goto(BASE + "index.html")
         n = pg.inner_text("#num")
