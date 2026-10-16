@@ -6,12 +6,18 @@ Pour chaque page de site/src/, remplace les marqueurs par :
   DMAX     20 000 km (échelle de Tradle)           CAL   data/derived/calendrier.json
   META     dates de mise à jour Eurostat et d'extraction
 Sorties :
-  site/dist/<page>.html          document HTML complet (doctype, langue, encodage) pour GitHub Pages
+  site/dist/<page>.html          document HTML complet (doctype, langue, encodage) pour GitHub Pages, durci :
+                                 polices hébergées localement (site/fonts), politique de sécurité de contenu (CSP)
+                                 n'autorisant que le site lui-même et le script de la page (empreinte SHA-256),
+                                 aucune information de provenance transmise aux liens externes (Referrer-Policy)
   site/dist-artifact/<page>.html même contenu sans squelette, pour un Artifact claude.ai (qui ajoute le sien)
 """
+import base64
+import hashlib
 import json
 import pathlib
 import re
+import shutil
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 read = lambda p: (ROOT / p).read_text(encoding="utf-8")
@@ -45,6 +51,22 @@ HEAD = ('<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
         '<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}'
         'body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>\n')
 
+FONTS_CSS = read("site/css/fonts.css")
+
+
+def harden(page: str) -> str:
+    """Version publique : retire Google Fonts, ajoute les polices locales, la CSP et la Referrer-Policy."""
+    page = "\n".join(l for l in page.split("\n") if "fonts.googleapis.com" not in l and "fonts.gstatic.com" not in l)
+    page = page.replace("<style>\n", "<style>\n" + FONTS_CSS, 1)
+    scripts = re.findall(r"<script>(.*?)</script>", page, re.S)
+    hashes = " ".join(f"'sha256-{base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()}'" for x in scripts)
+    csp = ("default-src 'none'; script-src " + hashes + "; style-src 'self' 'unsafe-inline'; font-src 'self'; "
+           "img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'")
+    meta = (f'<meta http-equiv="Content-Security-Policy" content="{csp}">\n'
+            '<meta name="referrer" content="no-referrer">\n')
+    return page.replace("<title>", meta + "<title>", 1)
+
+
 for d_ in ("site/dist", "site/dist-artifact"):
     (ROOT / d_).mkdir(parents=True, exist_ok=True)
 for src in sorted((ROOT / "site/src").glob("*.html")):
@@ -55,6 +77,9 @@ for src in sorted((ROOT / "site/src").glob("*.html")):
     (ROOT / "site/dist-artifact" / src.name).write_text(out, encoding="utf-8")
     # Pour le site : le contenu « tête » (title, meta, link, style) va dans <head>, le reste dans <body>
     i = out.index("</style>") + len("</style>")
-    full = HEAD + out[:i] + "\n</head>\n<body>\n" + out[i:] + "\n</body>\n</html>\n"
+    full = harden(HEAD + out[:i] + "\n</head>\n<body>\n" + out[i:] + "\n</body>\n</html>\n")
     (ROOT / "site/dist" / src.name).write_text(full, encoding="utf-8")
     print(f"{src.name} : {len(full):,} octets (site) / {len(out):,} (artifact)")
+
+# Polices locales copiées à côté des pages publiques
+shutil.copytree(ROOT / "site/fonts", ROOT / "site/dist/fonts", dirs_exist_ok=True)

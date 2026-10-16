@@ -215,6 +215,13 @@ for w in world:
     if not centroides.check_name(w["iso2"], tname):
         errors.append(f"{w['geo']} : le centre géographique porte le nom « {tname} »")
 log(f"Centres géographiques contrôlés : {len(world)} pays")
+# Les noms et libellés sont insérés dans les pages : on n'accepte que des lettres et une ponctuation simple
+SAFE = re.compile(r"^[^<>&\"`{}\\]+$")
+for w in world:
+    texts = [w["nom"], *w.get("alias", []), *(d["label"] for d in w["divisions"])]
+    bad = [t for t in texts if not SAFE.match(t)]
+    if bad:
+        errors.append(f"{w['geo']} : caractères non autorisés dans {bad}")
 # Noms acceptés à la saisie en plus du nom français : noms anglais ISO (officiel et usuel) et code ISO à 3 lettres
 for w in world:
     c = pycountry.countries.get(alpha_2=w["iso2"])

@@ -1,0 +1,74 @@
+[
+ {
+  "fichier": "AtkinsonHyperlegible-400i-latin-ext.woff2",
+  "url": "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt43C1KxNDXMspQ1lPyU89-1h6ONRlW45G056IkUwCybQ.woff2",
+  "sha256": "90d887d541fe6e912d15f826aae6ca1190efcf172b65401704472475ed771049",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "AtkinsonHyperlegible-400i-latin.woff2",
+  "url": "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt43C1KxNDXMspQ1lPyU89-1h6ONRlW45G056IqUwA.woff2",
+  "sha256": "bc8825fd435d4aa8e31449937826d583a7daaae15a83832c91b38375131ebf08",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "AtkinsonHyperlegible-400-latin-ext.woff2",
+  "url": "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G07JIoSwQ.woff2",
+  "sha256": "61eeb0eb8b881a84d069e67be1723f5b353b0b9b866ad8e7ad9dba66cdc4dabd",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "AtkinsonHyperlegible-400-latin.woff2",
+  "url": "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2",
+  "sha256": "d64ba838ef5472bba248620ec4fd8b5aa7cf0db2908e0bb230600caf279ba7bc",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "AtkinsonHyperlegible-700-latin-ext.woff2",
+  "url": "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9eiWPVFw.woff2",
+  "sha256": "840ced16f975d8abc2594b436d0206649e0c2a7327e36750ff849d3d37c3c02e",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "AtkinsonHyperlegible-700-latin.woff2",
+  "url": "https://fonts.gstatic.com/s/atkinsonhyperlegible/v12/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2",
+  "sha256": "140e2bd25a7315c8a062508391426b0d8c3297400c947b8d847be28f73a199f0",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "IBMPlexMono-400-latin-ext.woff2",
+  "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iEq129k.woff2",
+  "sha256": "6bc0f226a5b7884a8170e3f62c63d7675609d4631bdc5931b5cdab81821f00eb",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "IBMPlexMono-400-latin.woff2",
+  "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2",
+  "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "IBMPlexMono-500-latin-ext.woff2",
+  "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl5FgtIU.woff2",
+  "sha256": "6bb06407c97584b0867a959e05e8874693bfeb8c317de190811c51598f2d99ea",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "IBMPlexMono-500-latin.woff2",
+  "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2",
+  "sha256": "01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "YoungSerif-400-latin-ext.woff2",
+  "url": "https://fonts.gstatic.com/s/youngserif/v2/3qTpojO2nS2VtkB3KtkQZ1tz3kYoaQ.woff2",
+  "sha256": "9e6eb8e5e38f9dcbab1ea58e2f30a4d6dfdb5b3bb602bfbff9305bca1d4060f6",
+  "licence": "SIL OFL 1.1"
+ },
+ {
+  "fichier": "YoungSerif-400-latin.woff2",
+  "url": "https://fonts.gstatic.com/s/youngserif/v2/3qTpojO2nS2VtkB3KtkQZ1t93kY.woff2",
+  "sha256": "6ba68b9927ad2a640d32cbea050ffc2b5d0ae6cbaa785afe470da9d6bf0ef39f",
+  "licence": "SIL OFL 1.1"
+ }
+]

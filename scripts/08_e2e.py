@@ -35,7 +35,9 @@ with sync_playwright() as p:
         pg = ctx.new_page()
         errors = []
         pg.on("pageerror", lambda e: errors.append(str(e)))
-        pg.on("console", lambda m: errors.append(m.text) if m.type == "error" and "fonts" not in m.text else None)
+        pg.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
+        hosts = set()
+        pg.on("request", lambda r: hosts.add(r.url.split("/")[2]))
 
         # Partie n° 1 : erreurs de saisie, puis victoire au 2e essai (réponse lue dans le calendrier de la page)
         pg.goto(BASE + "index.html#partie1")
@@ -133,7 +135,9 @@ with sync_playwright() as p:
         pg.goto(BASE + "regles.html")
         check(pg.locator(".tile").count() > 20, f"[{width}px] page de règles : treemaps dessinés")
         check(pg.evaluate("document.documentElement.scrollWidth") <= width, f"[{width}px] pas de défilement horizontal (règles)")
-        check(not errors, f"[{width}px] aucune erreur JavaScript {errors[:2]}")
+        check(not errors, f"[{width}px] aucune erreur JavaScript ni violation de la CSP {errors[:2]}")
+        check(hosts == {f"127.0.0.1:{srv.server_port}"}, f"[{width}px] aucune requête vers un autre site {sorted(hosts)}")
+        check(pg.evaluate("document.fonts.check('16px \\'Young Serif\\'')"), f"[{width}px] polices locales chargées")
         ctx.close()
     b.close()
 srv.shutdown()

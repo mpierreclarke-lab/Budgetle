@@ -12,10 +12,12 @@ npm install && node scripts/04_simulate.mjs   # vérifie geo.js contre geolib, s
 python3 scripts/09_download_international.py  # FMI (COFOG, taux de change), OCDE (COFOG, PIB), BCE (contrôle des taux)
 python3 scripts/10_build_world.py     # data/derived/profils_monde.{json,csv}, taux_de_change.csv, controles_monde.txt
 python3 scripts/06_build_calendar.py  # data/derived/calendrier.json (pays du jour, 420 jours)
-python3 scripts/05_build_site.py      # site/dist/index.html (jeu) et regles.html, pages autonomes
+python3 scripts/11_fonts.py           # polices hébergées localement (site/fonts, licence OFL)
+python3 scripts/05_build_site.py      # site/dist/index.html (jeu) et regles.html, pages autonomes, CSP
 node scripts/05_check_site.mjs        # vérifie les données affichées et les affirmations des notes
 node scripts/07_test_game.mjs         # tests de la logique de partie et du calendrier
 python3 scripts/08_e2e.py             # partie complète jouée dans un navigateur (Playwright)
+python3 scripts/12_check_security.py  # contrôles de sécurité (CSP, ressources externes, redirections, secrets)
 ```
 
 ## Choix arrêtés (séance 2, élargissement mondial inclus)
@@ -40,6 +42,7 @@ python3 scripts/08_e2e.py             # partie complète jouée dans un navigate
 - `data/derived/` : tables prêtes pour le jeu et rapports de contrôle
 - `docs/comparabilite.md` : fiches pays et limites de comparabilité
 - `site/js/` : logique du jeu (distance, direction, treemap), testée
+- `SECURITY.md` : mesures de sécurité et signalement
 - `site/src/` → `site/dist/` : pages du site (jeu et règles), publiées par `.github/workflows/pages.yml`
 
 Données : © Union européenne, Eurostat ; OCDE ; source : Fonds monétaire international ; BCE (contrôle). Mécanique géographique : Tradle (MIT).

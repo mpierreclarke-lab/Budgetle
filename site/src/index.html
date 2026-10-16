@@ -137,7 +137,9 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
 };
-function load() { return MODE === "infini" ? (inf.guesses || []) : store.get(KEY, []); }
+// Le contenu du stockage local peut avoir été modifié : on ne garde que des codes de pays connus.
+const validGeos = (v) => (Array.isArray(v) ? [...new Set(v.filter(g => typeof g === "string" && Object.hasOwn(BY, g)))] : []);
+function load() { return validGeos(MODE === "infini" ? inf.guesses : store.get(KEY, [])); }
 function save() {
   if (MODE === "infini") { inf.guesses = guesses.map(g => g.geo); store.set(KEY, inf); }
   else store.set(KEY, guesses.map(g => g.geo));
@@ -248,7 +250,7 @@ function submit(value) {
 function setup(geo) {
   target = BY[geo];
   profileCard($("mystery"), target, { hideName: true, compact: true });
-  guesses = load().filter(g => BY[g]).slice(0, MAX_TRIES).map(g => evaluate(BY[g], target, DMAX));
+  guesses = load().slice(0, MAX_TRIES).map(g => evaluate(BY[g], target, DMAX));
   $("end").hidden = true; $("msg").textContent = ""; $("dock").hidden = false;
   render();
 }
@@ -300,7 +302,12 @@ function start() {
   $("form").addEventListener("submit", (e) => { e.preventDefault(); submit($("guess").value); });
 
   if (MODE === "infini") {
-    inf = { ...inf, ...store.get(KEY, {}) };
+    const saved = store.get(KEY, {});
+    const num = (v) => (Number.isInteger(v) && v >= 0 && v < 1e6 ? v : 0);
+    if (saved && typeof saved === "object") inf = {
+      geo: Object.hasOwn(BY, saved.geo) ? saved.geo : null, guesses: validGeos(saved.guesses), recent: validGeos(saved.recent).slice(0, 15),
+      played: num(saved.played), won: Math.min(num(saved.won), num(saved.played)), counted: saved.counted === true,
+    };
     if (!inf.geo || !BY[inf.geo]) return nextCountry();
     $("num").textContent = `Partie infinie n° ${inf.counted ? inf.played : inf.played + 1}`;
     return setup(inf.geo);
