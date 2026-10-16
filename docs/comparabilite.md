@@ -77,3 +77,8 @@ Règles de sélection et transformations : en-tête de `scripts/10_build_world.p
 - **Années.** 2022 (Namibie), 2023 (Albanie, Indonésie, Kazakhstan, Kenya, Kiribati, Corée, Ukraine), 2025 (Maurice, Nouvelle-Zélande, Turquie) ; 2024 pour les autres. L'année n'est révélée qu'en fin de partie.
 - **Exercices budgétaires.** [À vérifier] Pour certains pays (Japon, Nouvelle-Zélande, Australie, Royaume-Uni…), les données annuelles du FMI peuvent correspondre à l'exercice budgétaire plutôt qu'à l'année civile ; le taux de change utilisé est la moyenne de l'année civile.
 - **Taux de change.** [Données] Taux FMI (monnaie nationale pour 1 €, moyenne annuelle) ; pour les 17 pays dont la BCE publie la devise, écart maximal 0,52 % (livre turque, 2025). La méthode reproduit les euros d'Eurostat à 0,13 % près pour les pays européens hors zone euro.
+
+## Centres géographiques
+
+- [Données] Les distances sont calculées entre les centres géographiques des pays (table « countries » de Google reprise par Tradle), et non entre capitales ou frontières : Australie–Nouvelle-Zélande = 4 162 km de centre à centre. Choix confirmé pour la bêta.
+- Correction (16/10/2026) : le fichier de Tradle contient aussi une liste de planètes fictives (poisson d'avril) réutilisant des codes de pays réels. L'Albanie, Andorre et les Émirats arabes unis recevaient ces coordonnées. Seule la liste des pays réels est désormais lue (`scripts/centroides.py`), avec un contrôle des doublons et du nom de chaque pays.

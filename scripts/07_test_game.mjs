@@ -37,6 +37,12 @@ const BYG = BY;
 const g1 = G.evaluate(BY.DE, T, DMAX), g4 = G.evaluate(BY.PT, T, DMAX);
 eq([Math.round(g1.distance / 1000), g1.direction, g1.proximity], [1953, "SW", 90], "Allemagne → Portugal : 1 953 km, SW, 90 % (échelle 20 000 km)");
 eq([g4.distance, g4.direction, g4.proximity], [0, null, 100], "bonne réponse : 0 km, 100 %");
+// Centres géographiques : contrôles de vraisemblance (régression : Albanie, Andorre, Émirats avaient des coordonnées fictives)
+const km = (a, b) => Math.round(G.evaluate(BY[a], BY[b], DMAX).distance / 1000);
+eq([km("AL", "CY") > 1100 && km("AL", "CY") < 1600, G.evaluate(BY.AL, BY.CY, DMAX).direction], [true, "SE"], `Albanie → Chypre : ${km("AL", "CY")} km, sud-est`);
+eq(km("AD", "ES") < 700 && km("AD", "FR") < 700, true, `Andorre proche de l'Espagne (${km("AD", "ES")} km) et de la France (${km("AD", "FR")} km)`);
+eq(km("AE", "IL") > 1500 && km("AE", "IL") < 2500, true, `Émirats → Israël : ${km("AE", "IL")} km`);
+eq(P.every((p) => p.lat > -60 && p.lat < 72 && p.lon >= -180 && p.lon <= 180), true, "tous les centres sont des coordonnées terrestres plausibles");
 eq(G.status([g1]), "playing", "partie en cours après une erreur");
 eq(G.status([g1, g4]), "won", "partie gagnée");
 eq(G.status(Array(6).fill(g1)), "lost", "partie perdue après 6 erreurs");

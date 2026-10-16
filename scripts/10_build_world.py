@@ -50,7 +50,8 @@ OECD_SP = {"SP_SICK": ["GF1001"], "SP_OLD": ["GF1002"], "SP_SURV": ["GF1003"], "
            "SP_HOUS": ["GF1006"], "SP_OTHER": ["GF1007", "GF1008", "GF1009"]}
 
 ts = (ROOT / "data/raw/tradle_countries.ts").read_text(encoding="utf-8")
-COORDS = {m[0]: (float(m[1]), float(m[2])) for m in re.findall(r'code:\s*"(\w\w)",\s*latitude:\s*(-?[\d.]+),\s*longitude:\s*(-?[\d.]+)', ts)}
+import centroides
+COORDS = centroides.load(ROOT / "data/raw/tradle_countries.ts")
 report, errors = [], []
 
 
@@ -206,6 +207,14 @@ log("\nContrôle de la conversion (monnaie nationale Eurostat ÷ taux FMI, compa
 log("Information — dépense totale FMI vs Eurostat en monnaie nationale, 2024 : " + ", ".join(f"{k} {v:+.2f} %" for k, v in level))
 
 world = EU + profiles
+# Contrôle des centres géographiques : coordonnées identiques à la source, nom de la source = nom du pays
+for w in world:
+    lat, lon, tname = COORDS[w["iso2"]]
+    if (w["lat"], w["lon"]) != (lat, lon):
+        errors.append(f"{w['geo']} : coordonnées ({w['lat']}, {w['lon']}) ≠ source ({lat}, {lon})")
+    if not centroides.check_name(w["iso2"], tname):
+        errors.append(f"{w['geo']} : le centre géographique porte le nom « {tname} »")
+log(f"Centres géographiques contrôlés : {len(world)} pays")
 # Noms acceptés à la saisie en plus du nom français : noms anglais ISO (officiel et usuel) et code ISO à 3 lettres
 for w in world:
     c = pycountry.countries.get(alpha_2=w["iso2"])

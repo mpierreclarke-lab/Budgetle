@@ -71,8 +71,8 @@ def main():
     pop = pd.read_csv(RAW / "nama_10_pe.csv", dtype={"OBS_FLAG": str})
     pop = pop[pop.TIME_PERIOD == YEAR].set_index("geo")
     ts = (RAW / "tradle_countries.ts").read_text(encoding="utf-8")
-    coords = {m[0]: (float(m[1]), float(m[2])) for m in
-              re.findall(r'code:\s*"(\w\w)",\s*latitude:\s*(-?[\d.]+),\s*longitude:\s*(-?[\d.]+)', ts)}
+    import centroides
+    coords = centroides.load(RAW / "tradle_countries.ts")
 
     report, profiles, rows = [], [], []
 
