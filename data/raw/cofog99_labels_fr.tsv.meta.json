@@ -1,0 +1,7 @@
+{
+  "file": "cofog99_labels_fr.tsv",
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/codelist/ESTAT/COFOG99?format=TSV&lang=fr",
+  "retrieved_utc": "2026-10-16T13:19:50+00:00",
+  "bytes": 3164,
+  "sha256": "f9f87dea32c45132ccd20b526da39994e66f7ee86bd4b9fb82f4eea811f9039a"
+}

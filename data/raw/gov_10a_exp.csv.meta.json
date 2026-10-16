@@ -1,0 +1,7 @@
+{
+  "file": "gov_10a_exp.csv",
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/gov_10a_exp/A.PC_GDP+MIO_EUR+MIO_NAC+PC_TOT.S13..TE.?startPeriod=2019&format=SDMX-CSV",
+  "retrieved_utc": "2026-10-16T13:19:48+00:00",
+  "bytes": 5290595,
+  "sha256": "20677d3389fa6a9aeb23c403810836693a5a9fe082181aa4e563a8cd967b6020"
+}

@@ -1,0 +1,7 @@
+{
+  "file": "nama_10_pe.csv",
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10_pe/A.THS_PER.POP_NC.?startPeriod=2019&format=SDMX-CSV",
+  "retrieved_utc": "2026-10-16T13:19:49+00:00",
+  "bytes": 23397,
+  "sha256": "67a2e8b04eb02b6de96f5fb30ab63301040209be2ae1018f3d666a3d6f488b9e"
+}
