@@ -31,7 +31,7 @@ def check(ok, msg):
 with sync_playwright() as p:
     b = p.chromium.launch()
     for width, scheme in [(390, "dark"), (1200, "light")]:
-        ctx = b.new_context(viewport={"width": width, "height": 900}, color_scheme=scheme)
+        ctx = b.new_context(viewport={"width": width, "height": 844 if width < 600 else 900}, color_scheme=scheme)
         pg = ctx.new_page()
         errors = []
         pg.on("pageerror", lambda e: errors.append(str(e)))
@@ -43,7 +43,13 @@ with sync_playwright() as p:
         assert answer != "France", "le test suppose que la partie n° 1 n'est pas la France"
         pg.fill("#guess", "Fra")
         check(pg.locator("#sugg li").first.inner_text() == "France", f"[{width}px] suggestion « Fra » → France")
+        top = pg.evaluate("document.getElementById('guess').getBoundingClientRect().bottom")
+        check(top <= (844 if width < 600 else 900), f"[{width}px] champ de saisie visible sans défiler (bas à {top:.0f} px)")
         pg.keyboard.press("ArrowDown"); pg.keyboard.press("Enter")
+        pg.wait_for_timeout(300)
+        check(pg.locator(".reveal-row .sq span").count() == 5, f"[{width}px] révélation : 5 carrés affichés un par un")
+        pg.wait_for_timeout(1500)
+        check(pg.locator(".reveal-row").count() == 0 and "km" in pg.locator(".g:not(.empty)").first.inner_text(), f"[{width}px] après la révélation : distance, direction, proximité")
         check(pg.locator(".g:not(.empty):not(.head)").count() == 1, f"[{width}px] 1er essai enregistré par le clavier")
         pg.fill("#guess", "Atlantide"); pg.keyboard.press("Enter")
         check("Pays inconnu" in pg.inner_text("#msg"), f"[{width}px] pays inconnu signalé")
@@ -51,10 +57,12 @@ with sync_playwright() as p:
         check("déjà été proposé" in pg.inner_text("#msg"), f"[{width}px] doublon signalé")
         pg.fill("#guess", answer[:4])
         pg.locator("#sugg li", has_text=answer).first.dispatch_event("pointerdown")
+        pg.wait_for_timeout(1800)
         check(pg.is_visible("#end") and pg.inner_text("#end h2") == answer, f"[{width}px] victoire : écran de fin « {answer} »")
         check(pg.locator(".tile").first.inner_text().strip().endswith("%"), f"[{width}px] les rectangles affichent une part en %")
         pg.locator(".tile").first.hover()
         check("% du PIB" in pg.inner_text("#mystery .detail") and "€" in pg.inner_text("#mystery .detail"), f"[{width}px] survol : % du PIB et montant affichés")
+        check(pg.locator(".recap div").count() == 2, f"[{width}px] fin de partie : les carrés reviennent (2 lignes)")
         share = pg.input_value("#sharetxt")
         check(share.startswith("#Budgetle #1 2/6") and share.endswith("https://mpierreclarke-lab.github.io/Budgetle/"), f"[{width}px] texte de partage correct")
         check(pg.locator("#end li").count() >= 1, f"[{width}px] faits pédagogiques affichés")
@@ -69,7 +77,7 @@ with sync_playwright() as p:
         target = pg.evaluate("CAL.pays[1]")
         wrong = [g for g in pg.evaluate("PROFILES.map(p => p.nom + '|' + p.geo)") if not g.endswith("|" + target)][:6]
         for w in wrong:
-            pg.fill("#guess", w.split("|")[0]); pg.keyboard.press("Enter")
+            pg.fill("#guess", w.split("|")[0]); pg.keyboard.press("Enter"); pg.wait_for_timeout(1700)
         check(pg.inner_text("#end .eyebrow") == "PERDU" or pg.inner_text("#end .eyebrow").lower() == "perdu", f"[{width}px] défaite après 6 essais")
         check(pg.input_value("#sharetxt").startswith("#Budgetle #2 X/6"), f"[{width}px] partage d'une défaite (X/6)")
         check(pg.is_hidden("#form"), f"[{width}px] saisie fermée en fin de partie")

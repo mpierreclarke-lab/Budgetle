@@ -42,6 +42,11 @@ function drawTreemap(box, p, detailEl) {
     el.classList.add("on");
     const parent = t.sp ? `<span class="small">Protection sociale · ${share(sp)} de la dépense totale</span>` : "";
     const nodet = t.code === "GF10" && !sp.detail ? `<span class="small">Détail par risque non publié pour ce pays.</span>` : "";
+    if (detailEl.classList.contains("compact")) {
+      // Version courte, de hauteur fixe, pour ne pas déplacer le champ de saisie
+      detailEl.innerHTML = `<span><b>${t.sp ? "Protection sociale › " : ""}${t.label}</b> · ${share(t)} de la dépense · <span class="num">${pct(t.pc, t.approx)}</span> · <span class="num">${money(t.mio_eur)}</span>${t.code === "GF10" && !sp.detail ? " · détail non publié" : ""}</span>`;
+      return;
+    }
     detailEl.innerHTML = `${parent}<span class="k">${t.label}</span><div class="row"><span class="num">${share(t)} de la dépense totale</span><span class="num">${pct(t.pc, t.approx)}</span><span class="num">${money(t.mio_eur)}</span></div>${nodet}`;
   };
   detailEl.innerHTML = `<span class="small">Survolez ou touchez un rectangle pour voir son poids en % du PIB et son montant.</span>`;
@@ -71,8 +76,8 @@ function profileCard(container, p, opts = {}) {
     <div class="headline"><span class="big num">${money(p.total.mio_eur).replace(/ /g, "&nbsp;")}</span><span class="unit">de dépenses publiques${year} <span style="white-space:nowrap">(${fr1.format(p.total.pc_gdp)}&nbsp;% du PIB)</span></span></div>
     ${opts.hideName ? `<span class="eyebrow">Pays mystère</span>` : `<span class="eyebrow">${p.nom} · ${p.annee} · ${p.source}${p.provisoire ? " · provisoire" : ""}${p.base_comptable === "caisse" ? " · comptes en caisse" : ""}</span>`}
     <div class="tm" role="group" aria-label="Répartition des dépenses publiques par fonction"></div>
-    <div class="detail" aria-live="polite"></div>
-    <p class="legend-note">Chiffre affiché = part dans la dépense publique totale, proportionnelle à la surface.${hasDetail ? " Nuances de bleu, encadrées : protection sociale détaillée." : ""}</p>
+    <div class="detail${opts.compact ? " compact" : ""}" aria-live="polite"></div>
+    ${opts.compact ? "" : `<p class="legend-note">Chiffre affiché = part dans la dépense publique totale, proportionnelle à la surface.${hasDetail ? " Nuances de bleu, encadrées : protection sociale détaillée." : ""}</p>`}
     ${opts.note ? `<p class="note${opts.noteWarn ? " warn" : ""}">${opts.note}</p>` : ""}`;
   const box = container.querySelector(".tm"), det = container.querySelector(".detail");
   const go = () => drawTreemap(box, p, det);

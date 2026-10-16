@@ -8,7 +8,11 @@
 /*__CSS__*/
 /* Page de jeu : une seule colonne étroite, pensée d'abord pour le téléphone. */
 .game { max-width: 40rem; margin: 0 auto; display: grid; gap: 1rem; padding-top: 1rem; }
-.bar { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-bottom: .6rem; border-bottom: 1px solid var(--rule); }
+.bar { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; padding-bottom: .5rem; border-bottom: 1px solid var(--rule); }
+.bar nav { white-space: nowrap; font-size: .9rem; min-width: 0; }
+.bar { flex-wrap: wrap; }
+.detail.compact { display: block; height: 3.4rem; overflow: hidden; padding-top: .4rem; font-size: .88rem; line-height: 1.45; }
+@media (max-width: 560px) { .bar h1 { font-size: 1.6rem; } .game { gap: .7rem; padding-top: .6rem; } }
 .bar h1 { font-size: 2rem; }
 .bar nav { display: flex; gap: 1rem; font-size: .95rem; }
 .slots { display: grid; gap: .4rem; }
@@ -28,23 +32,34 @@ form.play button:disabled { opacity: .5; cursor: default; }
 .share { display: grid; gap: .5rem; }
 .share textarea { font: .95rem/1.4 var(--f-data); padding: .6rem; border-radius: 8px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); resize: none; width: 100%; }
 .share button, .end a.btn { justify-self: start; font: 700 .95rem/1 var(--f-body); padding: .65rem 1rem; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); cursor: pointer; text-decoration: none; }
+/* Le treemap reste visible au-dessus de la saisie sur téléphone */
+@media (max-width: 560px) { .game .tm { aspect-ratio: 1 / .8; } .game .headline .big { font-size: 2.2rem; } .game .legend-note { font-size: .8rem; } }
+.msg:empty { display: none; }
+/* Révélation d'un essai, comme Tradle : carrés un par un (250 ms), pourcentage qui monte, puis la ligne détaillée */
+.g.reveal-row { grid-template-columns: minmax(0, 1fr) 4rem; }
+.sq { display: flex; justify-content: space-evenly; font-size: 1.35rem; line-height: 1; }
+.sq span, .recap div { opacity: 0; animation: pop .25s ease-out forwards; }
+@keyframes pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+.recap { display: grid; gap: .25rem; font-size: 1.6rem; line-height: 1.2; letter-spacing: .15rem; }
+@media (prefers-reduced-motion: reduce) { .sq span, .recap div { animation: none; opacity: 1; } }
+details.copy summary { font-weight: 400; font-size: .9rem; padding: .4rem .6rem; }
 .banner { font-size: .88rem; background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: .5rem .8rem; }
 </style>
 
 <div class="game">
   <div class="bar">
     <h1>Budgetle</h1>
-    <nav><span class="num small" id="num"></span><a href="regles.html">Règles et données</a></nav>
+    <nav><span class="num small" id="num"></span><a href="regles.html">Règles</a></nav>
   </div>
   <p class="banner" id="banner" hidden></p>
   <div class="card" id="mystery"></div>
-  <div class="slots" id="slots" aria-live="polite"></div>
   <form class="play" id="form" autocomplete="off">
     <input id="guess" type="text" placeholder="Nom d'un pays" aria-label="Votre proposition" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" enterkeyhint="go" autocapitalize="words" spellcheck="false">
     <button type="submit" id="go">Valider</button>
     <ul class="sugg" id="sugg" role="listbox" hidden></ul>
   </form>
   <p class="msg" id="msg" role="status"></p>
+  <div class="slots" id="slots" aria-live="polite"></div>
   <div class="card end" id="end" hidden></div>
   <p class="small">Données : dépenses des administrations publiques par fonction (classification COFOG), Eurostat (© Union européenne), OCDE et FMI (source : Fonds monétaire international). Distance et direction calculées comme dans Tradle.</p>
 </div>
@@ -80,6 +95,21 @@ let guesses = [];
 function load() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch { return []; } }
 function save() { try { localStorage.setItem(KEY, JSON.stringify(guesses.map(g => g.geo))); } catch {} }
 
+const STEP = 250; // ms par carré, comme Tradle
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let animating = null; // indice de l'essai en cours de révélation
+
+function revealHtml(g, i) {
+  const sq = Array.from(squares(g.proximity)).map((c, k) => `<span style="animation-delay:${k * STEP}ms">${c}</span>`).join("");
+  return `<div class="g reveal-row" aria-label="Essai ${i + 1} : ${BY[g.geo].nom}, ${g.proximity} %"><div class="sq" aria-hidden="true">${sq}</div><span class="r num" id="count">0 %</span></div>`;
+}
+
+function countUp(el, to, ms) {
+  const t0 = performance.now();
+  const tick = (t) => { const k = Math.min(1, (t - t0) / ms); el.textContent = `${Math.round(to * k)} %`; if (k < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+
 function rowHtml(g, i) {
   const p = BY[g.geo];
   if (g.distance === 0) return `<div class="g win"><span class="c">${i + 1}. ${p.nom}</span><span class="r num">0 km</span><span aria-label="trouvé">🎉</span><span class="r num">100 %</span></div>`;
@@ -90,11 +120,16 @@ function rowHtml(g, i) {
 
 function render(target) {
   const slots = [];
-  for (let i = 0; i < MAX_TRIES; i++) slots.push(guesses[i] ? rowHtml(guesses[i], i) : `<div class="g empty" aria-hidden="true"></div>`);
+  for (let i = 0; i < MAX_TRIES; i++) slots.push(!guesses[i] ? `<div class="g empty" aria-hidden="true"></div>` : i === animating ? revealHtml(guesses[i], i) : rowHtml(guesses[i], i));
   $("slots").innerHTML = slots.join("");
   const st = status(guesses);
   const done = st !== "playing";
-  $("guess").disabled = $("go").disabled = done;
+  $("guess").disabled = $("go").disabled = done || animating !== null;
+  if (animating !== null) {
+    countUp($("count"), guesses[animating].proximity, STEP * 5);
+    setTimeout(() => { animating = null; render(target); if (status(guesses) === "playing") $("guess").focus({ preventScroll: true }); }, STEP * 6);
+    return;
+  }
   $("form").hidden = done;
   if (!done) return;
   const text = shareText(n, guesses, SITE_URL);
@@ -107,14 +142,15 @@ function render(target) {
     <h2>${target.nom}</h2>
     <p>Dépenses publiques en ${target.annee} : ${money(target.total.mio_eur)} (${fr1.format(target.total.pc_gdp)} % du PIB).</p>
     <ul>${lines}</ul>${note}${prov}
-    <div class="share"><label for="sharetxt" class="small">Votre résultat</label>
-      <textarea id="sharetxt" rows="${guesses.length + 4}" readonly>${text}</textarea>
-      <button type="button" id="copy">Copier le résultat</button></div>
+    <div class="share"><span class="small">Votre résultat</span>
+      <div class="recap" aria-label="Résumé des essais">${text.split("\n").slice(1, 1 + guesses.length).map((l, k) => `<div style="animation-delay:${k * STEP}ms">${l}</div>`).join("")}</div>
+      <button type="button" id="copy">Copier le résultat</button>
+      <details class="copy"><summary>Voir le texte à partager</summary><textarea id="sharetxt" rows="${guesses.length + 4}" readonly>${text}</textarea></details></div>
     <a class="btn" href="regles.html">Comprendre les données</a>`;
   $("copy").addEventListener("click", async () => {
     const ta = $("sharetxt");
     try { await navigator.clipboard.writeText(text); $("copy").textContent = "Copié"; }
-    catch { ta.focus(); ta.select(); $("copy").textContent = "Texte sélectionné : copiez-le"; }
+    catch { ta.closest("details").open = true; ta.focus(); ta.select(); $("copy").textContent = "Texte sélectionné : copiez-le"; }
   });
 }
 
@@ -145,8 +181,9 @@ function submit(target, value) {
   save();
   $("guess").value = "";
   hideSugg();
+  if (!REDUCED) animating = guesses.length - 1;
   render(target);
-  if (status(guesses) !== "playing") $("end").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  if (status(guesses) !== "playing") setTimeout(() => $("end").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }), REDUCED ? 0 : STEP * 6 + 50);
 }
 
 function start() {
@@ -158,7 +195,7 @@ function start() {
   const target = BY[CAL.pays[n - 1]];
   $("num").textContent = `Partie n° ${n}`;
   if (forced) { $("banner").hidden = false; $("banner").textContent = `Partie n° ${n} ouverte directement depuis l'adresse de la page.`; }
-  profileCard($("mystery"), target, { hideName: true });
+  profileCard($("mystery"), target, { hideName: true, compact: true });
   guesses = load().filter(g => BY[g]).slice(0, MAX_TRIES).map(g => evaluate(BY[g], target, DMAX));
   render(target);
   $("guess").addEventListener("input", showSugg);
