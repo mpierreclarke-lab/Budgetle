@@ -1,0 +1,16 @@
+1. Concordance geo.js / geolib sur 900 couples : 0 écart(s)
+
+2. Distances entre centroïdes (435 paires)
+   min 118 km (Croatie–Slovénie), médiane 1 394 km, max 4 778 km (Chypre–Islande)
+   Proximité échelle Tradle (20 000 km) : de 76 % à 99 %, médiane 93 %
+   Proximité échelle européenne (4 778 km) : de 0 % à 98 %, médiane 71 %
+   Carrés de partage, échelle Tradle : variables
+
+3. Pays encore possibles après 1 essai (moyenne sur tous les couples essai × réponse, hors bonne réponse)
+   km + direction (comme Tradle)        : 1.00 candidats en moyenne ; réponse déterminée dans 100 % des cas
+   % échelle Tradle + direction         : 1.50 candidats en moyenne ; réponse déterminée dans 63 % des cas
+   % échelle européenne + direction     : 1.10 candidats en moyenne ; réponse déterminée dans 90 % des cas
+   direction seule                      : 8.33 candidats en moyenne ; réponse déterminée dans 3 % des cas
+   % échelle européenne seul            : 1.49 candidats en moyenne ; réponse déterminée dans 61 % des cas
+
+   Direction seule — meilleurs premiers essais : Autriche (3.8), Slovénie (4.4), Tchéquie (4.6) ; pires : Chypre (15.2), Islande (17.7)
