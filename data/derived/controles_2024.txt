@@ -1,0 +1,32 @@
+AT  niv.I: somme 272,668 vs total 272,668 M€ (+0.000 %) ; %PIB 55.3 vs 55.2  -> OK | GF10: détail +0.000 % -> OK
+BE  niv.I: somme 335,288 vs total 335,288 M€ (+0.000 %) ; %PIB 54.0 vs 54.1  -> OK | GF10: détail -0.000 % -> OK
+BG  niv.I: somme 41,059 vs total 41,060 M€ (-0.000 %) ; %PIB 39.2 vs 39.2  -> OK | GF10: détail +0.000 % manquant: GF1008 -> OK
+CH  niv.I: somme 291,054 vs total 291,054 M€ (-0.000 %) ; %PIB 32.3 vs 32.5  -> OK | GF10: détail -0.000 % -> OK
+CY  niv.I: somme 13,311 vs total 13,311 M€ (+0.000 %) ; %PIB 38.4 vs 38.3  -> OK | GF10: détail +0.000 % -> OK
+CZ  niv.I: somme 137,483 vs total 137,483 M€ (-0.000 %) ; %PIB 42.9 vs 42.9  -> OK | GF10: détail -0.000 % -> OK
+DE  niv.I: somme 2,139,717 vs total 2,139,717 M€ (+0.000 %) ; %PIB 49.5 vs 49.4  -> OK | GF10: détail +0.000 % -> OK
+DK  niv.I: somme 185,721 vs total 185,721 M€ (+0.000 %) ; %PIB 47.3 vs 47.3  -> OK | GF10: détail +0.000 % -> OK
+EE  niv.I: somme 17,517 vs total 17,517 M€ (+0.001 %) ; %PIB 43.8 vs 44.0  -> OK | GF10: détail +0.000 % -> OK
+EL  niv.I: somme 114,222 vs total 114,222 M€ (+0.000 %) ; %PIB 48.2 vs 48.2  -> OK | GF10: détail +0.000 % -> OK
+ES  niv.I: somme 725,001 vs total 725,001 M€ (+0.000 %) ; %PIB 45.6 vs 45.5  -> OK | GF10: détail +0.000 % -> OK
+FI  niv.I: somme 159,373 vs total 159,373 M€ (+0.000 %) ; %PIB 57.8 vs 57.7  -> OK | GF10: détail +0.000 % -> OK
+FR  niv.I: somme 1,671,794 vs total 1,671,794 M€ (+0.000 %) ; %PIB 57.2 vs 57.3  -> OK | GF10: détail +0.000 % -> OK
+HR  niv.I: somme 41,238 vs total 41,238 M€ (+0.000 %) ; %PIB 48.0 vs 48.0  -> OK | GF10: détail +0.000 % -> OK
+HU  niv.I: somme 97,136 vs total 97,137 M€ (-0.000 %) ; %PIB 47.3 vs 47.1  -> OK | GF10: détail +0.000 % -> OK
+IE  niv.I: somme 125,998 vs total 125,998 M€ (+0.000 %) ; %PIB 22.4 vs 22.4  -> OK | GF10: détail -0.000 % -> OK
+IS  niv.I: somme 14,456 vs total 14,456 M€ (+0.000 %) ; %PIB 47.1 vs 47.1  -> OK | GF10: détail +0.000 % -> OK
+IT  niv.I: somme 1,109,154 vs total 1,109,154 M€ (+0.000 %) ; %PIB 50.4 vs 50.4  -> OK | GF10: détail +0.000 % -> OK
+LT  niv.I: somme 31,137 vs total 31,137 M€ (-0.000 %) ; %PIB 39.6 vs 39.4  -> OK | GF10: détail +0.000 % -> OK
+LU  niv.I: somme 40,370 vs total 40,370 M€ (+0.000 %) ; %PIB 47.0 vs 46.8  -> OK | GF10: détail +0.000 % -> OK
+LV  niv.I: somme 18,419 vs total 18,419 M€ (-0.000 %) ; %PIB 45.6 vs 45.6  -> OK | GF10: détail +0.002 % -> OK
+MT  niv.I: somme 8,641 vs total 8,641 M€ (+0.000 %) ; %PIB 37.4 vs 37.3  -> OK | GF10: détail -0.004 % -> OK
+NL  niv.I: somme 498,516 vs total 498,516 M€ (+0.000 %) ; %PIB 44.4 vs 44.4  -> OK | GF10: détail +0.000 % -> OK
+NO  niv.I: somme 221,050 vs total 221,050 M€ (-0.000 %) ; %PIB 47.8 vs 47.8  -> OK | GF10: détail -0.000 % -> OK
+PL  niv.I: somme 419,552 vs total 419,553 M€ (-0.000 %) ; %PIB 49.3 vs 49.4  -> OK | GF10: détail +0.000 % -> OK
+PT  niv.I: somme 122,805 vs total 122,805 M€ (+0.000 %) ; %PIB 42.2 vs 42.4  -> OK | GF10: détail +0.000 % -> OK
+RO  niv.I: somme 153,074 vs total 153,074 M€ (+0.000 %) ; %PIB 43.2 vs 43.3  -> OK | GF10: détail +0.000 % -> OK
+SE  niv.I: somme 282,185 vs total 282,185 M€ (+0.000 %) ; %PIB 50.4 vs 50.5  -> OK | GF10: détail -0.000 % -> OK
+SI  niv.I: somme 31,334 vs total 31,334 M€ (+0.000 %) ; %PIB 46.4 vs 46.5  -> OK | GF10: détail -0.001 % -> OK
+SK  niv.I: somme 61,806 vs total 61,806 M€ (+0.000 %) ; %PIB 47.5 vs 47.5  -> OK | GF10: détail +0.000 % -> OK
+
+Échecs : 0

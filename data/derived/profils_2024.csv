@@ -1,0 +1,541 @@
+geo,pays,code,categorie,pc_pib,mio_eur,part_du_total_pct
+AT,Autriche,GF01,Services généraux,6.0,29860.2,10.95
+AT,Autriche,GF02,Défense,0.7,3339.5,1.22
+AT,Autriche,GF03,Ordre et sécurité publics,1.5,7398.4,2.71
+AT,Autriche,GF04,Affaires économiques,7.1,35028.6,12.85
+AT,Autriche,GF05,Environnement,0.7,3483.6,1.28
+AT,Autriche,GF06,Logement et équipements collectifs,0.4,1940.3,0.71
+AT,Autriche,GF07,Santé,9.5,46782.4,17.16
+AT,Autriche,GF08,"Loisirs, culture et culte",1.3,6247.4,2.29
+AT,Autriche,GF09,Enseignement,5.3,26091.9,9.57
+AT,Autriche,GF10,Protection sociale,22.8,112496.0,41.26
+AT,Autriche,SP_OLD,  └ Vieillesse (surtout retraites),14.3,70695.5,25.93
+AT,Autriche,SP_SURV,  └ Survivants (pensions de réversion…),1.4,6687.0,2.45
+AT,Autriche,SP_SICK,  └ Maladie et invalidité,1.8,8717.0,3.2
+AT,Autriche,SP_FAM,  └ Famille et enfants,2.1,10257.9,3.76
+AT,Autriche,SP_UNEMP,  └ Chômage,1.2,6102.5,2.24
+AT,Autriche,SP_HOUS,  └ Logement (aides sociales),0.1,525.5,0.19
+AT,Autriche,SP_OTHER,  └ Exclusion sociale et autres,1.9,9510.7,3.49
+AT,Autriche,TOTAL,Total,55.2,272668.3,100.0
+BE,Belgique,GF01,Services généraux,7.1,44305.6,13.21
+BE,Belgique,GF02,Défense,1.3,7946.4,2.37
+BE,Belgique,GF03,Ordre et sécurité publics,1.7,10647.7,3.18
+BE,Belgique,GF04,Affaires économiques,6.4,39854.2,11.89
+BE,Belgique,GF05,Environnement,1.2,7176.1,2.14
+BE,Belgique,GF06,Logement et équipements collectifs,0.4,2401.4,0.72
+BE,Belgique,GF07,Santé,8.0,49579.9,14.79
+BE,Belgique,GF08,"Loisirs, culture et culte",1.2,7552.0,2.25
+BE,Belgique,GF09,Enseignement,6.3,39283.6,11.72
+BE,Belgique,GF10,Protection sociale,20.4,126541.0,37.74
+BE,Belgique,SP_OLD,  └ Vieillesse (surtout retraites),10.2,62983.9,18.79
+BE,Belgique,SP_SURV,  └ Survivants (pensions de réversion…),1.4,8808.3,2.63
+BE,Belgique,SP_SICK,  └ Maladie et invalidité,3.9,24254.6,7.23
+BE,Belgique,SP_FAM,  └ Famille et enfants,2.2,13508.8,4.03
+BE,Belgique,SP_UNEMP,  └ Chômage,1.1,6574.9,1.96
+BE,Belgique,SP_HOUS,  └ Logement (aides sociales),0.2,1435.5,0.43
+BE,Belgique,SP_OTHER,  └ Exclusion sociale et autres,1.4,8974.9,2.68
+BE,Belgique,TOTAL,Total,54.1,335287.9,100.0
+BG,Bulgarie,GF01,Services généraux,2.9,3075.3,7.49
+BG,Bulgarie,GF02,Défense,1.3,1344.5,3.27
+BG,Bulgarie,GF03,Ordre et sécurité publics,2.8,2914.6,7.1
+BG,Bulgarie,GF04,Affaires économiques,5.8,6105.9,14.87
+BG,Bulgarie,GF05,Environnement,0.6,639.8,1.56
+BG,Bulgarie,GF06,Logement et équipements collectifs,1.0,1067.0,2.6
+BG,Bulgarie,GF07,Santé,5.4,5618.4,13.68
+BG,Bulgarie,GF08,"Loisirs, culture et culte",0.7,747.0,1.82
+BG,Bulgarie,GF09,Enseignement,4.3,4455.0,10.85
+BG,Bulgarie,GF10,Protection sociale,14.4,15091.9,36.76
+BG,Bulgarie,SP_OLD,  └ Vieillesse (surtout retraites),9.4,9862.1,24.02
+BG,Bulgarie,SP_SURV,  └ Survivants (pensions de réversion…),1.2,1218.6,2.97
+BG,Bulgarie,SP_SICK,  └ Maladie et invalidité,0.9,961.1,2.34
+BG,Bulgarie,SP_FAM,  └ Famille et enfants,2.1,2179.0,5.31
+BG,Bulgarie,SP_UNEMP,  └ Chômage,0.4,384.8,0.94
+BG,Bulgarie,SP_HOUS,  └ Logement (aides sociales),0.1,107.4,0.26
+BG,Bulgarie,SP_OTHER,  └ Exclusion sociale et autres,0.4,378.9,0.92
+BG,Bulgarie,TOTAL,Total,39.2,41059.6,100.0
+CH,Suisse,GF01,Services généraux,4.3,38849.5,13.35
+CH,Suisse,GF02,Défense,0.8,7408.9,2.55
+CH,Suisse,GF03,Ordre et sécurité publics,1.6,14405.1,4.95
+CH,Suisse,GF04,Affaires économiques,3.8,34257.6,11.77
+CH,Suisse,GF05,Environnement,0.5,4746.2,1.63
+CH,Suisse,GF06,Logement et équipements collectifs,0.2,1784.3,0.61
+CH,Suisse,GF07,Santé,2.2,19623.3,6.74
+CH,Suisse,GF08,"Loisirs, culture et culte",0.9,8429.9,2.9
+CH,Suisse,GF09,Enseignement,5.3,47449.6,16.3
+CH,Suisse,GF10,Protection sociale,12.7,114099.4,39.2
+CH,Suisse,SP_OLD,  └ Vieillesse (surtout retraites),6.2,56020.7,19.25
+CH,Suisse,SP_SURV,  └ Survivants (pensions de réversion…),0.3,2478.6,0.85
+CH,Suisse,SP_SICK,  └ Maladie et invalidité,2.8,24819.0,8.53
+CH,Suisse,SP_FAM,  └ Famille et enfants,0.6,5198.7,1.79
+CH,Suisse,SP_UNEMP,  └ Chômage,1.0,9046.0,3.11
+CH,Suisse,SP_HOUS,  └ Logement (aides sociales),0.1,513.9,0.18
+CH,Suisse,SP_OTHER,  └ Exclusion sociale et autres,1.8,16022.4,5.5
+CH,Suisse,TOTAL,Total,32.5,291053.9,100.0
+CY,Chypre,GF01,Services généraux,5.3,1830.2,13.75
+CY,Chypre,GF02,Défense,1.8,626.6,4.71
+CY,Chypre,GF03,Ordre et sécurité publics,1.7,586.4,4.41
+CY,Chypre,GF04,Affaires économiques,2.9,991.4,7.45
+CY,Chypre,GF05,Environnement,0.6,195.0,1.46
+CY,Chypre,GF06,Logement et équipements collectifs,2.1,717.5,5.39
+CY,Chypre,GF07,Santé,6.1,2127.0,15.98
+CY,Chypre,GF08,"Loisirs, culture et culte",0.5,189.6,1.42
+CY,Chypre,GF09,Enseignement,5.0,1752.0,13.16
+CY,Chypre,GF10,Protection sociale,12.4,4295.4,32.27
+CY,Chypre,SP_OLD,  └ Vieillesse (surtout retraites),7.7,2682.2,20.15
+CY,Chypre,SP_SURV,  └ Survivants (pensions de réversion…),1.3,461.2,3.46
+CY,Chypre,SP_SICK,  └ Maladie et invalidité,0.5,186.5,1.4
+CY,Chypre,SP_FAM,  └ Famille et enfants,1.8,638.5,4.8
+CY,Chypre,SP_UNEMP,  └ Chômage,0.3,121.4,0.91
+CY,Chypre,SP_HOUS,  └ Logement (aides sociales),0.0,10.9,0.08
+CY,Chypre,SP_OTHER,  └ Exclusion sociale et autres,0.5,194.7,1.46
+CY,Chypre,TOTAL,Total,38.3,13311.1,100.0
+CZ,Tchéquie,GF01,Services généraux,4.7,14943.1,10.87
+CZ,Tchéquie,GF02,Défense,1.3,4182.7,3.04
+CZ,Tchéquie,GF03,Ordre et sécurité publics,1.6,5282.8,3.84
+CZ,Tchéquie,GF04,Affaires économiques,5.5,17526.7,12.75
+CZ,Tchéquie,GF05,Environnement,0.9,2737.9,1.99
+CZ,Tchéquie,GF06,Logement et équipements collectifs,0.9,2811.2,2.04
+CZ,Tchéquie,GF07,Santé,9.0,28968.0,21.07
+CZ,Tchéquie,GF08,"Loisirs, culture et culte",1.3,4058.7,2.95
+CZ,Tchéquie,GF09,Enseignement,4.5,14560.3,10.59
+CZ,Tchéquie,GF10,Protection sociale,13.2,42411.7,30.85
+CZ,Tchéquie,SP_OLD,  └ Vieillesse (surtout retraites),8.0,25553.2,18.59
+CZ,Tchéquie,SP_SURV,  └ Survivants (pensions de réversion…),0.5,1698.3,1.24
+CZ,Tchéquie,SP_SICK,  └ Maladie et invalidité,2.2,6977.4,5.08
+CZ,Tchéquie,SP_FAM,  └ Famille et enfants,1.4,4407.3,3.21
+CZ,Tchéquie,SP_UNEMP,  └ Chômage,0.2,556.7,0.4
+CZ,Tchéquie,SP_HOUS,  └ Logement (aides sociales),0.3,877.9,0.64
+CZ,Tchéquie,SP_OTHER,  └ Exclusion sociale et autres,0.7,2340.8,1.7
+CZ,Tchéquie,TOTAL,Total,42.9,137483.2,100.0
+DE,Allemagne,GF01,Services généraux,6.4,277890.0,12.99
+DE,Allemagne,GF02,Défense,1.4,58583.0,2.74
+DE,Allemagne,GF03,Ordre et sécurité publics,1.6,70657.0,3.3
+DE,Allemagne,GF04,Affaires économiques,5.4,234556.0,10.96
+DE,Allemagne,GF05,Environnement,0.6,24526.0,1.15
+DE,Allemagne,GF06,Logement et équipements collectifs,0.5,20503.0,0.96
+DE,Allemagne,GF07,Santé,7.6,329254.0,15.39
+DE,Allemagne,GF08,"Loisirs, culture et culte",1.1,45985.0,2.15
+DE,Allemagne,GF09,Enseignement,4.5,194584.0,9.09
+DE,Allemagne,GF10,Protection sociale,20.4,883179.0,41.28
+DE,Allemagne,SP_OLD,  └ Vieillesse (surtout retraites),9.9,427228.0,19.97
+DE,Allemagne,SP_SURV,  └ Survivants (pensions de réversion…),1.9,80844.0,3.78
+DE,Allemagne,SP_SICK,  └ Maladie et invalidité,3.3,143927.0,6.73
+DE,Allemagne,SP_FAM,  └ Famille et enfants,1.9,83763.0,3.91
+DE,Allemagne,SP_UNEMP,  └ Chômage,1.7,71737.0,3.35
+DE,Allemagne,SP_HOUS,  └ Logement (aides sociales),0.4,19210.0,0.9
+DE,Allemagne,SP_OTHER,  └ Exclusion sociale et autres,1.3,56470.0,2.64
+DE,Allemagne,TOTAL,Total,49.4,2139717.0,100.0
+DK,Danemark,GF01,Services généraux,5.7,22324.7,12.02
+DK,Danemark,GF02,Défense,1.8,7234.6,3.9
+DK,Danemark,GF03,Ordre et sécurité publics,1.0,3830.1,2.06
+DK,Danemark,GF04,Affaires économiques,3.1,11987.1,6.45
+DK,Danemark,GF05,Environnement,0.4,1562.9,0.84
+DK,Danemark,GF06,Logement et équipements collectifs,0.3,1358.3,0.73
+DK,Danemark,GF07,Santé,8.3,32593.7,17.55
+DK,Danemark,GF08,"Loisirs, culture et culte",1.5,5998.8,3.23
+DK,Danemark,GF09,Enseignement,5.6,21782.3,11.73
+DK,Danemark,GF10,Protection sociale,19.6,77048.6,41.49
+DK,Danemark,SP_OLD,  └ Vieillesse (surtout retraites),7.2,28357.9,15.27
+DK,Danemark,SP_SURV,  └ Survivants (pensions de réversion…),0.0,38.9,0.02
+DK,Danemark,SP_SICK,  └ Maladie et invalidité,4.8,18687.4,10.06
+DK,Danemark,SP_FAM,  └ Famille et enfants,4.1,15975.6,8.6
+DK,Danemark,SP_UNEMP,  └ Chômage,1.4,5461.5,2.94
+DK,Danemark,SP_HOUS,  └ Logement (aides sociales),0.6,2249.2,1.21
+DK,Danemark,SP_OTHER,  └ Exclusion sociale et autres,1.6,6278.1,3.38
+DK,Danemark,TOTAL,Total,47.3,185721.1,100.0
+EE,Estonie,GF01,Services généraux,4.3,1725.9,9.85
+EE,Estonie,GF02,Défense,3.7,1491.2,8.51
+EE,Estonie,GF03,Ordre et sécurité publics,1.8,732.8,4.18
+EE,Estonie,GF04,Affaires économiques,4.6,1843.3,10.52
+EE,Estonie,GF05,Environnement,0.7,280.4,1.6
+EE,Estonie,GF06,Logement et équipements collectifs,0.4,162.8,0.93
+EE,Estonie,GF07,Santé,6.3,2520.6,14.39
+EE,Estonie,GF08,"Loisirs, culture et culte",1.9,775.7,4.43
+EE,Estonie,GF09,Enseignement,6.3,2492.0,14.23
+EE,Estonie,GF10,Protection sociale,13.8,5492.0,31.35
+EE,Estonie,SP_OLD,  └ Vieillesse (surtout retraites),8.1,3235.9,18.47
+EE,Estonie,SP_SURV,  └ Survivants (pensions de réversion…),0.1,25.6,0.15
+EE,Estonie,SP_SICK,  └ Maladie et invalidité,1.8,735.9,4.2
+EE,Estonie,SP_FAM,  └ Famille et enfants,2.4,946.0,5.4
+EE,Estonie,SP_UNEMP,  └ Chômage,0.9,352.3,2.01
+EE,Estonie,SP_HOUS,  └ Logement (aides sociales),0.0,6.5,0.04
+EE,Estonie,SP_OTHER,  └ Exclusion sociale et autres,0.4,189.8,1.08
+EE,Estonie,TOTAL,Total,44.0,17516.6,100.0
+EL,Grèce,GF01,Services généraux,8.3,19565.0,17.13
+EL,Grèce,GF02,Défense,2.2,5270.0,4.61
+EL,Grèce,GF03,Ordre et sécurité publics,2.0,4844.0,4.24
+EL,Grèce,GF04,Affaires économiques,6.0,14115.0,12.36
+EL,Grèce,GF05,Environnement,0.9,2130.0,1.86
+EL,Grèce,GF06,Logement et équipements collectifs,0.5,1220.0,1.07
+EL,Grèce,GF07,Santé,5.7,13564.0,11.88
+EL,Grèce,GF08,"Loisirs, culture et culte",1.0,2315.0,2.03
+EL,Grèce,GF09,Enseignement,3.9,9330.0,8.17
+EL,Grèce,GF10,Protection sociale,17.7,41869.0,36.66
+EL,Grèce,SP_OLD,  └ Vieillesse (surtout retraites),11.8,27947.0,24.47
+EL,Grèce,SP_SURV,  └ Survivants (pensions de réversion…),2.1,4933.0,4.32
+EL,Grèce,SP_SICK,  └ Maladie et invalidité,1.5,3488.0,3.05
+EL,Grèce,SP_FAM,  └ Famille et enfants,0.9,2155.0,1.89
+EL,Grèce,SP_UNEMP,  └ Chômage,0.7,1615.0,1.41
+EL,Grèce,SP_HOUS,  └ Logement (aides sociales),0.2,458.0,0.4
+EL,Grèce,SP_OTHER,  └ Exclusion sociale et autres,0.5,1273.0,1.11
+EL,Grèce,TOTAL,Total,48.2,114222.0,100.0
+ES,Espagne,GF01,Services généraux,5.8,92551.0,12.77
+ES,Espagne,GF02,Défense,0.9,14233.0,1.96
+ES,Espagne,GF03,Ordre et sécurité publics,1.8,28628.0,3.95
+ES,Espagne,GF04,Affaires économiques,5.1,80908.0,11.16
+ES,Espagne,GF05,Environnement,1.0,15539.0,2.14
+ES,Espagne,GF06,Logement et équipements collectifs,0.5,7613.0,1.05
+ES,Espagne,GF07,Santé,6.5,102942.0,14.2
+ES,Espagne,GF08,"Loisirs, culture et culte",1.2,19193.0,2.65
+ES,Espagne,GF09,Enseignement,4.1,65862.0,9.08
+ES,Espagne,GF10,Protection sociale,18.7,297532.0,41.04
+ES,Espagne,SP_OLD,  └ Vieillesse (surtout retraites),10.4,165050.0,22.77
+ES,Espagne,SP_SURV,  └ Survivants (pensions de réversion…),2.2,35425.0,4.89
+ES,Espagne,SP_SICK,  └ Maladie et invalidité,2.8,44019.0,6.07
+ES,Espagne,SP_FAM,  └ Famille et enfants,1.0,15294.0,2.11
+ES,Espagne,SP_UNEMP,  └ Chômage,1.5,24077.0,3.32
+ES,Espagne,SP_HOUS,  └ Logement (aides sociales),0.0,657.0,0.09
+ES,Espagne,SP_OTHER,  └ Exclusion sociale et autres,0.8,13010.0,1.79
+ES,Espagne,TOTAL,Total,45.5,725001.0,100.0
+FI,Finlande,GF01,Services généraux,7.1,19721.0,12.37
+FI,Finlande,GF02,Défense,1.6,4300.0,2.7
+FI,Finlande,GF03,Ordre et sécurité publics,1.3,3643.0,2.29
+FI,Finlande,GF04,Affaires économiques,4.9,13472.0,8.45
+FI,Finlande,GF05,Environnement,0.2,600.0,0.38
+FI,Finlande,GF06,Logement et équipements collectifs,0.5,1450.0,0.91
+FI,Finlande,GF07,Santé,7.7,21330.0,13.38
+FI,Finlande,GF08,"Loisirs, culture et culte",1.7,4581.0,2.87
+FI,Finlande,GF09,Enseignement,6.3,17270.0,10.84
+FI,Finlande,GF10,Protection sociale,26.5,73006.0,45.81
+FI,Finlande,SP_OLD,  └ Vieillesse (surtout retraites),15.5,42720.0,26.81
+FI,Finlande,SP_SURV,  └ Survivants (pensions de réversion…),0.7,1956.0,1.23
+FI,Finlande,SP_SICK,  └ Maladie et invalidité,3.3,9062.0,5.69
+FI,Finlande,SP_FAM,  └ Famille et enfants,3.5,9660.0,6.06
+FI,Finlande,SP_UNEMP,  └ Chômage,1.6,4482.0,2.81
+FI,Finlande,SP_HOUS,  └ Logement (aides sociales),0.6,1677.0,1.05
+FI,Finlande,SP_OTHER,  └ Exclusion sociale et autres,1.2,3449.0,2.16
+FI,Finlande,TOTAL,Total,57.7,159373.0,100.0
+FR,France,GF01,Services généraux,6.2,181103.2,10.83
+FR,France,GF02,Défense,1.9,54199.0,3.24
+FR,France,GF03,Ordre et sécurité publics,1.8,52113.0,3.12
+FR,France,GF04,Affaires économiques,5.7,166072.8,9.93
+FR,France,GF05,Environnement,1.0,30285.1,1.81
+FR,France,GF06,Logement et équipements collectifs,1.4,42128.6,2.52
+FR,France,GF07,Santé,8.9,261156.3,15.62
+FR,France,GF08,"Loisirs, culture et culte",1.5,43067.6,2.58
+FR,France,GF09,Enseignement,5.1,148639.6,8.89
+FR,France,GF10,Protection sociale,23.7,693028.8,41.45
+FR,France,SP_OLD,  └ Vieillesse (surtout retraites),13.4,391954.3,23.45
+FR,France,SP_SURV,  └ Survivants (pensions de réversion…),1.4,40608.3,2.43
+FR,France,SP_SICK,  └ Maladie et invalidité,2.9,83898.9,5.02
+FR,France,SP_FAM,  └ Famille et enfants,2.3,66711.4,3.99
+FR,France,SP_UNEMP,  └ Chômage,1.7,48520.9,2.9
+FR,France,SP_HOUS,  └ Logement (aides sociales),0.7,21146.7,1.26
+FR,France,SP_OTHER,  └ Exclusion sociale et autres,1.3,40188.4,2.4
+FR,France,TOTAL,Total,57.3,1671793.8,100.0
+HR,Croatie,GF01,Services généraux,5.5,4756.3,11.53
+HR,Croatie,GF02,Défense,1.5,1259.7,3.05
+HR,Croatie,GF03,Ordre et sécurité publics,2.4,2095.9,5.08
+HR,Croatie,GF04,Affaires économiques,6.4,5456.0,13.23
+HR,Croatie,GF05,Environnement,1.2,1061.2,2.57
+HR,Croatie,GF06,Logement et équipements collectifs,1.5,1270.9,3.08
+HR,Croatie,GF07,Santé,9.0,7709.4,18.69
+HR,Croatie,GF08,"Loisirs, culture et culte",1.7,1441.8,3.5
+HR,Croatie,GF09,Enseignement,5.0,4320.3,10.48
+HR,Croatie,GF10,Protection sociale,13.8,11866.5,28.78
+HR,Croatie,SP_OLD,  └ Vieillesse (surtout retraites),8.2,7075.1,17.16
+HR,Croatie,SP_SURV,  └ Survivants (pensions de réversion…),1.3,1081.0,2.62
+HR,Croatie,SP_SICK,  └ Maladie et invalidité,1.9,1629.8,3.95
+HR,Croatie,SP_FAM,  └ Famille et enfants,1.8,1576.1,3.82
+HR,Croatie,SP_UNEMP,  └ Chômage,0.2,192.3,0.47
+HR,Croatie,SP_HOUS,  └ Logement (aides sociales),0.1,122.7,0.3
+HR,Croatie,SP_OTHER,  └ Exclusion sociale et autres,0.2,189.5,0.46
+HR,Croatie,TOTAL,Total,48.0,41237.9,100.0
+HU,Hongrie,GF01,Services généraux,10.0,20598.2,21.21
+HU,Hongrie,GF02,Défense,2.0,4092.6,4.21
+HU,Hongrie,GF03,Ordre et sécurité publics,1.8,3627.1,3.73
+HU,Hongrie,GF04,Affaires économiques,7.7,15870.4,16.34
+HU,Hongrie,GF05,Environnement,0.4,781.4,0.8
+HU,Hongrie,GF06,Logement et équipements collectifs,1.0,1978.4,2.04
+HU,Hongrie,GF07,Santé,4.7,9726.3,10.01
+HU,Hongrie,GF08,"Loisirs, culture et culte",2.5,5055.2,5.2
+HU,Hongrie,GF09,Enseignement,4.9,10143.6,10.44
+HU,Hongrie,GF10,Protection sociale,12.3,25263.3,26.01
+HU,Hongrie,SP_OLD,  └ Vieillesse (surtout retraites),6.9,14186.4,14.6
+HU,Hongrie,SP_SURV,  └ Survivants (pensions de réversion…),0.7,1443.2,1.49
+HU,Hongrie,SP_SICK,  └ Maladie et invalidité,1.8,3639.6,3.75
+HU,Hongrie,SP_FAM,  └ Famille et enfants,1.6,3375.1,3.47
+HU,Hongrie,SP_UNEMP,  └ Chômage,0.3,552.8,0.57
+HU,Hongrie,SP_HOUS,  └ Logement (aides sociales),0.1,202.0,0.21
+HU,Hongrie,SP_OTHER,  └ Exclusion sociale et autres,0.9,1864.3,1.92
+HU,Hongrie,TOTAL,Total,47.1,97136.6,100.0
+IE,Irlande,GF01,Services généraux,2.0,11160.2,8.86
+IE,Irlande,GF02,Défense,0.1,840.7,0.67
+IE,Irlande,GF03,Ordre et sécurité publics,0.7,4162.4,3.3
+IE,Irlande,GF04,Affaires économiques,2.1,11672.5,9.26
+IE,Irlande,GF05,Environnement,0.4,2348.3,1.86
+IE,Irlande,GF06,Logement et équipements collectifs,0.6,3388.6,2.69
+IE,Irlande,GF07,Santé,5.2,29243.4,23.21
+IE,Irlande,GF08,"Loisirs, culture et culte",0.4,2309.5,1.83
+IE,Irlande,GF09,Enseignement,2.7,15073.4,11.96
+IE,Irlande,GF10,Protection sociale,8.2,45799.2,36.35
+IE,Irlande,SP_OLD,  └ Vieillesse (surtout retraites),3.0,16827.0,13.35
+IE,Irlande,SP_SURV,  └ Survivants (pensions de réversion…),0.3,1963.6,1.56
+IE,Irlande,SP_SICK,  └ Maladie et invalidité,1.1,6044.2,4.8
+IE,Irlande,SP_FAM,  └ Famille et enfants,1.5,8486.3,6.74
+IE,Irlande,SP_UNEMP,  └ Chômage,0.6,3573.7,2.84
+IE,Irlande,SP_HOUS,  └ Logement (aides sociales),1.0,5444.0,4.32
+IE,Irlande,SP_OTHER,  └ Exclusion sociale et autres,0.6,3460.3,2.75
+IE,Irlande,TOTAL,Total,22.4,125998.2,100.0
+IS,Islande,GF01,Services généraux,7.6,2338.5,16.18
+IS,Islande,GF02,Défense,0.2,63.8,0.44
+IS,Islande,GF03,Ordre et sécurité publics,1.8,544.5,3.77
+IS,Islande,GF04,Affaires économiques,4.9,1509.6,10.44
+IS,Islande,GF05,Environnement,0.7,225.6,1.56
+IS,Islande,GF06,Logement et équipements collectifs,0.7,205.7,1.42
+IS,Islande,GF07,Santé,8.6,2646.9,18.31
+IS,Islande,GF08,"Loisirs, culture et culte",3.0,921.8,6.38
+IS,Islande,GF09,Enseignement,7.0,2150.8,14.88
+IS,Islande,GF10,Protection sociale,12.6,3848.9,26.62
+IS,Islande,SP_OLD,  └ Vieillesse (surtout retraites),2.8,856.0,5.92
+IS,Islande,SP_SURV,  └ Survivants (pensions de réversion…),0.0,4.1,0.03
+IS,Islande,SP_SICK,  └ Maladie et invalidité,3.2,992.4,6.86
+IS,Islande,SP_FAM,  └ Famille et enfants,2.6,798.7,5.53
+IS,Islande,SP_UNEMP,  └ Chômage,0.7,223.3,1.54
+IS,Islande,SP_HOUS,  └ Logement (aides sociales),0.4,129.4,0.9
+IS,Islande,SP_OTHER,  └ Exclusion sociale et autres,2.8,845.0,5.85
+IS,Islande,TOTAL,Total,47.1,14456.1,100.0
+IT,Italie,GF01,Services généraux,7.7,170414.0,15.36
+IT,Italie,GF02,Défense,1.3,28301.0,2.55
+IT,Italie,GF03,Ordre et sécurité publics,1.8,39094.0,3.52
+IT,Italie,GF04,Affaires économiques,5.1,112380.8,10.13
+IT,Italie,GF05,Environnement,0.9,19828.0,1.79
+IT,Italie,GF06,Logement et équipements collectifs,0.8,16972.7,1.53
+IT,Italie,GF07,Santé,6.6,146075.0,13.17
+IT,Italie,GF08,"Loisirs, culture et culte",0.9,18773.6,1.69
+IT,Italie,GF09,Enseignement,4.0,89179.9,8.04
+IT,Italie,GF10,Protection sociale,21.3,468135.0,42.21
+IT,Italie,SP_OLD,  └ Vieillesse (surtout retraites),13.9,306359.0,27.62
+IT,Italie,SP_SURV,  └ Survivants (pensions de réversion…),2.4,53213.0,4.8
+IT,Italie,SP_SICK,  └ Maladie et invalidité,1.7,37782.0,3.41
+IT,Italie,SP_FAM,  └ Famille et enfants,1.5,32266.0,2.91
+IT,Italie,SP_UNEMP,  └ Chômage,0.9,20257.0,1.83
+IT,Italie,SP_HOUS,  └ Logement (aides sociales),0.0,789.0,0.07
+IT,Italie,SP_OTHER,  └ Exclusion sociale et autres,0.8,17469.0,1.57
+IT,Italie,TOTAL,Total,50.4,1109154.0,100.0
+LT,Lituanie,GF01,Services généraux,3.6,2806.5,9.01
+LT,Lituanie,GF02,Défense,2.6,2037.3,6.54
+LT,Lituanie,GF03,Ordre et sécurité publics,1.6,1232.2,3.96
+LT,Lituanie,GF04,Affaires économiques,3.2,2503.4,8.04
+LT,Lituanie,GF05,Environnement,0.5,421.2,1.35
+LT,Lituanie,GF06,Logement et équipements collectifs,0.8,658.8,2.12
+LT,Lituanie,GF07,Santé,5.8,4548.9,14.61
+LT,Lituanie,GF08,"Loisirs, culture et culte",1.3,995.4,3.2
+LT,Lituanie,GF09,Enseignement,5.5,4337.4,13.93
+LT,Lituanie,GF10,Protection sociale,14.7,11595.8,37.24
+LT,Lituanie,SP_OLD,  └ Vieillesse (surtout retraites),6.9,5478.5,17.59
+LT,Lituanie,SP_SURV,  └ Survivants (pensions de réversion…),0.3,220.2,0.71
+LT,Lituanie,SP_SICK,  └ Maladie et invalidité,3.9,3083.0,9.9
+LT,Lituanie,SP_FAM,  └ Famille et enfants,1.8,1440.0,4.62
+LT,Lituanie,SP_UNEMP,  └ Chômage,1.0,777.0,2.5
+LT,Lituanie,SP_HOUS,  └ Logement (aides sociales),0.1,85.2,0.27
+LT,Lituanie,SP_OTHER,  └ Exclusion sociale et autres,0.7,511.9,1.64
+LT,Lituanie,TOTAL,Total,39.4,31136.9,100.0
+LU,Luxembourg,GF01,Services généraux,5.6,4790.8,11.87
+LU,Luxembourg,GF02,Défense,0.7,572.5,1.42
+LU,Luxembourg,GF03,Ordre et sécurité publics,1.3,1108.5,2.75
+LU,Luxembourg,GF04,Affaires économiques,5.9,5070.3,12.56
+LU,Luxembourg,GF05,Environnement,1.1,907.6,2.25
+LU,Luxembourg,GF06,Logement et équipements collectifs,0.6,493.8,1.22
+LU,Luxembourg,GF07,Santé,5.6,4841.5,11.99
+LU,Luxembourg,GF08,"Loisirs, culture et culte",1.3,1121.4,2.78
+LU,Luxembourg,GF09,Enseignement,5.0,4289.8,10.63
+LU,Luxembourg,GF10,Protection sociale,19.9,17173.9,42.54
+LU,Luxembourg,SP_OLD,  └ Vieillesse (surtout retraites),10.4,8976.4,22.24
+LU,Luxembourg,SP_SURV,  └ Survivants (pensions de réversion…),0.0,1.2,0.0
+LU,Luxembourg,SP_SICK,  └ Maladie et invalidité,3.4,2887.3,7.15
+LU,Luxembourg,SP_FAM,  └ Famille et enfants,3.7,3148.8,7.8
+LU,Luxembourg,SP_UNEMP,  └ Chômage,1.1,965.3,2.39
+LU,Luxembourg,SP_HOUS,  └ Logement (aides sociales),0.3,256.9,0.64
+LU,Luxembourg,SP_OTHER,  └ Exclusion sociale et autres,1.1,938.0,2.32
+LU,Luxembourg,TOTAL,Total,46.8,40370.1,100.0
+LV,Lettonie,GF01,Services généraux,4.6,1850.3,10.05
+LV,Lettonie,GF02,Défense,2.7,1104.2,5.99
+LV,Lettonie,GF03,Ordre et sécurité publics,3.2,1284.4,6.97
+LV,Lettonie,GF04,Affaires économiques,6.6,2665.6,14.47
+LV,Lettonie,GF05,Environnement,0.5,213.9,1.16
+LV,Lettonie,GF06,Logement et équipements collectifs,1.0,387.8,2.11
+LV,Lettonie,GF07,Santé,5.4,2188.2,11.88
+LV,Lettonie,GF08,"Loisirs, culture et culte",1.4,560.3,3.04
+LV,Lettonie,GF09,Enseignement,6.1,2468.8,13.4
+LV,Lettonie,GF10,Protection sociale,14.1,5695.4,30.92
+LV,Lettonie,SP_OLD,  └ Vieillesse (surtout retraites),8.1,3281.3,17.81
+LV,Lettonie,SP_SURV,  └ Survivants (pensions de réversion…),0.2,89.4,0.49
+LV,Lettonie,SP_SICK,  └ Maladie et invalidité,2.9,1188.4,6.45
+LV,Lettonie,SP_FAM,  └ Famille et enfants,1.4,568.9,3.09
+LV,Lettonie,SP_UNEMP,  └ Chômage,0.5,206.2,1.12
+LV,Lettonie,SP_HOUS,  └ Logement (aides sociales),0.1,46.1,0.25
+LV,Lettonie,SP_OTHER,  └ Exclusion sociale et autres,0.8,315.2,1.71
+LV,Lettonie,TOTAL,Total,45.6,18418.9,100.0
+MT,Malte,GF01,Services généraux,5.0,1146.3,13.27
+MT,Malte,GF02,Défense,0.5,121.8,1.41
+MT,Malte,GF03,Ordre et sécurité publics,1.5,337.4,3.9
+MT,Malte,GF04,Affaires économiques,7.6,1753.2,20.29
+MT,Malte,GF05,Environnement,1.2,288.3,3.34
+MT,Malte,GF06,Logement et équipements collectifs,0.6,148.6,1.72
+MT,Malte,GF07,Santé,5.0,1155.2,13.37
+MT,Malte,GF08,"Loisirs, culture et culte",1.5,339.2,3.93
+MT,Malte,GF09,Enseignement,4.7,1092.1,12.64
+MT,Malte,GF10,Protection sociale,9.8,2258.5,26.14
+MT,Malte,SP_OLD,  └ Vieillesse (surtout retraites),5.9,1366.4,15.81
+MT,Malte,SP_SURV,  └ Survivants (pensions de réversion…),0.9,217.2,2.51
+MT,Malte,SP_SICK,  └ Maladie et invalidité,0.8,192.6,2.23
+MT,Malte,SP_FAM,  └ Famille et enfants,0.9,216.3,2.5
+MT,Malte,SP_UNEMP,  └ Chômage,0.1,20.8,0.24
+MT,Malte,SP_HOUS,  └ Logement (aides sociales),0.4,95.9,1.11
+MT,Malte,SP_OTHER,  └ Exclusion sociale et autres,0.7,149.2,1.73
+MT,Malte,TOTAL,Total,37.3,8640.6,100.0
+NL,Pays-Bas,GF01,Services généraux,4.1,46190.0,9.27
+NL,Pays-Bas,GF02,Défense,1.6,18279.0,3.67
+NL,Pays-Bas,GF03,Ordre et sécurité publics,1.9,21598.0,4.33
+NL,Pays-Bas,GF04,Affaires économiques,4.4,49487.0,9.93
+NL,Pays-Bas,GF05,Environnement,1.6,17941.0,3.6
+NL,Pays-Bas,GF06,Logement et équipements collectifs,0.6,6914.0,1.39
+NL,Pays-Bas,GF07,Santé,7.3,81501.0,16.35
+NL,Pays-Bas,GF08,"Loisirs, culture et culte",1.2,13424.0,2.69
+NL,Pays-Bas,GF09,Enseignement,5.1,57152.0,11.46
+NL,Pays-Bas,GF10,Protection sociale,16.6,186030.0,37.32
+NL,Pays-Bas,SP_OLD,  └ Vieillesse (surtout retraites),6.1,68841.0,13.81
+NL,Pays-Bas,SP_SURV,  └ Survivants (pensions de réversion…),0.0,441.0,0.09
+NL,Pays-Bas,SP_SICK,  └ Maladie et invalidité,4.3,48523.0,9.73
+NL,Pays-Bas,SP_FAM,  └ Famille et enfants,2.4,27184.0,5.45
+NL,Pays-Bas,SP_UNEMP,  └ Chômage,0.7,7534.0,1.51
+NL,Pays-Bas,SP_HOUS,  └ Logement (aides sociales),0.4,4921.0,0.99
+NL,Pays-Bas,SP_OTHER,  └ Exclusion sociale et autres,2.5,28586.0,5.73
+NL,Pays-Bas,TOTAL,Total,44.4,498516.0,100.0
+NO,Norvège,GF01,Services généraux,5.4,24781.8,11.21
+NO,Norvège,GF02,Défense,2.1,9920.5,4.49
+NO,Norvège,GF03,Ordre et sécurité publics,1.0,4804.9,2.17
+NO,Norvège,GF04,Affaires économiques,5.7,26230.8,11.87
+NO,Norvège,GF05,Environnement,0.8,3810.6,1.72
+NO,Norvège,GF06,Logement et équipements collectifs,0.9,3938.4,1.78
+NO,Norvège,GF07,Santé,7.2,33442.4,15.13
+NO,Norvège,GF08,"Loisirs, culture et culte",1.5,6881.8,3.11
+NO,Norvège,GF09,Enseignement,4.7,21606.6,9.77
+NO,Norvège,GF10,Protection sociale,18.5,85631.9,38.74
+NO,Norvège,SP_OLD,  └ Vieillesse (surtout retraites),8.1,37643.2,17.03
+NO,Norvège,SP_SURV,  └ Survivants (pensions de réversion…),0.2,756.4,0.34
+NO,Norvège,SP_SICK,  └ Maladie et invalidité,5.9,27123.7,12.27
+NO,Norvège,SP_FAM,  └ Famille et enfants,2.9,13598.2,6.15
+NO,Norvège,SP_UNEMP,  └ Chômage,0.3,1432.1,0.65
+NO,Norvège,SP_HOUS,  └ Logement (aides sociales),0.1,518.9,0.23
+NO,Norvège,SP_OTHER,  └ Exclusion sociale et autres,1.0,4559.3,2.06
+NO,Norvège,TOTAL,Total,47.8,221049.9,100.0
+PL,Pologne,GF01,Services généraux,5.2,43916.0,10.47
+PL,Pologne,GF02,Défense,2.9,24952.0,5.95
+PL,Pologne,GF03,Ordre et sécurité publics,2.4,20347.8,4.85
+PL,Pologne,GF04,Affaires économiques,6.1,52153.2,12.43
+PL,Pologne,GF05,Environnement,0.7,6096.3,1.45
+PL,Pologne,GF06,Logement et équipements collectifs,0.6,5106.6,1.22
+PL,Pologne,GF07,Santé,6.1,52094.3,12.42
+PL,Pologne,GF08,"Loisirs, culture et culte",1.4,11942.3,2.85
+PL,Pologne,GF09,Enseignement,5.6,47608.1,11.35
+PL,Pologne,GF10,Protection sociale,18.3,155335.9,37.02
+PL,Pologne,SP_OLD,  └ Vieillesse (surtout retraites),10.8,91958.4,21.92
+PL,Pologne,SP_SURV,  └ Survivants (pensions de réversion…),1.6,13512.5,3.22
+PL,Pologne,SP_SICK,  └ Maladie et invalidité,2.0,16737.4,3.99
+PL,Pologne,SP_FAM,  └ Famille et enfants,3.1,25969.8,6.19
+PL,Pologne,SP_UNEMP,  └ Chômage,0.2,1941.8,0.46
+PL,Pologne,SP_HOUS,  └ Logement (aides sociales),0.0,414.7,0.1
+PL,Pologne,SP_OTHER,  └ Exclusion sociale et autres,0.6,4801.5,1.14
+PL,Pologne,TOTAL,Total,49.4,419552.6,100.0
+PT,Portugal,GF01,Services généraux,5.8,16871.8,13.74
+PT,Portugal,GF02,Défense,0.9,2525.8,2.06
+PT,Portugal,GF03,Ordre et sécurité publics,1.6,4777.6,3.89
+PT,Portugal,GF04,Affaires économiques,3.6,10497.4,8.55
+PT,Portugal,GF05,Environnement,0.7,2001.0,1.63
+PT,Portugal,GF06,Logement et équipements collectifs,0.6,1684.9,1.37
+PT,Portugal,GF07,Santé,6.8,19811.3,16.13
+PT,Portugal,GF08,"Loisirs, culture et culte",0.8,2398.4,1.95
+PT,Portugal,GF09,Enseignement,4.3,12587.7,10.25
+PT,Portugal,GF10,Protection sociale,17.1,49649.4,40.43
+PT,Portugal,SP_OLD,  └ Vieillesse (surtout retraites),10.8,31407.2,25.57
+PT,Portugal,SP_SURV,  └ Survivants (pensions de réversion…),1.7,5052.3,4.11
+PT,Portugal,SP_SICK,  └ Maladie et invalidité,1.1,3192.0,2.6
+PT,Portugal,SP_FAM,  └ Famille et enfants,1.8,5219.8,4.25
+PT,Portugal,SP_UNEMP,  └ Chômage,0.5,1543.4,1.26
+PT,Portugal,SP_HOUS,  └ Logement (aides sociales),0.3,947.8,0.77
+PT,Portugal,SP_OTHER,  └ Exclusion sociale et autres,0.8,2286.9,1.86
+PT,Portugal,TOTAL,Total,42.4,122805.3,100.0
+RO,Roumanie,GF01,Services généraux,5.8,20616.7,13.47
+RO,Roumanie,GF02,Défense,1.6,5802.8,3.79
+RO,Roumanie,GF03,Ordre et sécurité publics,2.8,9967.4,6.51
+RO,Roumanie,GF04,Affaires économiques,6.7,23809.9,15.55
+RO,Roumanie,GF05,Environnement,0.9,3041.7,1.99
+RO,Roumanie,GF06,Logement et équipements collectifs,1.5,5337.4,3.49
+RO,Roumanie,GF07,Santé,5.2,18319.5,11.97
+RO,Roumanie,GF08,"Loisirs, culture et culte",1.1,3802.7,2.48
+RO,Roumanie,GF09,Enseignement,4.0,14258.0,9.31
+RO,Roumanie,GF10,Protection sociale,13.6,48118.0,31.43
+RO,Roumanie,SP_OLD,  └ Vieillesse (surtout retraites),9.8,34625.3,22.62
+RO,Roumanie,SP_SURV,  └ Survivants (pensions de réversion…),0.1,330.5,0.22
+RO,Roumanie,SP_SICK,  └ Maladie et invalidité,1.4,4844.4,3.16
+RO,Roumanie,SP_FAM,  └ Famille et enfants,1.6,5754.7,3.76
+RO,Roumanie,SP_UNEMP,  └ Chômage,0.0,169.4,0.11
+RO,Roumanie,SP_HOUS,  └ Logement (aides sociales),0.0,10.7,0.01
+RO,Roumanie,SP_OTHER,  └ Exclusion sociale et autres,0.6,2383.0,1.56
+RO,Roumanie,TOTAL,Total,43.3,153074.1,100.0
+SE,Suède,GF01,Services généraux,5.5,30977.4,10.98
+SE,Suède,GF02,Défense,2.0,10967.9,3.89
+SE,Suède,GF03,Ordre et sécurité publics,1.6,8907.0,3.16
+SE,Suède,GF04,Affaires économiques,4.8,26964.8,9.56
+SE,Suède,GF05,Environnement,0.5,3065.4,1.09
+SE,Suède,GF06,Logement et équipements collectifs,0.8,4449.4,1.58
+SE,Suède,GF07,Santé,7.4,41416.5,14.68
+SE,Suède,GF08,"Loisirs, culture et culte",1.4,7799.1,2.76
+SE,Suède,GF09,Enseignement,7.3,40612.2,14.39
+SE,Suède,GF10,Protection sociale,19.1,107025.1,37.93
+SE,Suède,SP_OLD,  └ Vieillesse (surtout retraites),11.0,61350.0,21.74
+SE,Suède,SP_SURV,  └ Survivants (pensions de réversion…),0.1,722.3,0.26
+SE,Suède,SP_SICK,  └ Maladie et invalidité,3.6,19977.4,7.08
+SE,Suède,SP_FAM,  └ Famille et enfants,2.3,12873.0,4.56
+SE,Suède,SP_UNEMP,  └ Chômage,1.1,6044.5,2.14
+SE,Suède,SP_HOUS,  └ Logement (aides sociales),0.3,1595.8,0.57
+SE,Suède,SP_OTHER,  └ Exclusion sociale et autres,0.8,4462.0,1.58
+SE,Suède,TOTAL,Total,50.5,282184.7,100.0
+SI,Slovénie,GF01,Services généraux,4.6,3115.8,9.94
+SI,Slovénie,GF02,Défense,1.4,952.1,3.04
+SI,Slovénie,GF03,Ordre et sécurité publics,1.5,1034.4,3.3
+SI,Slovénie,GF04,Affaires économiques,5.7,3863.8,12.33
+SI,Slovénie,GF05,Environnement,0.7,480.1,1.53
+SI,Slovénie,GF06,Logement et équipements collectifs,0.4,274.0,0.87
+SI,Slovénie,GF07,Santé,8.0,5402.3,17.24
+SI,Slovénie,GF08,"Loisirs, culture et culte",1.5,996.7,3.18
+SI,Slovénie,GF09,Enseignement,5.5,3709.7,11.84
+SI,Slovénie,GF10,Protection sociale,17.1,11505.2,36.72
+SI,Slovénie,SP_OLD,  └ Vieillesse (surtout retraites),10.3,6915.9,22.07
+SI,Slovénie,SP_SURV,  └ Survivants (pensions de réversion…),1.1,736.5,2.35
+SI,Slovénie,SP_SICK,  └ Maladie et invalidité,2.6,1728.9,5.52
+SI,Slovénie,SP_FAM,  └ Famille et enfants,1.8,1205.2,3.85
+SI,Slovénie,SP_UNEMP,  └ Chômage,0.3,202.1,0.64
+SI,Slovénie,SP_HOUS,  └ Logement (aides sociales),0.0,21.2,0.07
+SI,Slovénie,SP_OTHER,  └ Exclusion sociale et autres,1.0,695.3,2.22
+SI,Slovénie,TOTAL,Total,46.5,31334.0,100.0
+SK,Slovaquie,GF01,Services généraux,5.5,7127.4,11.53
+SK,Slovaquie,GF02,Défense,1.4,1800.5,2.91
+SK,Slovaquie,GF03,Ordre et sécurité publics,2.3,3037.2,4.91
+SK,Slovaquie,GF04,Affaires économiques,5.5,7105.8,11.5
+SK,Slovaquie,GF05,Environnement,0.8,979.9,1.59
+SK,Slovaquie,GF06,Logement et équipements collectifs,0.5,618.9,1.0
+SK,Slovaquie,GF07,Santé,6.9,9023.9,14.6
+SK,Slovaquie,GF08,"Loisirs, culture et culte",1.1,1466.1,2.37
+SK,Slovaquie,GF09,Enseignement,5.1,6682.7,10.81
+SK,Slovaquie,GF10,Protection sociale,18.4,23964.1,38.77
+SK,Slovaquie,SP_OLD,  └ Vieillesse (surtout retraites),9.2,12017.5,19.44
+SK,Slovaquie,SP_SURV,  └ Survivants (pensions de réversion…),0.8,1038.2,1.68
+SK,Slovaquie,SP_SICK,  └ Maladie et invalidité,3.2,4179.4,6.76
+SK,Slovaquie,SP_FAM,  └ Famille et enfants,3.5,4560.6,7.38
+SK,Slovaquie,SP_UNEMP,  └ Chômage,0.4,510.1,0.83
+SK,Slovaquie,SP_HOUS,  └ Logement (aides sociales),0.1,69.1,0.11
+SK,Slovaquie,SP_OTHER,  └ Exclusion sociale et autres,1.2,1589.3,2.57
+SK,Slovaquie,TOTAL,Total,47.5,61806.4,100.0

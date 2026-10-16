@@ -1,0 +1,65 @@
+{
+  "projet": "Jeu de devinette des finances publiques — profils 2024",
+  "genere_le": "2026-10-16T13:21:14+00:00",
+  "sources": {
+    "depenses": {
+      "jeu": "gov_10a_exp",
+      "doi": "https://doi.org/10.2908/GOV_10A_EXP",
+      "derniere_mise_a_jour_eurostat": [
+        "16/09/26 23:00:00"
+      ],
+      "producteur": "Eurostat",
+      "metadonnees": "https://ec.europa.eu/eurostat/cache/metadata/en/gov_10a_exp_esms.htm"
+    },
+    "population": {
+      "jeu": "nama_10_pe",
+      "doi": "https://doi.org/10.2908/NAMA_10_PE"
+    },
+    "centroides": {
+      "source": "Google canonical countries.csv, via le dépôt Tradle (licence MIT)"
+    },
+    "licence": "Réutilisation autorisée sous réserve de citer la source (Décision 2011/833/UE) ; modifications signalées ci-dessous."
+  },
+  "perimetre": {
+    "secteur": "S13 administrations publiques, consolidé",
+    "operation": "TE dépense totale",
+    "nomenclature": "COFOG 1999",
+    "annee": 2024
+  },
+  "unites": {
+    "pc_gdp": "% du PIB, valeur publiée (0,1 point)",
+    "mio_eur": "millions d'euros courants",
+    "part_du_total": "fraction calculée à partir des MIO_EUR"
+  },
+  "transformations": "R1  Périmètre : secteur S13 (APU consolidées), opération TE (dépense totale), année 2024.\n  R2  % du PIB : valeur publiée par Eurostat (arrondie à 0,1 point), jamais recalculée.\n  R3  Montants : millions d'euros publiés (MIO_EUR) ; convertis en milliards pour l'affichage.\n  R4  Surfaces du treemap : parts calculées à partir des MIO_EUR (plus précis que les % arrondis).\n  R5  Valeur manquante (drapeau 'm' ou absence) : null, jamais 0, jamais imputée.\n  R6  Détail protection sociale : regroupement des groupes COFOG 10.7, 10.8, 10.9 en\n      « Exclusion sociale et autres » (somme simple ; null si toutes les composantes manquent).",
+  "fichiers_bruts": {
+    "nama_10_pe.csv": {
+      "file": "nama_10_pe.csv",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10_pe/A.THS_PER.POP_NC.?startPeriod=2019&format=SDMX-CSV",
+      "retrieved_utc": "2026-10-16T13:19:49+00:00",
+      "bytes": 23397,
+      "sha256": "67a2e8b04eb02b6de96f5fb30ab63301040209be2ae1018f3d666a3d6f488b9e"
+    },
+    "gov_10a_exp.csv": {
+      "file": "gov_10a_exp.csv",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/gov_10a_exp/A.PC_GDP+MIO_EUR+MIO_NAC+PC_TOT.S13..TE.?startPeriod=2019&format=SDMX-CSV",
+      "retrieved_utc": "2026-10-16T13:19:48+00:00",
+      "bytes": 5290595,
+      "sha256": "20677d3389fa6a9aeb23c403810836693a5a9fe082181aa4e563a8cd967b6020"
+    },
+    "tradle_countries.ts": {
+      "file": "tradle_countries.ts",
+      "url": "https://raw.githubusercontent.com/alexandersimoes/tradle/main/src/domain/countries.ts",
+      "retrieved_utc": "2026-10-16T13:19:50+00:00",
+      "bytes": 29996,
+      "sha256": "666e8c12aedb93bd06a648309c514e7a2db3df4bab7cf14b49b3e25c1b3e470f"
+    },
+    "cofog99_labels_fr.tsv": {
+      "file": "cofog99_labels_fr.tsv",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/codelist/ESTAT/COFOG99?format=TSV&lang=fr",
+      "retrieved_utc": "2026-10-16T13:19:50+00:00",
+      "bytes": 3164,
+      "sha256": "f9f87dea32c45132ccd20b526da39994e66f7ee86bd4b9fb82f4eea811f9039a"
+    }
+  }
+}
