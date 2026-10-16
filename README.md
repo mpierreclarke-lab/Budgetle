@@ -1,4 +1,4 @@
-# Budgetle (nom provisoire)
+# Budgetle
 
 Jeu de devinette inspiré de Tradle : retrouver un pays européen à partir de ses dépenses publiques.
 Données préparées à l'avance, règles déterministes, page statique, aucune IA pendant les parties.
