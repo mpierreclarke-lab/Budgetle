@@ -1,4 +1,10 @@
-<title>Budgetle</title>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Règles de Budgetle</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,11 +118,15 @@ select { font: inherit; padding: .5rem .6rem; border-radius: 8px; border: 1px so
 .small { font-size: .88rem; color: var(--ink-2); }
 button.reveal { font: 700 .9rem/1 var(--f-body); padding: .6rem .9rem; border-radius: 8px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; justify-self: start; }
 @media (prefers-reduced-motion: no-preference) { .tile { transition: outline-color .15s; } }
+
 </style>
+</head>
+<body>
+
 
 <div class="wrap">
   <header class="top">
-    <span class="eyebrow">Version de travail · séance 2</span>
+    <span class="eyebrow">Version bêta · règles et données · <a href="index.html">Jouer la partie du jour</a></span>
     <h1>Budgetle</h1>
     <p class="lede">Un pays européen se cache derrière un budget public. Vous voyez combien il dépense et à quoi. Vous avez six essais pour le trouver ; chaque erreur vous dit à quelle distance et dans quelle direction chercher.</p>
     <div class="status"><span class="pill">30 pays · UE + Islande, Norvège, Suisse</span><span class="pill">Données 2024 · Eurostat</span><span class="pill warn">Règles provisoires</span></div>
@@ -185,10 +195,10 @@ button.reveal { font: 700 .9rem/1 var(--f-body); padding: .6rem .9rem; border-ra
   </section>
 
   <section aria-labelledby="ouvert">
-    <span class="eyebrow">À trancher</span>
-    <h2 id="ouvert">Décisions encore ouvertes</h2>
+    <span class="eyebrow">Choix de conception</span>
+    <h2 id="ouvert">Ce qu'il faut savoir</h2>
     <div class="open col">
-      <div><b>Échelle de proximité.</b> Avec la formule de Tradle (rapportée à 20 000 km), deux pays européens sont toujours entre 76 % et 99 % de proximité. Cette page utilise une échelle européenne (rapportée à 4 778 km), qui va de 0 % à 98 %.</div>
+      <div><b>Échelle de proximité européenne.</b> Avec la formule de Tradle, rapportée à 20 000 km, deux pays européens seraient toujours entre 76 % et 99 % de proximité. Budgetle rapporte la distance à 4 778 km, la plus grande distance entre deux pays du jeu : la proximité va de 0 % à 98 %.</div>
       <div><b>Difficulté.</b> Un joueur qui connaîtrait parfaitement la carte trouverait la réponse dès le deuxième essai, grâce à la distance en km et à la direction. C'est déjà le cas sur Tradle ; avec 30 pays, l'effet est plus fort. Le graphique budgétaire sert donc surtout au premier essai.</div>
       <div><b>Montants en euros.</b> Les montants affichés par catégorie révèlent la taille de l'économie : les quatre plus grands pays (Allemagne, France, Italie, Espagne) sont reconnaissables à leurs seuls montants.</div>
     </div>
@@ -297,6 +307,8 @@ const DMAX = 4778219;
 const META = {"update": "16/09/2026", "extraction": "16/10/2026"};
 
 const BY = Object.fromEntries(PROFILES.map(p => [p.geo, p]));
+// Affichage partagé par les pages : formats français, couleurs, treemap interactif.
+// Script classique (pas de module) : injecté tel quel dans chaque page par scripts/05_build_site.py.
 const COLORS = { GF01:"--gf01", GF02:"--gf02", GF03:"--gf03", GF04:"--gf04", GF05:"--gf05", GF06:"--gf06", GF07:"--gf07", GF08:"--gf08", GF09:"--gf09",
   SP_OLD:"--sp1", SP_SURV:"--sp2", SP_SICK:"--sp3", SP_FAM:"--sp4", SP_UNEMP:"--sp5", SP_HOUS:"--sp6", SP_OTHER:"--sp7" };
 const fr1 = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -315,20 +327,6 @@ function inkFor(hex) {
   return L > .23 ? "#111317" : "#ffffff";
 }
 // Rang parmi les 30 pays, en % du PIB (1 = le plus élevé)
-function rank(code, geo) {
-  const val = (p) => code === "TOTAL" ? p.total.pc_gdp : (p.divisions.find(d => d.code === code) || p.divisions[9].detail.find(k => k.code === code))?.[code.startsWith("SP_") ? "pc_gdp_somme_publiee" : "pc_gdp"];
-  const me = val(BY[geo]);
-  return 1 + PROFILES.filter(p => val(p) > me).length;
-}
-
-function leaves(p) {
-  const out = [];
-  for (const d of p.divisions) {
-    if (d.code === "GF10") for (const k of d.detail) { if (k.mio_eur != null && k.mio_eur > 0) out.push({ ...k, value: k.mio_eur, pc: k.pc_gdp_somme_publiee, approx: k.cofog.length > 1, sp: true }); }
-    else out.push({ ...d, value: d.mio_eur, pc: d.pc_gdp, sp: false });
-  }
-  return out;
-}
 
 function drawTreemap(box, p, detailEl) {
   box.innerHTML = "";
@@ -388,6 +386,13 @@ function profileCard(container, p, opts = {}) {
   const go = () => drawTreemap(box, p, det);
   go();
   new ResizeObserver(go).observe(box);
+}
+
+
+function rank(code, geo) {
+  const val = (p) => code === "TOTAL" ? p.total.pc_gdp : (p.divisions.find(d => d.code === code) || p.divisions[9].detail.find(k => k.code === code))?.[code.startsWith("SP_") ? "pc_gdp_somme_publiee" : "pc_gdp"];
+  const me = val(BY[geo]);
+  return 1 + PROFILES.filter(p => val(p) > me).length;
 }
 
 // --- Exemple de partie
@@ -454,3 +459,6 @@ function table(geo) {
 pick.value = "FR"; table("FR");
 pick.addEventListener("change", () => table(pick.value));
 </script>
+
+</body>
+</html>

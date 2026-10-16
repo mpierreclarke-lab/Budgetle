@@ -1,0 +1,178 @@
+<title>Budgetle</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Devinez le pays européen derrière un budget public. Six essais, données Eurostat 2024.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/*__CSS__*/
+/* Page de jeu : une seule colonne étroite, pensée d'abord pour le téléphone. */
+.game { max-width: 40rem; margin: 0 auto; display: grid; gap: 1rem; padding-top: 1rem; }
+.bar { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-bottom: .6rem; border-bottom: 1px solid var(--rule); }
+.bar h1 { font-size: 2rem; }
+.bar nav { display: flex; gap: 1rem; font-size: .95rem; }
+.slots { display: grid; gap: .4rem; }
+.g.empty { background: transparent; border-style: dashed; min-height: 2.6rem; }
+form.play { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem; position: relative; }
+form.play input { font: inherit; font-size: 1.05rem; padding: .7rem .8rem; border-radius: 8px; border: 1px solid var(--ink-3); background: var(--surface); color: var(--ink); min-width: 0; }
+form.play input:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+form.play button { font: 700 1rem/1 var(--f-body); padding: .7rem 1.1rem; border-radius: 8px; border: 0; background: var(--ink); color: var(--bg); cursor: pointer; }
+form.play button:disabled { opacity: .5; cursor: default; }
+.sugg { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 5; list-style: none; margin: 0; padding: .3rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; box-shadow: 0 8px 24px rgb(0 0 0 / .12); }
+.sugg li { padding: .55rem .6rem; border-radius: 6px; cursor: pointer; }
+.sugg li[aria-selected="true"], .sugg li:hover { background: var(--accent-soft); }
+.msg { min-height: 1.4rem; font-size: .92rem; color: var(--warn); }
+.end { display: grid; gap: .8rem; }
+.end h2 { font-size: 1.6rem; }
+.end ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .35rem; }
+.share { display: grid; gap: .5rem; }
+.share textarea { font: .95rem/1.4 var(--f-data); padding: .6rem; border-radius: 8px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); resize: none; width: 100%; }
+.share button, .end a.btn { justify-self: start; font: 700 .95rem/1 var(--f-body); padding: .65rem 1rem; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); cursor: pointer; text-decoration: none; }
+.banner { font-size: .88rem; background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: .5rem .8rem; }
+</style>
+
+<div class="game">
+  <div class="bar">
+    <h1>Budgetle</h1>
+    <nav><span class="num small" id="num"></span><a href="regles.html">Règles et données</a></nav>
+  </div>
+  <p class="banner" id="banner" hidden></p>
+  <div class="card" id="mystery"></div>
+  <div class="slots" id="slots" aria-live="polite"></div>
+  <form class="play" id="form" autocomplete="off">
+    <input id="guess" type="text" placeholder="Nom d'un pays européen" aria-label="Votre proposition" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" enterkeyhint="go" autocapitalize="words" spellcheck="false">
+    <button type="submit" id="go">Valider</button>
+    <ul class="sugg" id="sugg" role="listbox" hidden></ul>
+  </form>
+  <p class="msg" id="msg" role="status"></p>
+  <div class="card end" id="end" hidden></div>
+  <p class="small">Données : Eurostat, dépenses des administrations publiques par fonction, 2024 (© Union européenne). Distance et direction calculées comme dans Tradle.</p>
+</div>
+
+<script>
+/*__GEO__*/
+/*__TREEMAP__*/
+/*__GAME__*/
+const PROFILES = /*__DATA__*/;
+const DMAX = /*__DMAX__*/;
+const CAL = /*__CAL__*/;
+const SITE_URL = "https://mpierreclarke-lab.github.io/Budgetle/";
+const BY = Object.fromEntries(PROFILES.map(p => [p.geo, p]));
+/*__UI__*/
+
+// Comparabilité : notes affichées en fin de partie (voir docs/comparabilite.md)
+const NOTES = {
+  CH: "La santé publique paraît très faible : l'assurance-maladie obligatoire suisse est probablement gérée hors des administrations publiques (hypothèse non confirmée par une source officielle).",
+  IE: "Le ratio au PIB est bas en partie parce que le PIB irlandais est gonflé par les multinationales.",
+};
+const ARROW = { N: 0, NE: 45, E: 90, SE: 135, S: 180, SW: 225, W: 270, NW: 315 };
+const $ = (id) => document.getElementById(id);
+
+// Partie du jour, ou partie choisie par l'adresse (#partie12) pour revoir une partie passée
+const forced = /^#partie(\d+)$/.exec(location.hash);
+const today = localDay();
+let n = forced ? +forced[1] : dayNumber(today, CAL);
+if (n != null && (n < 1 || n > CAL.pays.length)) n = null;
+const KEY = `budgetle-v1-${n}`;
+const index = buildIndex(PROFILES);
+let guesses = [];
+
+function load() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch { return []; } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(guesses.map(g => g.geo))); } catch {} }
+
+function rowHtml(g, i) {
+  const p = BY[g.geo];
+  if (g.distance === 0) return `<div class="g win"><span class="c">${i + 1}. ${p.nom}</span><span class="r num">0 km</span><span aria-label="trouvé">🎉</span><span class="r num">100 %</span></div>`;
+  return `<div class="g"><span class="c">${i + 1}. ${p.nom}</span><span class="r num">${fr0.format(g.distance / 1000)} km</span>
+    <svg class="arrow" viewBox="0 0 24 24" role="img" aria-label="direction ${g.direction}" style="transform:rotate(${ARROW[g.direction]}deg)"><path d="M12 3l6 8h-4v10h-4V11H6z" fill="currentColor"/></svg>
+    <span class="r num">${g.proximity} %</span></div>`;
+}
+
+function render(target) {
+  const slots = [];
+  for (let i = 0; i < MAX_TRIES; i++) slots.push(guesses[i] ? rowHtml(guesses[i], i) : `<div class="g empty" aria-hidden="true"></div>`);
+  $("slots").innerHTML = slots.join("");
+  const st = status(guesses);
+  const done = st !== "playing";
+  $("guess").disabled = $("go").disabled = done;
+  $("form").hidden = done;
+  if (!done) return;
+  const text = shareText(n, guesses, SITE_URL);
+  const lines = facts(target.geo, PROFILES).map(f => `<li>${f}</li>`).join("");
+  const note = NOTES[target.geo] ? `<p class="note warn">${NOTES[target.geo]}</p>` : "";
+  const prov = target.provisoire ? `<p class="small">Les chiffres 2024 de ce pays sont provisoires (Eurostat).</p>` : "";
+  $("end").hidden = false;
+  $("end").innerHTML = `
+    <span class="eyebrow">${st === "won" ? `Trouvé en ${guesses.length} essai${guesses.length > 1 ? "s" : ""}` : "Perdu"}</span>
+    <h2>${target.nom}</h2>
+    <p>Dépense publique : ${fr1.format(target.total.pc_gdp)} % du PIB, soit ${money(target.total.mio_eur)} en 2024.</p>
+    <ul>${lines}</ul>${note}${prov}
+    <div class="share"><label for="sharetxt" class="small">Votre résultat</label>
+      <textarea id="sharetxt" rows="${guesses.length + 4}" readonly>${text}</textarea>
+      <button type="button" id="copy">Copier le résultat</button></div>
+    <a class="btn" href="regles.html">Comprendre les données</a>`;
+  $("copy").addEventListener("click", async () => {
+    const ta = $("sharetxt");
+    try { await navigator.clipboard.writeText(text); $("copy").textContent = "Copié"; }
+    catch { ta.focus(); ta.select(); $("copy").textContent = "Texte sélectionné : copiez-le"; }
+  });
+}
+
+// Suggestions accessibles au clavier
+let options = [], active = -1;
+function showSugg() {
+  const exclude = guesses.map(g => g.geo);
+  options = suggest($("guess").value, PROFILES, exclude);
+  active = -1;
+  const ul = $("sugg");
+  ul.innerHTML = options.map((p, i) => `<li role="option" id="opt${i}" data-geo="${p.geo}" aria-selected="false">${p.nom}</li>`).join("");
+  ul.hidden = !options.length;
+  $("guess").setAttribute("aria-expanded", String(!!options.length));
+}
+function hideSugg() { $("sugg").hidden = true; $("guess").setAttribute("aria-expanded", "false"); active = -1; }
+function setActive(i) {
+  active = (i + options.length) % options.length;
+  [...$("sugg").children].forEach((li, j) => li.setAttribute("aria-selected", String(j === active)));
+  $("guess").setAttribute("aria-activedescendant", "opt" + active);
+}
+
+function submit(target, value) {
+  const geo = findCountry(value, index);
+  if (!geo) { $("msg").textContent = "Pays inconnu : choisissez un des 30 pays proposés (UE, Islande, Norvège, Suisse)."; return; }
+  if (guesses.some(g => g.geo === geo)) { $("msg").textContent = `${BY[geo].nom} a déjà été proposé.`; return; }
+  $("msg").textContent = "";
+  guesses.push(evaluate(BY[geo], target, DMAX));
+  save();
+  $("guess").value = "";
+  hideSugg();
+  render(target);
+  if (status(guesses) !== "playing") $("end").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+}
+
+function start() {
+  if (n == null) {
+    $("mystery").innerHTML = `<p>Pas de partie à cette date. Le calendrier de la version bêta couvre du 16/10/2026 au 10/10/2027.</p>`;
+    $("form").hidden = true;
+    return;
+  }
+  const target = BY[CAL.pays[n - 1]];
+  $("num").textContent = `Partie n° ${n}`;
+  if (forced) { $("banner").hidden = false; $("banner").textContent = `Partie n° ${n} ouverte directement depuis l'adresse de la page.`; }
+  profileCard($("mystery"), target, { hideName: true });
+  guesses = load().filter(g => BY[g]).slice(0, MAX_TRIES).map(g => evaluate(BY[g], target, DMAX));
+  render(target);
+  $("guess").addEventListener("input", showSugg);
+  $("guess").addEventListener("keydown", (e) => {
+    if ($("sugg").hidden) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); setActive(active + 1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
+    else if (e.key === "Escape") hideSugg();
+    else if (e.key === "Enter" && active >= 0) { e.preventDefault(); submit(target, options[active].nom); }
+  });
+  $("guess").addEventListener("blur", () => setTimeout(hideSugg, 150));
+  $("sugg").addEventListener("pointerdown", (e) => { const li = e.target.closest("li"); if (li) { e.preventDefault(); submit(target, BY[li.dataset.geo].nom); } });
+  $("form").addEventListener("submit", (e) => { e.preventDefault(); submit(target, $("guess").value); });
+}
+start();
+window.addEventListener("hashchange", () => location.reload());
+</script>

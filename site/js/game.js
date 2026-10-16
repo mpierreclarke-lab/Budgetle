@@ -88,7 +88,7 @@ export function rankOf(code, geo, profiles) {
   };
 }
 
-const fr1 = (v) => v.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const fmt1 = (v) => v.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const ord = (r) => (r === 1 ? "" : `${r}ᵉ `);
 const tie = (r) => (r.ties ? `, à égalité avec ${r.ties} autre${r.ties > 1 ? "s" : ""} pays` : "");
 const TOP = 5;
@@ -102,7 +102,7 @@ export function facts(geo, profiles) {
   const hi = [...r].sort((a, b) => a.high - b.high || b.value - a.value)[0];
   const lo = r.filter((x) => x !== hi).sort((a, b) => a.low - b.low || a.value - b.value)[0];
   const out = [];
-  if (hi.high <= TOP) out.push(`${hi.d.label} : ${fr1(hi.value)} % de la dépense publique, la ${ord(hi.high)}part la plus forte des ${n} pays${tie(hi)}.`);
-  if (lo.low <= TOP) out.push(`${lo.d.label} : ${fr1(lo.value)} % de la dépense publique, la ${ord(lo.low)}part la plus faible des ${n} pays${tie(lo)}.`);
+  if (hi.high <= TOP) out.push(`${hi.d.label} : ${fmt1(hi.value)} % de la dépense publique, la ${ord(hi.high)}part la plus forte des ${n} pays${tie(hi)}.`);
+  if (lo.low <= TOP) out.push(`${lo.d.label} : ${fmt1(lo.value)} % de la dépense publique, la ${ord(lo.low)}part la plus faible des ${n} pays${tie(lo)}.`);
   return out;
 }

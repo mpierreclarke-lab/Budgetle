@@ -1,122 +1,15 @@
-<title>Budgetle</title>
+<title>Règles de Budgetle</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Mise en page : une colonne de lecture (68ch) façon fiche de comptes publics ; le treemap est le seul objet « plein cadre ». */
-:root {
-  --bg: #f5f6f8; --surface: #ffffff; --ink: #14171c; --ink-2: #4a505a; --ink-3: #6b7280;
-  --rule: #d9dde3; --accent: #1c5cab; --accent-soft: #e4edf8; --warn: #8a5a00; --warn-soft: #fbf1dc;
-  --ok: #1b7a4a;
-  --gf01: #6250d6; --gf02: #e34948; --gf03: #e87ba4; --gf04: #eb6834; --gf05: #008300;
-  --gf06: #8a8f98; --gf07: #1baf7a; --gf08: #a39a8c; --gf09: #eda100;
-  --sp1: #104281; --sp2: #184f95; --sp3: #256abf; --sp4: #2a78d6; --sp5: #3987e5; --sp6: #5598e7; --sp7: #6da7ec;
-  --f-display: "Young Serif", Georgia, "Times New Roman", serif;
-  --f-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #121417; --surface: #1b1e23; --ink: #eef0f3; --ink-2: #b8bec8; --ink-3: #8f96a1;
-  --rule: #2e333b; --accent: #7fb0ee; --accent-soft: #1d2a3b; --warn: #f0c063; --warn-soft: #2e2512; --ok: #5fcf93;
-  --gf01: #9085e9; --gf02: #e66767; --gf03: #d55181; --gf04: #d95926; --gf05: #2f9a2f;
-  --gf06: #767c86; --gf07: #199e70; --gf08: #8f8778; --gf09: #c98500;
-  color-scheme: dark; } }
-:root[data-theme="dark"] {
-  --bg: #121417; --surface: #1b1e23; --ink: #eef0f3; --ink-2: #b8bec8; --ink-3: #8f96a1;
-  --rule: #2e333b; --accent: #7fb0ee; --accent-soft: #1d2a3b; --warn: #f0c063; --warn-soft: #2e2512; --ok: #5fcf93;
-  --gf01: #9085e9; --gf02: #e66767; --gf03: #d55181; --gf04: #d95926; --gf05: #2f9a2f;
-  --gf06: #767c86; --gf07: #199e70; --gf08: #8f8778; --gf09: #c98500;
-  color-scheme: dark; }
-
-* { box-sizing: border-box; }
-body { background: var(--bg); color: var(--ink); font: 400 1rem/1.6 var(--f-body);
-  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 4rem; }
-.wrap { max-width: 68rem; margin: 0 auto; }
-.col { max-width: 44rem; }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 400; text-wrap: balance; line-height: 1.15; margin: 0; }
-h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); letter-spacing: -0.01em; }
-h2 { font-size: 1.7rem; }
-h3 { font-size: 1.2rem; }
-p { margin: 0; }
-a { color: var(--accent); }
-.eyebrow { font: 500 .75rem/1 var(--f-data); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
-.num { font-family: var(--f-data); font-variant-numeric: tabular-nums; }
-section { display: grid; gap: 1.1rem; padding-block: 2.6rem; border-top: 1px solid var(--rule); }
-header.top { display: grid; gap: .9rem; padding-block: 2.4rem 2rem; }
-.lede { font-size: 1.12rem; color: var(--ink-2); max-width: 40rem; }
-.status { display: inline-flex; gap: .5rem; flex-wrap: wrap; }
-.pill { font: 500 .78rem/1 var(--f-data); padding: .4rem .6rem; border-radius: 999px; border: 1px solid var(--rule); color: var(--ink-2); background: var(--surface); }
-.pill.warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
-
-/* Carte du pays mystère */
-.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 1.1rem; display: grid; gap: .9rem; min-width: 0; }
-.headline { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
-.headline .big { font: 400 clamp(2.4rem, 8vw, 3.6rem)/1 var(--f-display); }
-.headline .unit { color: var(--ink-2); }
-.tm { position: relative; width: 100%; aspect-ratio: 16 / 10; max-width: 100%; background: var(--surface); }
-@media (max-width: 560px) { .tm { aspect-ratio: 1 / 1.05; } }
-.tile { position: absolute; overflow: hidden; border-radius: 3px; padding: .35rem .45rem; display: flex; flex-direction: column; gap: .1rem;
-  font-size: .8rem; line-height: 1.2; cursor: pointer; outline-offset: -3px; }
-.tile:focus-visible, .tile.on { outline: 3px solid var(--ink); }
-.tile b { font-weight: 700; }
-.tile .v { font-family: var(--f-data); font-size: .74rem; font-variant-numeric: tabular-nums; opacity: .92; }
-.tile.sp { border-radius: 1px; }
-.group-ring { position: absolute; border: 2px solid var(--ink); border-radius: 4px; pointer-events: none; opacity: .55; }
-.detail { min-height: 4.6rem; border-top: 1px solid var(--rule); padding-top: .7rem; display: grid; gap: .2rem; }
-.detail .k { font-weight: 700; }
-.detail .row { display: flex; gap: 1.2rem; flex-wrap: wrap; color: var(--ink-2); }
-.legend-note { font-size: .85rem; color: var(--ink-3); }
-
-/* Essais */
-.guesses { display: grid; gap: .4rem; }
-.g { display: grid; grid-template-columns: minmax(0, 1fr) 6.2rem 2.4rem 4rem; gap: .5rem; align-items: center;
-  background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: .55rem .7rem; }
-.g.head { background: transparent; border: 0; padding-block: 0; }
-.g .c { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
-.g.head .c, .g.head span { font-weight: 400; }
-.g.win { border-color: var(--ok); }
-.arrow { width: 1.4rem; height: 1.4rem; display: block; margin: auto; color: var(--ink); }
-.r { text-align: right; }
-.squares { font-size: 1.1rem; letter-spacing: .1rem; }
-
-.rules { display: grid; gap: .9rem; counter-reset: r; padding: 0; margin: 0; list-style: none; }
-.rules li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: .6rem; }
-.rules li::before { counter-increment: r; content: counter(r); font: 400 1.3rem/1.3 var(--f-display); color: var(--accent); }
-
-.tabs { display: flex; gap: .4rem; flex-wrap: wrap; }
-.tab { font: 700 .9rem/1 var(--f-body); padding: .6rem .85rem; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
-.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.tab:focus-visible, select:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.note { background: var(--accent-soft); border-radius: 8px; padding: .8rem 1rem; font-size: .95rem; }
-.note.warn { background: var(--warn-soft); }
-.tag { font: 500 .7rem/1 var(--f-data); letter-spacing: .06em; text-transform: uppercase; padding: .2rem .4rem; border-radius: 4px; margin-right: .35rem; vertical-align: .1em; background: var(--surface); color: var(--ink-2); border: 1px solid var(--rule); }
-
-.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1rem; }
-.facts { display: grid; gap: .55rem; margin: 0; }
-.facts div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: .8rem; }
-.facts dt { color: var(--ink-3); font-size: .9rem; }
-.facts dd { margin: 0; min-width: 0; }
-@media (max-width: 480px) { .facts div { grid-template-columns: 1fr; gap: 0; } }
-
-details { border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
-summary { cursor: pointer; padding: .6rem .8rem; font-weight: 700; }
-.tbl { overflow-x: auto; padding: 0 .8rem .8rem; }
-table { border-collapse: collapse; width: 100%; font-size: .88rem; }
-th, td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
-td.n, th.n { text-align: right; font-family: var(--f-data); font-variant-numeric: tabular-nums; }
-tr.sub td:first-child { padding-left: 1.4rem; color: var(--ink-2); }
-select { font: inherit; padding: .5rem .6rem; border-radius: 8px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); max-width: 100%; }
-.open { display: grid; gap: .8rem; }
-.open > div { border-left: 3px solid var(--warn); padding-left: .9rem; }
-.small { font-size: .88rem; color: var(--ink-2); }
-button.reveal { font: 700 .9rem/1 var(--f-body); padding: .6rem .9rem; border-radius: 8px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; justify-self: start; }
-@media (prefers-reduced-motion: no-preference) { .tile { transition: outline-color .15s; } }
+/*__CSS__*/
 </style>
 
 <div class="wrap">
   <header class="top">
-    <span class="eyebrow">Version de travail · séance 2</span>
+    <span class="eyebrow">Version bêta · règles et données · <a href="index.html">Jouer la partie du jour</a></span>
     <h1>Budgetle</h1>
     <p class="lede">Un pays européen se cache derrière un budget public. Vous voyez combien il dépense et à quoi. Vous avez six essais pour le trouver ; chaque erreur vous dit à quelle distance et dans quelle direction chercher.</p>
     <div class="status"><span class="pill">30 pays · UE + Islande, Norvège, Suisse</span><span class="pill">Données 2024 · Eurostat</span><span class="pill warn">Règles provisoires</span></div>
@@ -185,10 +78,10 @@ button.reveal { font: 700 .9rem/1 var(--f-body); padding: .6rem .9rem; border-ra
   </section>
 
   <section aria-labelledby="ouvert">
-    <span class="eyebrow">À trancher</span>
-    <h2 id="ouvert">Décisions encore ouvertes</h2>
+    <span class="eyebrow">Choix de conception</span>
+    <h2 id="ouvert">Ce qu'il faut savoir</h2>
     <div class="open col">
-      <div><b>Échelle de proximité.</b> Avec la formule de Tradle (rapportée à 20 000 km), deux pays européens sont toujours entre 76 % et 99 % de proximité. Cette page utilise une échelle européenne (rapportée à 4 778 km), qui va de 0 % à 98 %.</div>
+      <div><b>Échelle de proximité européenne.</b> Avec la formule de Tradle, rapportée à 20 000 km, deux pays européens seraient toujours entre 76 % et 99 % de proximité. Budgetle rapporte la distance à 4 778 km, la plus grande distance entre deux pays du jeu : la proximité va de 0 % à 98 %.</div>
       <div><b>Difficulté.</b> Un joueur qui connaîtrait parfaitement la carte trouverait la réponse dès le deuxième essai, grâce à la distance en km et à la direction. C'est déjà le cas sur Tradle ; avec 30 pays, l'effet est plus fort. Le graphique budgétaire sert donc surtout au premier essai.</div>
       <div><b>Montants en euros.</b> Les montants affichés par catégorie révèlent la taille de l'économie : les quatre plus grands pays (Allemagne, France, Italie, Espagne) sont reconnaissables à leurs seuls montants.</div>
     </div>
@@ -212,97 +105,11 @@ const DMAX = /*__DMAX__*/;
 const META = /*__META__*/;
 
 const BY = Object.fromEntries(PROFILES.map(p => [p.geo, p]));
-const COLORS = { GF01:"--gf01", GF02:"--gf02", GF03:"--gf03", GF04:"--gf04", GF05:"--gf05", GF06:"--gf06", GF07:"--gf07", GF08:"--gf08", GF09:"--gf09",
-  SP_OLD:"--sp1", SP_SURV:"--sp2", SP_SICK:"--sp3", SP_FAM:"--sp4", SP_UNEMP:"--sp5", SP_HOUS:"--sp6", SP_OTHER:"--sp7" };
-const fr1 = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-const fr0 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
-const pct = (v, approx) => v == null ? "n.d." : `${approx ? "≈ " : ""}${fr1.format(v)} % du PIB`;
-function money(mio) {
-  if (mio == null) return "n.d.";
-  if (mio >= 100000) return `${fr0.format(mio / 1000)} Md€`;
-  if (mio >= 1000) return `${fr1.format(mio / 1000)} Md€`;
-  return `${fr0.format(mio)} M€`;
-}
-const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-function inkFor(hex) {
-  const n = parseInt(hex.slice(1), 16), c = [n >> 16, (n >> 8) & 255, n & 255].map(x => { x /= 255; return x <= .04045 ? x / 12.92 : ((x + .055) / 1.055) ** 2.4; });
-  const L = .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
-  return L > .23 ? "#111317" : "#ffffff";
-}
-// Rang parmi les 30 pays, en % du PIB (1 = le plus élevé)
+/*__UI__*/
 function rank(code, geo) {
   const val = (p) => code === "TOTAL" ? p.total.pc_gdp : (p.divisions.find(d => d.code === code) || p.divisions[9].detail.find(k => k.code === code))?.[code.startsWith("SP_") ? "pc_gdp_somme_publiee" : "pc_gdp"];
   const me = val(BY[geo]);
   return 1 + PROFILES.filter(p => val(p) > me).length;
-}
-
-function leaves(p) {
-  const out = [];
-  for (const d of p.divisions) {
-    if (d.code === "GF10") for (const k of d.detail) { if (k.mio_eur != null && k.mio_eur > 0) out.push({ ...k, value: k.mio_eur, pc: k.pc_gdp_somme_publiee, approx: k.cofog.length > 1, sp: true }); }
-    else out.push({ ...d, value: d.mio_eur, pc: d.pc_gdp, sp: false });
-  }
-  return out;
-}
-
-function drawTreemap(box, p, detailEl) {
-  box.innerHTML = "";
-  const W = box.clientWidth, H = box.clientHeight;
-  if (!W || !H) return;
-  const divs = p.divisions.map(d => ({ ...d, value: d.mio_eur }));
-  const top = squarify(divs, { x: 0, y: 0, w: W, h: H });
-  const GAP = 1;
-  const tiles = [];
-  for (const r of top) {
-    if (r.code === "GF10") {
-      const kids = r.detail.filter(k => k.mio_eur > 0).map(k => ({ ...k, value: k.mio_eur, pc: k.pc_gdp_somme_publiee, approx: k.cofog.length > 1, sp: true }));
-      for (const k of squarify(kids, { x: r.x, y: r.y, w: r.w, h: r.h })) tiles.push(k);
-      const ring = document.createElement("div"); ring.className = "group-ring";
-      Object.assign(ring.style, { left: r.x + "px", top: r.y + "px", width: r.w + "px", height: r.h + "px" });
-      tiles.push({ ring });
-    } else tiles.push({ ...r, pc: r.pc_gdp, sp: false });
-  }
-  const sp = p.divisions[9];
-  const show = (t, el) => {
-    box.querySelectorAll(".tile.on").forEach(x => x.classList.remove("on"));
-    el.classList.add("on");
-    const parent = t.sp ? `<span class="small">Protection sociale · ${pct(sp.pc_gdp)} · ${money(sp.mio_eur)}</span>` : "";
-    detailEl.innerHTML = `${parent}<span class="k">${t.label}</span><div class="row"><span class="num">${pct(t.pc, t.approx)}</span><span class="num">${money(t.mio_eur)}</span><span class="num">${fr1.format(100 * t.part_du_total)} % de la dépense totale</span></div>`;
-  };
-  let first = null;
-  for (const t of tiles) {
-    if (t.ring) { box.appendChild(t.ring); continue; }
-    const el = document.createElement("div");
-    el.className = "tile" + (t.sp ? " sp" : "");
-    el.tabIndex = 0;
-    el.setAttribute("role", "button");
-    el.setAttribute("aria-label", `${t.label} : ${pct(t.pc, t.approx)}, ${money(t.mio_eur)}`);
-    const bg = css(COLORS[t.code]);
-    Object.assign(el.style, { left: t.x + GAP + "px", top: t.y + GAP + "px", width: Math.max(0, t.w - 2 * GAP) + "px", height: Math.max(0, t.h - 2 * GAP) + "px", background: bg, color: inkFor(bg) });
-    const w = t.w, h = t.h;
-    if (w > 62 && h > 30) el.innerHTML = `<b>${t.label}</b>` + (h > 46 ? `<span class="v">${fr1.format(t.pc)} %${t.approx ? "≈" : ""} · ${money(t.mio_eur)}</span>` : "");
-    else if (w > 34 && h > 18) el.innerHTML = `<span class="v">${fr1.format(t.pc)}</span>`;
-    el.addEventListener("mouseenter", () => show(t, el));
-    el.addEventListener("focus", () => show(t, el));
-    el.addEventListener("click", () => show(t, el));
-    box.appendChild(el);
-    if (!first) first = [t, el];
-  }
-  if (first) show(...first);
-}
-
-function profileCard(container, p, opts = {}) {
-  container.innerHTML = `
-    <div class="headline"><span class="big num">${fr1.format(p.total.pc_gdp)}&nbsp;%</span><span class="unit">du PIB en dépenses publiques${opts.hideName ? "" : ` · ${money(p.total.mio_eur)}`}</span></div>
-    ${opts.hideName ? `<span class="eyebrow">Pays mystère · 2024</span>` : `<span class="eyebrow">${p.nom} · 2024${p.provisoire ? " · provisoire" : ""}</span>`}
-    <div class="tm" role="group" aria-label="Répartition des dépenses publiques par fonction"></div>
-    <div class="detail" aria-live="polite"></div>
-    <p class="legend-note">Surface = part dans la dépense totale. Nuances de bleu, encadrées : protection sociale détaillée. Touchez un rectangle pour le détail.</p>
-    ${opts.note ? `<p class="note${opts.noteWarn ? " warn" : ""}">${opts.note}</p>` : ""}`;
-  const box = container.querySelector(".tm"), det = container.querySelector(".detail");
-  const go = () => drawTreemap(box, p, det);
-  go();
-  new ResizeObserver(go).observe(box);
 }
 
 // --- Exemple de partie

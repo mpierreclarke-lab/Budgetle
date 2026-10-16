@@ -58,9 +58,15 @@ check(Math.min(...allP) === 76 && Math.max(...allP) === 99, "échelle Tradle : p
 // Exemple de partie (cible PT)
 for (const g of ["DE", "IT", "ES"]) console.log(`      essai ${by[g].nom} → ${Math.round(distanceMeters(by[g], by.PT) / 1000)} km ${compassDirection(by[g], by.PT)}`);
 
-// d) le script de la page se compile
-const script = html.match(/<script>([\s\S]*)<\/script>/)[1];
-try { new vm.Script(script); check(true, "script de la page syntaxiquement valide"); } catch (e) { check(false, "script : " + e.message); }
+// d) page de jeu : mêmes données, même calendrier ; les scripts des deux pages se compilent
+const game = readFileSync(new URL("../site/dist/index.html", import.meta.url), "utf8");
+const cal = JSON.parse(readFileSync(new URL("../data/derived/calendrier.json", import.meta.url)));
+check(JSON.stringify(JSON.parse(game.match(/const PROFILES = (\[.*?\]);\n/s)[1])) === JSON.stringify(ref), "page de jeu : données identiques");
+check(JSON.stringify(JSON.parse(game.match(/const CAL = (\{.*?\});\n/s)[1]).pays) === JSON.stringify(cal.pays), "page de jeu : calendrier identique");
+for (const [name, h] of [["règles", html], ["jeu", game]]) {
+  const script = h.match(/<script>([\s\S]*)<\/script>/)[1];
+  try { new vm.Script(script); check(true, `script de la page ${name} syntaxiquement valide`); } catch (e) { check(false, `script ${name} : ` + e.message); }
+}
 
 console.log(`\n${fails} échec(s)`);
 process.exit(fails ? 1 : 0);
