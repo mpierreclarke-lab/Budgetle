@@ -105,7 +105,7 @@ function render(target) {
   $("end").innerHTML = `
     <span class="eyebrow">${st === "won" ? `Trouvé en ${guesses.length} essai${guesses.length > 1 ? "s" : ""}` : "Perdu"}</span>
     <h2>${target.nom}</h2>
-    <p>Dépense publique : ${fr1.format(target.total.pc_gdp)} % du PIB, soit ${money(target.total.mio_eur)} en 2024.</p>
+    <p>Dépenses publiques en 2024 : ${money(target.total.mio_eur)} (${fr1.format(target.total.pc_gdp)} % du PIB).</p>
     <ul>${lines}</ul>${note}${prov}
     <div class="share"><label for="sharetxt" class="small">Votre résultat</label>
       <textarea id="sharetxt" rows="${guesses.length + 4}" readonly>${text}</textarea>

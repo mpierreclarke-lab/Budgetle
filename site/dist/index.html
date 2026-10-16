@@ -436,7 +436,7 @@ function drawTreemap(box, p, detailEl) {
 
 function profileCard(container, p, opts = {}) {
   container.innerHTML = `
-    <div class="headline"><span class="big num">${fr1.format(p.total.pc_gdp)}&nbsp;%</span><span class="unit">du PIB en dépenses publiques${opts.hideName ? "" : ` · ${money(p.total.mio_eur)}`}</span></div>
+    <div class="headline"><span class="big num">${money(p.total.mio_eur).replace(/ /g, "&nbsp;")}</span><span class="unit">de dépenses publiques en 2024 <span style="white-space:nowrap">(${fr1.format(p.total.pc_gdp)}&nbsp;% du PIB)</span></span></div>
     ${opts.hideName ? `<span class="eyebrow">Pays mystère · 2024</span>` : `<span class="eyebrow">${p.nom} · 2024${p.provisoire ? " · provisoire" : ""}</span>`}
     <div class="tm" role="group" aria-label="Répartition des dépenses publiques par fonction"></div>
     <div class="detail" aria-live="polite"></div>
@@ -495,7 +495,7 @@ function render(target) {
   $("end").innerHTML = `
     <span class="eyebrow">${st === "won" ? `Trouvé en ${guesses.length} essai${guesses.length > 1 ? "s" : ""}` : "Perdu"}</span>
     <h2>${target.nom}</h2>
-    <p>Dépense publique : ${fr1.format(target.total.pc_gdp)} % du PIB, soit ${money(target.total.mio_eur)} en 2024.</p>
+    <p>Dépenses publiques en 2024 : ${money(target.total.mio_eur)} (${fr1.format(target.total.pc_gdp)} % du PIB).</p>
     <ul>${lines}</ul>${note}${prov}
     <div class="share"><label for="sharetxt" class="small">Votre résultat</label>
       <textarea id="sharetxt" rows="${guesses.length + 4}" readonly>${text}</textarea>

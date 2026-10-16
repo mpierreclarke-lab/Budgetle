@@ -67,7 +67,7 @@ function drawTreemap(box, p, detailEl) {
 
 function profileCard(container, p, opts = {}) {
   container.innerHTML = `
-    <div class="headline"><span class="big num">${fr1.format(p.total.pc_gdp)}&nbsp;%</span><span class="unit">du PIB en dépenses publiques${opts.hideName ? "" : ` · ${money(p.total.mio_eur)}`}</span></div>
+    <div class="headline"><span class="big num">${money(p.total.mio_eur).replace(/ /g, "&nbsp;")}</span><span class="unit">de dépenses publiques en 2024 <span style="white-space:nowrap">(${fr1.format(p.total.pc_gdp)}&nbsp;% du PIB)</span></span></div>
     ${opts.hideName ? `<span class="eyebrow">Pays mystère · 2024</span>` : `<span class="eyebrow">${p.nom} · 2024${p.provisoire ? " · provisoire" : ""}</span>`}
     <div class="tm" role="group" aria-label="Répartition des dépenses publiques par fonction"></div>
     <div class="detail" aria-live="polite"></div>

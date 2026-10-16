@@ -22,10 +22,10 @@ python3 scripts/08_e2e.py             # partie complète jouée dans un navigate
 |---|---|
 | Périmètre | S13 (toutes APU), consolidé, dépense totale TE |
 | Pays / année | 30 pays (UE-27 + IS, NO, CH), 2024 |
-| Indice principal | dépense totale en % du PIB |
+| Indice principal | montant total des dépenses en euros, puis (entre parenthèses) en % du PIB |
 | Catégories | 10 divisions COFOG en % du PIB et en euros ; protection sociale détaillée en 7 sous-catégories |
 | Surfaces du treemap | parts dans la dépense totale, calculées à partir des millions d'euros |
-| Proximité | géographique avec boussole, formule et code de Tradle ; échelle européenne (4 778 km) à confirmer |
+| Proximité | géographique avec boussole, formule et code de Tradle ; échelle européenne (4 778 km) |
 | Essais | 6 |
 | Pays du jour | liste fixée à l'avance (cycles de 30 jours, pas de retour avant 15 jours), date locale du joueur |
 | Revoir une partie | adresse `index.html#partie12` |
